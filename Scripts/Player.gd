@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var SPEED = 200
+var SPEED = 300
 var motion = Vector2()
 
 func _physics_process(delta):
@@ -19,7 +19,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_down"):
 		motion.y = SPEED
 		
-	move_and_slide(motion)
+	move_and_slide(motion.normalized() * SPEED)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
