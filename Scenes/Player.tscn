@@ -23,15 +23,14 @@ shape = SubResource( 1 )
 scale = Vector2( 0.323363, 0.323363 )
 frames = SubResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 current = true
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
-wait_time = 2.0
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

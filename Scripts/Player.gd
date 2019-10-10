@@ -47,9 +47,8 @@ func _get_input():
 			can_dash = false
 			player.visible = not player.visible
 			var target_position = player.get_position() + ((motion.normalized()) * 150)
-#			trying to get the player to be animated from current position to target position instead of just teleporting
-			if ((player.get_position().x < target_position.x) && (player.get_position().y < target_position.y)):
-				pass
+			player.position.x = target_position.x
+			player.position.y = target_position.y
 			$DashTimer.start()
 
 func _on_DashTimer_timeout():
