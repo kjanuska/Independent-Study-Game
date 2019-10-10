@@ -6,6 +6,8 @@ var moving = false
 var can_move = true
 var can_dash = true
 var player
+var dashing = false
+var target_position
 
 func _ready():
 	player = get_node(".")
@@ -16,7 +18,19 @@ func _physics_process(delta):
 	moving = false
 	
 	_get_input()
-
+	
+	if dashing:
+#		move player smootly from current position to target position
+			dashing = false
+	
+	if Input.is_action_just_pressed("space"):
+		if moving && can_dash:
+			dashing = true
+			can_move = false
+			can_dash = false
+			target_position = player.get_position() + ((motion.normalized()) * 150)
+			$DashTimer.start()
+			
 	move_and_slide(motion.normalized() * SPEED)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -41,18 +55,8 @@ func _get_input():
 			motion.y = SPEED
 			moving = true
 	
-	if Input.is_action_just_pressed("space"):
-		if moving && can_dash:
-			can_move = false
-			can_dash = false
-			player.visible = not player.visible
-			var target_position = player.get_position() + ((motion.normalized()) * 150)
-			player.position.x = target_position.x
-			player.position.y = target_position.y
-			$DashTimer.start()
 
 func _on_DashTimer_timeout():
-	player.visible = not player.visible
 	can_move = true
 	$DashCooldown.start()
 
