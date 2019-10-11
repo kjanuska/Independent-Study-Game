@@ -20,7 +20,12 @@ func _physics_process(delta):
 	_get_input()
 	
 	if dashing:
-#		move player smootly from current position to target position
+		print(player.get_position().distance_to(target_position))
+		if player.get_position().distance_to(target_position) > 0:
+			player.position.x += delta * sign(motion.x) * SPEED
+			player.position.y += delta * sign(motion.y) * SPEED
+		else:
+			player.position = player.get_position()
 			dashing = false
 	
 	if Input.is_action_just_pressed("space"):
