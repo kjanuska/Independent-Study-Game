@@ -29,9 +29,10 @@ drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_DashCooldown_timeout"]
