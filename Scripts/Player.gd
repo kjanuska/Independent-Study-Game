@@ -6,7 +6,6 @@ var moving = false
 var can_move = true
 var can_dash = true
 var player
-var dashing = false
 var target_position
 
 func _ready():
@@ -19,22 +18,21 @@ func _physics_process(delta):
 	
 	_get_input()
 	
-	if dashing:
+	if can_dash == false:
 		print(player.get_position().distance_to(target_position))
 		if player.get_position().distance_to(target_position) > 0:
-			player.position.x += delta * sign(motion.x) * SPEED
-			player.position.y += delta * sign(motion.y) * SPEED
+			player.position.x += delta * sign(motion.x) * 100
+			player.position.y += delta * sign(motion.y) * 100
+			can_move = false
+			can_dash = false
 		else:
-			player.position = player.get_position()
-			dashing = false
+			can_dash = true
 	
 	if Input.is_action_just_pressed("space"):
 		if moving && can_dash:
-			dashing = true
-			can_move = false
-			can_dash = false
 			target_position = player.get_position() + ((motion.normalized()) * 150)
 			$DashTimer.start()
+			can_dash = false
 			
 	move_and_slide(motion.normalized() * SPEED)
 	
