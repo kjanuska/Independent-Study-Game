@@ -56,7 +56,7 @@ func _get_input():
 		moving = true
 	
 	if Input.is_action_just_pressed("shoot"):
-		var new_bullet = bullet.instance()
+		pass
 
 func _on_DashTimer_timeout():
 	SPEED = 300
