@@ -7,7 +7,10 @@ var dashing = false
 var can_move = true
 var can_dash = true
 var player
-var distance_to_move
+
+#projectile
+var shoot_speed = 20
+var bullet = preload("res://Scenes/Projectile.tscn")
 
 func _ready():
 	player = get_node(".")
@@ -52,6 +55,8 @@ func _get_input():
 		motion.y = SPEED
 		moving = true
 	
+	if Input.is_action_just_pressed("shoot"):
+		var new_bullet = bullet.instance()
 
 func _on_DashTimer_timeout():
 	SPEED = 300
