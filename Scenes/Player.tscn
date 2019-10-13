@@ -34,5 +34,6 @@ one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
 wait_time = 0.5
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_DashCooldown_timeout"]

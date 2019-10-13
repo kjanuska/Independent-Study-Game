@@ -10,7 +10,7 @@ var player
 
 #projectile
 var shoot_speed = 20
-var bullet = preload("res://Scenes/Projectile.tscn")
+var bullet_load = preload("res://Scenes/Projectile.tscn")
 
 func _ready():
 	player = get_node(".")
@@ -22,7 +22,7 @@ func _physics_process(delta):
 		moving = false
 	
 	if can_move:
-		_get_input()
+		_get_input(delta)
 	
 	if Input.is_action_just_pressed("space"):
 		if moving && (dashing == false) && can_dash:
@@ -38,7 +38,7 @@ func _physics_process(delta):
 		get_tree().quit()
 
 
-func _get_input():
+func _get_input(delta):
 	if Input.is_action_pressed("ui_right"):
 		motion.x = SPEED
 		moving = true
@@ -56,7 +56,16 @@ func _get_input():
 		moving = true
 	
 	if Input.is_action_just_pressed("shoot"):
-		pass
+		_shoot_bullet(delta)
+		
+func _shoot_bullet(delta):
+	var bullet = bullet_load.instance()
+	var bullet_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
+	bullet.set_rotation(bullet_rotation)
+	bullet.set_global_position(self.get_global_position())
+	get_parent().add_child(bullet)
+	var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
+	bullet.direction = direction_vector
 
 func _on_DashTimer_timeout():
 	SPEED = 300
