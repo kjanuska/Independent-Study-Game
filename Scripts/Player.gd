@@ -131,8 +131,11 @@ func _melee_attack():
 
 func _set_weapon_rotation(weapon):
 	var weapon_rotation = mouse_rotation
-#	instead of making the weapon rotate around the center point i want to make it rotate around a circle
-#	whose center is the center of the player so the weapon is off to the side and not in the middle
+# instead of making the weapon rotate around the center point i want to make it rotate around a circle
+# whose center is the center of the player so the weapon is off to the side and not in the middle
+# or
+# make the weapons rotate around one point but move them left or right some amount depending on where the mouse cursor is 
+# (left or right side of the screen)
 	weapon.set_rotation(weapon_rotation)
 	if sign(weapon_rotation) == -1:
 		weapon.set_z_index(-1)
