@@ -9,6 +9,7 @@
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 315.5, 196.5 )
 scale = Vector2( 13.0781, 8.92188 )
+z_index = -5
 texture = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]

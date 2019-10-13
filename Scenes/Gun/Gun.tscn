@@ -4,7 +4,7 @@
 
 [node name="Gun" type="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -35.7369, 0.0788827 )
+position = Vector2( 0.0788879, -0.078897 )
 scale = Vector2( 1.1208, 0.243154 )
 texture = ExtResource( 1 )
 
