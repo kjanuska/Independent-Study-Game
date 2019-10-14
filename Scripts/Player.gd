@@ -19,6 +19,7 @@ var bullet_load = preload("res://Scenes/Gun/Bullet.tscn")
 var ranged
 #stores preloaded gun as var
 var gun_load = preload("res://Scenes/Gun/Gun.tscn")
+var shot_cooldown
 
 #used later to assign to loaded melee weapon scene
 var melee
@@ -85,13 +86,12 @@ func _get_input():
 		motion.y = SPEED
 		moving = true
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
 		if current_weapon == 1:
 			current_weapon = 0
 			_equip_ranged(gun_load)
 		_shoot_bullet()
-		print(mouse_rotation)
 	
 	if Input.is_action_just_pressed("melee"):
 #		only equip melee if currently equipped ranged
@@ -108,6 +108,7 @@ func _equip_ranged(ranged_load):
 	ranged = gun_load.instance()
 	player.add_child(ranged)
 	ranged.set_global_position(player.get_global_position())
+	shot_cooldown = ranged.get_node("ShotCooldown")
 
 #equip ranged and remove melee if equiped
 func _equip_melee(melee_load):
@@ -117,40 +118,31 @@ func _equip_melee(melee_load):
 	melee.set_global_position(player.get_global_position())
 
 func _shoot_bullet():
-	var bullet = bullet_load.instance()
-	var bullet_rotation = mouse_rotation
-	bullet.set_rotation(bullet_rotation)
-	bullet.set_global_position(self.get_global_position())
-	player.add_child(bullet)
-	var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
-	bullet.direction = direction_vector
+	if shot_cooldown.is_stopped():
+		var bullet = bullet_load.instance()
+		var bullet_rotation = mouse_rotation
+		bullet.set_rotation(bullet_rotation)
+		bullet.set_global_position(ranged.get_global_position())
+		player.add_child(bullet)
+		var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
+		bullet.direction = direction_vector
+		shot_cooldown.start()
 
 func _melee_attack():
 	print("attack")
 	$SwordAttack.start()
 
 func _set_weapon_rotation(weapon):
-	var weapon_rotation = mouse_rotation
-# instead of making the weapon rotate around the center point i want to make it rotate around a circle
-# whose center is the center of the player so the weapon is off to the side and not in the middle
-# or
-# make the weapons rotate around one point but move them left or right some amount depending on where the mouse cursor is 
-# (left or right side of the screen)
-	weapon.set_rotation(weapon_rotation)
-	if sign(weapon_rotation) == -1:
+	weapon.set_rotation(mouse_rotation)
+	if sign(mouse_rotation) == -1:
 		weapon.set_z_index(-1)
 	else:
 		weapon.set_z_index(1)
-
-# need to figure out how to get the sprite node of a weapon and flip that horizontally based on where the mouse cursor is
-# angle is in radians, top middle is pi/2 
-# the absolute value of anything to the left of pi/2 (the middle line) should be greater than pi/2
-# less than pi/2 for the right
-#
-#	if abs(mouse_rotation) > PI/2:
-#		weapon.sprite.flip_h = true
-#	else:
-#		weapon.sprite.flip_h = false
+		
+	if abs(mouse_rotation) > PI/2:
+		weapon.position.x = -15
+	else:
+		weapon.position.x = 15
 
 #timer that sets how long and how fast you dash
 func _on_DashTimer_timeout():
