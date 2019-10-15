@@ -1,4 +1,4 @@
 extends Area2D
 
-func _on_SwordAttack_timeout():
-	pass # Replace with function body.
+func _on_MeleeAttack_timeout():
+	$MeleeAttack.stop()

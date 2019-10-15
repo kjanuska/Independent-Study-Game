@@ -25,6 +25,7 @@ var shot_cooldown
 var melee
 #store preloaded sword as var
 var sword_load = preload("res://Scenes/Sword.tscn")
+var melee_attack_cooldown
 
 #0 = ranged
 #1 = melee
@@ -32,6 +33,9 @@ var current_weapon = 0
 
 #angle from character to mouse
 var mouse_rotation
+# 0 = left
+# 1 = right
+var side = 0
 
 #equip gun as soon as the player is loaded
 func _ready():
@@ -98,7 +102,7 @@ func _get_input():
 		if current_weapon == 0:
 			current_weapon = 1
 			_equip_melee(sword_load)
-		if $SwordAttack.is_stopped():
+		if melee_attack_cooldown.is_stopped():
 			_melee_attack()
 
 #equip ranged and remove melee if equiped
@@ -116,6 +120,7 @@ func _equip_melee(melee_load):
 	melee = melee_load.instance()
 	player.add_child(melee)
 	melee.set_global_position(player.get_global_position())
+	melee_attack_cooldown = melee.get_node("MeleeAttack")
 
 func _shoot_bullet():
 	if shot_cooldown.is_stopped():
@@ -130,7 +135,7 @@ func _shoot_bullet():
 
 func _melee_attack():
 	print("attack")
-	$SwordAttack.start()
+	melee_attack_cooldown.start()
 
 func _set_weapon_rotation(weapon):
 	weapon.set_rotation(mouse_rotation)
@@ -138,11 +143,18 @@ func _set_weapon_rotation(weapon):
 		weapon.set_z_index(-1)
 	else:
 		weapon.set_z_index(1)
-		
-	if abs(mouse_rotation) > PI/2:
-		weapon.position.x = -15
-	else:
-		weapon.position.x = 15
+
+	if side == 0:
+		if abs(mouse_rotation) <= PI/4:
+			side = 1
+		else:
+			weapon.position.x = -15
+	elif side == 1:
+		if abs(mouse_rotation) >= (3 * PI)/4:
+			side = 0
+		else:
+			weapon.position.x = 15
+
 
 #timer that sets how long and how fast you dash
 func _on_DashTimer_timeout():
@@ -154,7 +166,3 @@ func _on_DashTimer_timeout():
 #timer for a cooldown after you dash (can't spam)
 func _on_DashCooldown_timeout():
 	$DashCooldown.stop()
-
-#sword attack cooldown
-func _on_SwordAttack_timeout():
-	$SwordAttack.stop()
