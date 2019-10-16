@@ -15,11 +15,13 @@ var player
 
 #store preloaded scene as var
 var bullet_load = preload("res://Scenes/Gun/Bullet.tscn")
+var arrow_load = preload("res://Scenes/Bow/Arrow.tscn")
 #used later to assign to loaded ranged weapon scene
 var ranged
 #stores preloaded gun as var
 var gun_load = preload("res://Scenes/Gun/Gun.tscn")
 var shot_cooldown
+var bow_load = preload("res://Scenes/Bow/Bow.tscn")
 
 #used later to assign to loaded melee weapon scene
 var melee
@@ -41,7 +43,7 @@ var side = 0
 func _ready():
 	player = get_node(".")
 	player.set_z_index(1)
-	_equip_ranged(gun_load)
+	_equip_ranged(bow_load)
 
 #check for movement input, dash, move character
 func _physics_process(delta):
@@ -94,8 +96,8 @@ func _get_input():
 #		only equip ranged if currently equipped melee
 		if current_weapon == 1:
 			current_weapon = 0
-			_equip_ranged(gun_load)
-		_shoot_bullet()
+			_equip_ranged(bow_load)
+		_shoot_weapon(arrow_load)
 	
 	if Input.is_action_just_pressed("melee"):
 #		only equip melee if currently equipped ranged
@@ -109,7 +111,7 @@ func _get_input():
 func _equip_ranged(ranged_load):
 	if melee != null:
 		melee.queue_free()
-	ranged = gun_load.instance()
+	ranged = ranged_load.instance()
 	player.add_child(ranged)
 	ranged.set_global_position(player.get_global_position())
 	shot_cooldown = ranged.get_node("ShotCooldown")
@@ -122,15 +124,15 @@ func _equip_melee(melee_load):
 	melee.set_global_position(player.get_global_position())
 	melee_attack_cooldown = melee.get_node("MeleeAttack")
 
-func _shoot_bullet():
+func _shoot_weapon(ammo_load):
 	if shot_cooldown.is_stopped():
-		var bullet = bullet_load.instance()
-		var bullet_rotation = mouse_rotation
-		bullet.set_rotation(bullet_rotation)
-		bullet.set_global_position(ranged.get_global_position())
-		player.add_child(bullet)
+		var projectile = ammo_load.instance()
+		var projectile_rotation = mouse_rotation
+		projectile.set_rotation(projectile_rotation)
+		projectile.set_global_position(ranged.get_global_position())
+		player.add_child(projectile)
 		var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
-		bullet.direction = direction_vector
+		projectile.direction = direction_vector
 		shot_cooldown.start()
 
 func _melee_attack():
