@@ -19,8 +19,8 @@ self_modulate = Color( 0.305882, 1, 0.447059, 1 )
 scale = Vector2( 0.119999, 1 )
 texture = ExtResource( 2 )
 
-[node name="SwordAttack" type="Timer" parent="."]
+[node name="MeleeAttack" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 
-[connection signal="timeout" from="SwordAttack" to="." method="_on_SwordAttack_timeout"]
+[connection signal="timeout" from="MeleeAttack" to="." method="_on_MeleeAttack_timeout"]
