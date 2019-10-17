@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/PickupWeapon.tscn" type="PackedScene" id=4]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 315.5, 196.5 )
@@ -20,4 +21,7 @@ position = Vector2( 419.002, 149.444 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 245.304, 228.095 )
+
+[node name="Area2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 76.2641, 58.7209 )
 

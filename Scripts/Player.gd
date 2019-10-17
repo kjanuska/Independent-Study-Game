@@ -29,9 +29,19 @@ var melee
 var sword_load = preload("res://Scenes/Sword.tscn")
 var melee_attack_cooldown
 
-#0 = ranged
-#1 = melee
-var current_weapon = 0
+# 0 = ranged
+# 1 = melee
+var current_weapon_type = 0
+
+# specific weapon for each type
+# melee in 0s, ranged in 10s
+# 0 = sword
+# 10 = bow
+# 11 = gun
+var current_melee_id = 0
+var current_melee
+var current_ranged_id = 10
+var current_ranged
 
 #angle from character to mouse
 var mouse_rotation
@@ -39,11 +49,16 @@ var mouse_rotation
 # 1 = right
 var side = 0
 
+# check how long shoot button has been pressed
+var count = 0
+
 #equip gun as soon as the player is loaded
 func _ready():
+	equip(0)
+	equip(10)
 	player = get_node(".")
 	player.set_z_index(1)
-	_equip_ranged(bow_load)
+	_equip_ranged(current_ranged)
 
 #check for movement input, dash, move character
 func _physics_process(delta):
@@ -53,13 +68,13 @@ func _physics_process(delta):
 		moving = false
 	
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
-	
+
 	if can_move:
 		_get_input()
 	
-	if current_weapon == 0:
+	if current_weapon_type == 0:
 		_set_weapon_rotation(ranged)
-	elif current_weapon == 1:
+	elif current_weapon_type == 1:
 		_set_weapon_rotation(melee)
 	
 	if Input.is_action_just_pressed("space"):
@@ -94,15 +109,23 @@ func _get_input():
 	
 	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
-		if current_weapon == 1:
-			current_weapon = 0
+		if current_weapon_type == 1:
+			current_weapon_type = 0
 			_equip_ranged(bow_load)
-		_shoot_weapon(arrow_load)
+		count += 1
+		if current_ranged == bow_load:
+			if count >= 80:
+				$Charged.popup()
+		else:
+			_shoot_weapon(arrow_load)
+	
+	if Input.is_action_just_released("shoot") && current_ranged == bow_load:
+		shoot_charged()
 	
 	if Input.is_action_just_pressed("melee"):
 #		only equip melee if currently equipped ranged
-		if current_weapon == 0:
-			current_weapon = 1
+		if current_weapon_type == 0:
+			current_weapon_type = 1
 			_equip_melee(sword_load)
 		if melee_attack_cooldown.is_stopped():
 			_melee_attack()
@@ -124,6 +147,18 @@ func _equip_melee(melee_load):
 	melee.set_global_position(player.get_global_position())
 	melee_attack_cooldown = melee.get_node("MeleeAttack")
 
+func equip(id):
+	if id < 10:
+		match id:
+			0:
+				current_melee = sword_load
+	elif id >= 10:
+		match id:
+			10:
+				current_ranged = bow_load
+			11:
+				current_ranged = gun_load
+
 func _shoot_weapon(ammo_load):
 	if shot_cooldown.is_stopped():
 		var projectile = ammo_load.instance()
@@ -134,6 +169,15 @@ func _shoot_weapon(ammo_load):
 		var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
 		projectile.direction = direction_vector
 		shot_cooldown.start()
+
+func shoot_charged():
+	if count >= 80:
+		$Charged.hide()
+		count = 0
+	elif count < 80:
+		print("short shot")
+		_shoot_weapon(arrow_load)
+		count = 0
 
 func _melee_attack():
 	print("attack")
