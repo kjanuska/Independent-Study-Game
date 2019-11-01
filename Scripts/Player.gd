@@ -33,15 +33,15 @@ var melee_attack_cooldown
 var current_weapon
 
 # specific weapon for each type
-# melee in 0s
+# melee in 1s
 # 0 = sword
 # 
 # ranged in 10s
 # 10 = bow
 # 11 = gun
-var equipped_melee_id = 0
+var equipped_melee_id
 var equipped_melee
-var equipped_ranged_id = 10
+var equipped_ranged_id
 var equipped_ranged
 var equipped_ammo
 var ammo_speed
@@ -59,8 +59,6 @@ var count = 0
 func _ready():
 	player = get_node(".")
 	player.set_z_index(1)
-	equip(equipped_melee_id)
-	equip(equipped_ranged_id)
 
 #check for movement input, dash, move character
 func _physics_process(delta):
@@ -73,8 +71,9 @@ func _physics_process(delta):
 	
 	if can_move:
 		get_input()
-
-	set_weapon_rotation()
+	
+	if current_weapon != null:
+		set_weapon_rotation()
 	
 	if Input.is_action_just_pressed("space"):
 		if moving && dashing == false && $DashCooldown.is_stopped():
@@ -108,65 +107,68 @@ func get_input():
 	
 	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
-		if current_weapon == melee:
-			equip(equipped_ranged_id)
-		count += 1
-		if equipped_ranged == bow_load:
-			if count >= 80:
-				$Charged.popup()
-		else:
-			shoot_weapon(equipped_ammo, ammo_speed)
-			count = 0
-	
-	if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
-		shoot_charged()
-	
-	if Input.is_action_just_pressed("melee"):
-#		only equip melee if currently equipped ranged
-		if current_weapon == ranged:
-			current_weapon = melee
-			equip(equipped_melee_id)
-		if melee_attack_cooldown.is_stopped():
-			melee_attack()
+		if current_weapon != null:
+			if current_weapon == melee:
+				equip(equipped_ranged_id)
+			count += 1
+			if equipped_ranged == bow_load:
+				if count >= 80:
+					$Charged.popup()
+			else:
+				shoot_weapon(equipped_ammo, ammo_speed)
+				count = 0
+		
+		if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
+			shoot_charged()
+		
+		if Input.is_action_just_pressed("melee"):
+	#		only equip melee if currently equipped ranged
+			if current_weapon != null:
+				if current_weapon == ranged:
+					current_weapon = melee
+					equip(equipped_melee_id)
+				if melee_attack_cooldown.is_stopped():
+					melee_attack()
 
 func pickup(id):
 	if current_weapon == melee:
 		melee.queue_free()
-	else:
+	elif current_weapon == ranged:
 		ranged.queue_free()
 	equip(id)
 
 func equip(id):
-	if id < 10:
-		match id:
-			0:
-				equipped_melee = sword_load
-				equipped_melee_id = 0
-		if is_instance_valid(ranged):
-			ranged.queue_free()
-		melee = equipped_melee.instance()
-		player.add_child(melee)
-		melee.set_global_position(player.get_global_position())
-		melee_attack_cooldown = melee.get_node("MeleeAttack")
-		current_weapon = melee
-	elif id >= 10:
-		match id:
-			10:
-				equipped_ranged = bow_load
-				equipped_ranged_id = 10
-				equipped_ammo = arrow_load
-			11:
-				equipped_ranged = gun_load
-				equipped_ranged_id = 11
-				equipped_ammo = bullet_load
-				ammo_speed = 3000
-		if is_instance_valid(melee):
-			melee.queue_free()
-		ranged = equipped_ranged.instance()
-		player.add_child(ranged)
-		ranged.set_global_position(player.get_global_position())
-		shot_cooldown = ranged.get_node("ShotCooldown")
-		current_weapon = ranged
+	if id != null:
+		if id < 10:
+			match id:
+				0:
+					equipped_melee = sword_load
+					equipped_melee_id = 0
+			if is_instance_valid(ranged):
+				ranged.queue_free()
+			melee = equipped_melee.instance()
+			player.add_child(melee)
+			melee.set_global_position(player.get_global_position())
+			melee_attack_cooldown = melee.get_node("MeleeAttack")
+			current_weapon = melee
+		elif id >= 10:
+			match id:
+				10:
+					equipped_ranged = bow_load
+					equipped_ranged_id = 10
+					equipped_ammo = arrow_load
+				11:
+					equipped_ranged = gun_load
+					equipped_ranged_id = 11
+					equipped_ammo = bullet_load
+					ammo_speed = 3000
+			if is_instance_valid(melee):
+				melee.queue_free()
+			ranged = equipped_ranged.instance()
+			player.add_child(ranged)
+			ranged.set_global_position(player.get_global_position())
+			shot_cooldown = ranged.get_node("ShotCooldown")
+			current_weapon = ranged
 
 func shoot_weapon(ammo_load, speed):
 	if shot_cooldown.is_stopped():
