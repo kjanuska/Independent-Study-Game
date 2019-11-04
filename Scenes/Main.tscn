@@ -42,6 +42,10 @@ offset = Vector2( 14.0098, 4.74544 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 286.732, 149.764 )
 
-[node name="Area2D" parent="." instance=ExtResource( 3 )]
+[node name="Pickup Gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 493.694, 186.664 )
-weapon_id = null
+
+[node name="Pickup Melee" parent="." instance=ExtResource( 3 )]
+position = Vector2( 86.4383, 183.406 )
+weapon_id = 0
+

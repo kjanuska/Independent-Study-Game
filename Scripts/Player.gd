@@ -107,7 +107,7 @@ func get_input():
 	
 	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
-		if current_weapon != null:
+		if equipped_ranged != null:
 			if current_weapon == melee:
 				equip(equipped_ranged_id)
 			count += 1
@@ -123,7 +123,7 @@ func get_input():
 		
 		if Input.is_action_just_pressed("melee"):
 	#		only equip melee if currently equipped ranged
-			if current_weapon != null:
+			if equipped_melee != null:
 				if current_weapon == ranged:
 					current_weapon = melee
 					equip(equipped_melee_id)
@@ -131,10 +131,11 @@ func get_input():
 					melee_attack()
 
 func pickup(id):
-	if current_weapon == melee:
-		melee.queue_free()
-	elif current_weapon == ranged:
-		ranged.queue_free()
+	if current_weapon != null:
+		if current_weapon == melee:
+			melee.queue_free()
+		elif current_weapon == ranged:
+			ranged.queue_free()
 	equip(id)
 
 func equip(id):
