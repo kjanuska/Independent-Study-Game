@@ -5,7 +5,7 @@ var state = null setget set_state
 var previous_state = null
 var states = {}
 
-onready var parent = get_parent()
+onready var player = get_tree().get_root().get_node("Main").get_node("Player")
 
 func _physics_process(delta):
 	if state != null:

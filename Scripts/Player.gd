@@ -60,35 +60,24 @@ func _ready():
 	player = get_node(".")
 	player.set_z_index(1)
 
-#check for movement input, dash, move character
-func _physics_process(delta):
-	if dashing == false:
-		motion.x = 0
-		motion.y = 0
-		moving = false
-	
+func apply_weapon_rotation():
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
-	
-	if can_move:
-		get_input()
-	
-	if current_weapon != null:
-		set_weapon_rotation()
-	
-	if Input.is_action_just_pressed("space"):
-		if moving && dashing == false && $DashCooldown.is_stopped():
-			SPEED *= 5
-			dashing = true
-			can_move = false
-			$DashTimer.start()
-			
+	set_weapon_rotation()
+
+func dash():
+	if $DashCooldown.is_stopped():
+		SPEED *= 5
+		dashing = true
+		can_move = false
+		$DashTimer.start()
+
+func apply_movement():
 	move_and_slide(motion.normalized() * SPEED)
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
+#	motion.x = 0
+#	motion.y = 0
 
 #get input for WASD, left and right mouse buttons
-func get_input():
+func handle_move_input():
 	if Input.is_action_pressed("ui_right"):
 		motion.x = SPEED
 		moving = true
@@ -105,6 +94,10 @@ func get_input():
 		motion.y = SPEED
 		moving = true
 	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
+
+func handle_ranged_input():
 	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
 		if current_weapon != null:
@@ -120,15 +113,16 @@ func get_input():
 		
 		if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
 			shoot_charged()
-		
-		if Input.is_action_just_pressed("melee"):
-	#		only equip melee if currently equipped ranged
-			if current_weapon != null:
-				if current_weapon == ranged:
-					current_weapon = melee
-					equip(equipped_melee_id)
-				if melee_attack_cooldown.is_stopped():
-					melee_attack()
+
+func handle_melee_input():
+	if Input.is_action_just_pressed("melee"):
+#		only equip melee if currently equipped ranged
+		if current_weapon != null:
+			if current_weapon == ranged:
+				current_weapon = melee
+				equip(equipped_melee_id)
+			if melee_attack_cooldown.is_stopped():
+				melee_attack()
 
 func pickup(id):
 	if current_weapon == melee:
