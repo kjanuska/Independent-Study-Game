@@ -1,16 +1,5 @@
 extends StateMachine
 
-func _ready():
-	add_state("idle")
-	add_state("walk")
-	add_state("dash")
-	call_deferred("set_state", states.idle)
-
-func _input(event):
-	if [states.walk].has(state):
-		if event.is_action_pressed("dash"):
-			player.dash()
-
 func _state_logic(delta):
 	player.handle_move_input()
 	player.apply_movement()
@@ -41,3 +30,33 @@ func _enter_state(new_state, old_state):
 
 func _exit_state(old_state, new_state):
 	pass	
+	#speed that the player travels at
+	var SPEED = 300
+	#player direction vector
+	var motion = Vector2()
+	
+func apply_movement():
+	move_and_slide(motion.normalized() * SPEED)
+#	motion.x = 0
+#	motion.y = 0
+
+#get input for WASD, left and right mouse buttons
+func handle_move_input():
+	if Input.is_action_pressed("ui_right"):
+		motion.x = SPEED
+		moving = true
+	
+	if Input.is_action_pressed("ui_left"):
+		motion.x = -SPEED
+		moving = true
+	
+	if Input.is_action_pressed("ui_up"):
+		motion.y = -SPEED
+		moving = true
+	
+	if Input.is_action_pressed("ui_down"):
+		motion.y = SPEED
+		moving = true
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()

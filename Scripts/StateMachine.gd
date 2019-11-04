@@ -1,9 +1,14 @@
 extends Node
 class_name StateMachine
 
+export(NodePath) var START_STATE
 var state = null setget set_state
 var previous_state = null
-var states = {}
+enum STATES {
+	IDLE,
+	WALK,
+	DASH
+	}
 
 onready var player = get_tree().get_root().get_node("Main").get_node("Player")
 

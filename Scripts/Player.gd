@@ -1,9 +1,5 @@
 extends KinematicBody2D
 
-#speed that the player travels at
-var SPEED = 300
-#player direction vector
-var motion = Vector2()
 #is the player currently moving using the WASD keys
 var moving = false
 #is the player in the process of dashing
@@ -70,32 +66,6 @@ func dash():
 		dashing = true
 		can_move = false
 		$DashTimer.start()
-
-func apply_movement():
-	move_and_slide(motion.normalized() * SPEED)
-#	motion.x = 0
-#	motion.y = 0
-
-#get input for WASD, left and right mouse buttons
-func handle_move_input():
-	if Input.is_action_pressed("ui_right"):
-		motion.x = SPEED
-		moving = true
-	
-	if Input.is_action_pressed("ui_left"):
-		motion.x = -SPEED
-		moving = true
-	
-	if Input.is_action_pressed("ui_up"):
-		motion.y = -SPEED
-		moving = true
-	
-	if Input.is_action_pressed("ui_down"):
-		motion.y = SPEED
-		moving = true
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
 
 func handle_ranged_input():
 	if Input.is_action_pressed("shoot"):
