@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/PlayerStateMachine.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -55,9 +54,6 @@ script = SubResource( 3 )
 margin_right = 40.0
 margin_bottom = 14.0
 text = "Shink"
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 3 )
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_DashCooldown_timeout"]

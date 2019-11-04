@@ -45,4 +45,3 @@ position = Vector2( 286.732, 149.764 )
 [node name="Area2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 493.694, 186.664 )
 weapon_id = null
-
