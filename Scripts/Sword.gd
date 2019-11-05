@@ -1,6 +1,7 @@
 extends Node
 
 func playAnim(animation):
+	print("attack")
 	$AnimationPlayer.play(animation)
 
 func _on_MeleeAttack_timeout():
