@@ -121,14 +121,14 @@ func get_input():
 		if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
 			shoot_charged()
 		
-		if Input.is_action_just_pressed("melee"):
-	#		only equip melee if currently equipped ranged
-			if equipped_melee != null:
-				if current_weapon == ranged:
-					current_weapon = melee
-					equip(equipped_melee_id)
-				if melee_attack_cooldown.is_stopped():
-					melee_attack()
+	if Input.is_action_just_pressed("melee"):
+#		only equip melee if currently equipped ranged
+		if equipped_melee != null:
+			if current_weapon == ranged:
+				current_weapon = melee
+				equip(equipped_melee_id)
+			if melee_attack_cooldown.is_stopped():
+				melee_attack()
 
 func pickup(id):
 	if current_weapon != null:
@@ -195,8 +195,7 @@ func shoot_charged():
 		count = 0
 
 func melee_attack():
-	print("attack")
-	
+	melee.playAnim("attack")
 	melee_attack_cooldown.start()
 
 func set_weapon_rotation():
