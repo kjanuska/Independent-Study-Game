@@ -1,10 +1,12 @@
 extends Area2D
 
-onready var player = get_tree().get_root().get_node("Main").get_node("Player")
+var player
 
-export var weapon_id = 0
+export var weapon_id = 11
 
 var is_colliding = false
+func _ready():
+	player = get_tree().get_root().get_node("Main").get_node("Player")
 
 func _on_Area2D_body_entered(body):
 	if body.get_name() == "Player":
