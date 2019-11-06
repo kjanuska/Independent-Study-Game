@@ -3,16 +3,16 @@
 [ext_resource path="res://icon.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.5548, 79.477 )
+extents = Vector2( 33.0027, 31.9991 )
 
-[node name="River" type="StaticBody2D"]
-scale = Vector2( 1.47451, 14.2935 )
+[node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2( -1.19886, 18.5145 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 1.05426, 0.41232 )
-z_index = 1
+position = Vector2( -1, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0, 0, 1, 1 )
+modulate = Color( 0.160784, 0.254902, 0.741176, 1 )
 texture = ExtResource( 1 )
+
