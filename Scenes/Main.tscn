@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Tree.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/SpawnLocation.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Log.tscn" type="PackedScene" id=9]
 
 [node name="Main" type="Node2D"]
 
@@ -92,3 +93,6 @@ position = Vector2( 979.212, 210.111 )
 
 [node name="Target" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1550.86, 202.004 )
+
+[node name="Log" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1641, 105.806 )
