@@ -117,9 +117,9 @@ func get_input():
 			else:
 				shoot_weapon(equipped_ammo, ammo_speed)
 				count = 0
-		
-		if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
-			shoot_charged()
+
+	if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
+		shoot_charged()
 		
 	if Input.is_action_just_pressed("melee"):
 #		only equip melee if currently equipped ranged
