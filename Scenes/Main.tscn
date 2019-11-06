@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/SpawnLocation.tscn" type="PackedScene" id=1]
@@ -8,6 +9,16 @@
 [ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Ocean.tscn" type="PackedScene" id=8]
+=======
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/PickupWeapon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Tree.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/SpawnLocation.tscn" type="PackedScene" id=6]
+>>>>>>> Stashed changes
 
 [node name="Main" type="Node2D"]
 
@@ -27,6 +38,7 @@ offset = Vector2( 14.0098, 4.74544 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 286.732, 149.764 )
 
+<<<<<<< Updated upstream
 [node name="Pickup Gun" parent="." instance=ExtResource( 4 )]
 position = Vector2( 968.763, 201.412 )
 
@@ -36,6 +48,14 @@ position = Vector2( 1251.16, 122.024 )
 [node name="Pickup Melee" parent="." instance=ExtResource( 4 )]
 position = Vector2( 457.036, 180.751 )
 weapon_id = 0
+=======
+[node name="Pickup Gun" parent="." instance=ExtResource( 3 )]
+position = Vector2( 493.694, 186.664 )
+weapon_id = 10
+
+[node name="Pickup Melee" parent="." instance=ExtResource( 3 )]
+position = Vector2( 86.4383, 183.406 )
+>>>>>>> Stashed changes
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.411765, 0.313726, 0.0509804, 1 )
@@ -51,6 +71,7 @@ __meta__ = {
 [node name="Rock" parent="." instance=ExtResource( 6 )]
 position = Vector2( 672.202, 190.333 )
 
+<<<<<<< Updated upstream
 [node name="Node2D" parent="." instance=ExtResource( 7 )]
 position = Vector2( 482.028, -136.329 )
 
@@ -74,3 +95,32 @@ position = Vector2( 1527.12, -162.439 )
 
 [node name="Ocean" parent="." instance=ExtResource( 8 )]
 position = Vector2( 709.421, 774.554 )
+=======
+[node name="Trees" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Node2D" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 503.529, -109.453 )
+
+[node name="Node2D2" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 705.136, -71.9745 )
+
+[node name="Node2D3" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 861.511, -119.792 )
+
+[node name="Node2D4" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 1016.59, -84.8981 )
+
+[node name="Node2D5" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 1204.03, -102.991 )
+
+[node name="Node2D6" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 1384.96, -88.7751 )
+
+[node name="Node2D7" parent="Trees" instance=ExtResource( 5 )]
+position = Vector2( 1527.12, -162.439 )
+
+[node name="SpawnLocation" parent="." instance=ExtResource( 6 )]
+position = Vector2( 290.536, -350.701 )
+
+>>>>>>> Stashed changes
