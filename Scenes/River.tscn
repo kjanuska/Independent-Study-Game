@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.0027, 31.9991 )
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="River" type="StaticBody2D"]
 scale = Vector2( -1.19886, 18.5145 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -15,4 +15,3 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.160784, 0.254902, 0.741176, 1 )
 texture = ExtResource( 1 )
-

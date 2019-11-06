@@ -46,7 +46,6 @@ text = "Shink"
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.32, 0.320001 )
 texture = ExtResource( 2 )
-
-[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_DashCooldown_timeout"]
