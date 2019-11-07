@@ -12,7 +12,6 @@ var dashing = false
 var can_move = true
 #used in _ready to get parent node
 var player
-var health = 3
 
 #store preloaded scene as var
 var bullet_load = preload("res://Scenes/Gun/Bullet.tscn")

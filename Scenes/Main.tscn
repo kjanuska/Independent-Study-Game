@@ -47,6 +47,7 @@ rotation = 3.14159
 scale = Vector2( 1.19886, -18.5145 )
 
 [node name="Rocks" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Rock" parent="Rocks" instance=ExtResource( 5 )]
 position = Vector2( 814.235, 213.108 )
@@ -89,10 +90,11 @@ position = Vector2( 1364.91, -93.0711 )
 position = Vector2( 1527.12, -162.439 )
 
 [node name="SpawnLocation" parent="." instance=ExtResource( 7 )]
-position = Vector2( 979.212, 210.111 )
+position = Vector2( 1005.68, 221.954 )
 
 [node name="Target" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1550.86, 202.004 )
 
 [node name="Log" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1641, 105.806 )
+
