@@ -104,5 +104,4 @@ position = Vector2( 1550.86, 202.004 )
 [node name="Log" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1641, 105.806 )
 
-
 [editable path="Pickup Gun"]

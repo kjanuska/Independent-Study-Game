@@ -1,13 +1,18 @@
 extends Area2D
 
 var health = 3
+var is_invincible = false
 
 func take_damage():
-	health -= 1
-	if health == 0:
-		print("you died")
-	$CollisionShape2D.disabled = true
-	$InvincibilityPeriod.start()
+	if !is_invincible:
+		print("yikes")
+		health -= 1
+		if health == 0:
+			print("you died")
+			return
+		is_invincible = true
+		$InvincibilityPeriod.start()
 
 func _on_InvincibilityPeriod_timeout():
-	$CollisionShape2D.disabled = false
+	is_invincible = false
+	print("done")
