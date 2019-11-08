@@ -10,6 +10,10 @@
 [ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Log.tscn" type="PackedScene" id=9]
 
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+
 [node name="Main" type="Node2D"]
 
 [node name="Sprite2" type="Sprite" parent="."]
@@ -20,6 +24,9 @@ scale = Vector2( 27.7967, 3.83829 )
 z_index = -5
 texture = ExtResource( 1 )
 offset = Vector2( 14.0098, 4.74544 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 286.732, 149.764 )
@@ -46,6 +53,9 @@ scale = Vector2( 1.44377, 8.92188 )
 z_index = -5
 texture = ExtResource( 1 )
 offset = Vector2( 14.0098, 4.74544 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="River" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1466.1, -81.3826 )
@@ -103,5 +113,63 @@ position = Vector2( 1550.86, 202.004 )
 
 [node name="Log" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1641, 105.806 )
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Ocean" type="StaticBody2D" parent="Obstacles"]
+editor/display_folded = true
+position = Vector2( 770.209, 635.255 )
+scale = Vector2( 134.806, 29.0249 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Ocean"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Forest1" type="StaticBody2D" parent="Obstacles"]
+editor/display_folded = true
+position = Vector2( -88.8541, -120.588 )
+scale = Vector2( 33.04, 21.92 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Forest1"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Forest2" type="StaticBody2D" parent="Obstacles"]
+editor/display_folded = true
+position = Vector2( 976.693, -118.382 )
+scale = Vector2( 64.0727, -22.1608 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Forest2"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Forest3" type="StaticBody2D" parent="Obstacles"]
+editor/display_folded = true
+position = Vector2( -295.823, 222.754 )
+scale = Vector2( 22.5527, -13.5208 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Forest3"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Forest4" type="StaticBody2D" parent="Obstacles"]
+editor/display_folded = true
+position = Vector2( 273.795, -473.798 )
+scale = Vector2( 22.5527, -13.5208 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Forest4"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 
 [editable path="Pickup Gun"]
