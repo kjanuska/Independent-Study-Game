@@ -92,10 +92,14 @@ func get_input():
 	if Input.is_action_pressed("ui_right"):
 		motion.x = SPEED
 		moving = true
+		$Sprite.flip_h = false
+		$AnimationPlayer.play("walk")
 	
 	if Input.is_action_pressed("ui_left"):
 		motion.x = -SPEED
 		moving = true
+		$Sprite.flip_h = true
+		$AnimationPlayer.play("walk")
 	
 	if Input.is_action_pressed("ui_up"):
 		motion.y = -SPEED

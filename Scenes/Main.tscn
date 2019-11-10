@@ -115,6 +115,7 @@ position = Vector2( 1550.86, 202.004 )
 position = Vector2( 1641, 105.806 )
 
 [node name="Obstacles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Ocean" type="StaticBody2D" parent="Obstacles"]
 editor/display_folded = true
