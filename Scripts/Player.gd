@@ -1,9 +1,6 @@
 extends KinematicBody2D
 
-#speed that the player travels at
-var SPEED = 300
-#player direction vector
-var motion = Vector2()
+
 #is the player currently moving using the WASD keys
 var moving = false
 #is the player in the process of dashing
@@ -61,12 +58,7 @@ func _ready():
 	player.set_z_index(1)
 
 #check for movement input, dash, move character
-func _physics_process(delta):
-	if dashing == false:
-		motion.x = 0
-		motion.y = 0
-		moving = false
-	
+func _physics_process(_delta):	
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
 	
 	if can_move:
@@ -77,38 +69,13 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("space"):
 		if moving && dashing == false && $DashCooldown.is_stopped():
-			SPEED *= 5
-			dashing = true
-			can_move = false
 			$DashTimer.start()
 			
-	move_and_slide(motion.normalized() * SPEED)
-	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 
 #get input for WASD, left and right mouse buttons
-func get_input():
-	if Input.is_action_pressed("ui_right"):
-		motion.x = SPEED
-		moving = true
-		$Sprite.flip_h = false
-		$AnimationPlayer.play("walk")
-	
-	if Input.is_action_pressed("ui_left"):
-		motion.x = -SPEED
-		moving = true
-		$Sprite.flip_h = true
-		$AnimationPlayer.play("walk")
-	
-	if Input.is_action_pressed("ui_up"):
-		motion.y = -SPEED
-		moving = true
-	
-	if Input.is_action_pressed("ui_down"):
-		motion.y = SPEED
-		moving = true
-	
+func get_input():	
 	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
 		if equipped_ranged != null:
@@ -219,14 +186,3 @@ func set_weapon_rotation():
 			side = 0
 		else:
 			current_weapon.position.x = 15
-
-#timer that sets how long and how fast you dash
-func _on_DashTimer_timeout():
-	SPEED = 300
-	can_move = true
-	dashing = false
-	$DashCooldown.start()
-
-#timer for a cooldown after you dash (can't spam)
-func _on_DashCooldown_timeout():
-	$DashCooldown.stop()
