@@ -10,7 +10,7 @@
 [ext_resource path="res://Scripts/StateMachine/States/TakeDamage.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.11818, 10.7913 )
+extents = Vector2( 8.1963, 3.50365 )
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Popup
@@ -20,6 +20,7 @@ func _on_PopupTimer_timeout():
 "
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 10.7607 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "dash"
@@ -106,6 +107,7 @@ scale = Vector2( 2.16, 2.16 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2.5613, 8.39539 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -141,6 +143,7 @@ hframes = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( -0.569174, -8.9407e-008 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
