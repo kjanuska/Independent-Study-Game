@@ -1,12 +1,5 @@
 extends KinematicBody2D
 
-
-#is the player currently moving using the WASD keys
-var moving = false
-#is the player in the process of dashing
-var dashing = false
-#is the player not dashing (can't move while dashing)
-var can_move = true
 #used in _ready to get parent node
 var player
 
@@ -61,15 +54,10 @@ func _ready():
 func _physics_process(_delta):	
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
 	
-	if can_move:
-		get_input()
+	get_input()
 	
 	if current_weapon != null:
 		set_weapon_rotation()
-	
-	if Input.is_action_just_pressed("space"):
-		if moving && dashing == false && $DashCooldown.is_stopped():
-			$DashTimer.start()
 			
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()

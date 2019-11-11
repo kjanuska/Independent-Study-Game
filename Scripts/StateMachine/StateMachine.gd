@@ -48,7 +48,6 @@ func _change_state(state_name):
 		states_stack.pop_front()
 	else:
 		states_stack[0] = states_map[state_name]
-	
 	current_state = states_stack[0]
 	emit_signal("state_changed", current_state)
 	

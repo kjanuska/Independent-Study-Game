@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/StateMachine/States/Idle.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/StateMachine/States/Walk.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/StateMachine/States/Dash.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/StateMachine/States/TakeDamage.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.11818, 10.7913 )
@@ -31,9 +32,21 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 7.72748, 1 ),
 "update": 0,
 "values": [ Color( 0, 0.0862745, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -52,6 +65,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "invulnerable"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 8.87653, 1 ),
+"update": 0,
+"values": [ Color( 0.945098, 0, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -106,7 +134,6 @@ text = "Shink"
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 4
-frame = 1
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "hurtbox",
@@ -120,10 +147,10 @@ shape = SubResource( 3 )
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 1.5
 anims/dash = SubResource( 4 )
 anims/hurt = SubResource( 5 )
 anims/idle = SubResource( 6 )
+anims/invulnerable = SubResource( 8 )
 anims/walk = SubResource( 7 )
 
 [node name="MovementStates" type="Node" parent="."]
@@ -138,6 +165,9 @@ script = ExtResource( 6 )
 
 [node name="Dash" type="Node2D" parent="MovementStates"]
 script = ExtResource( 7 )
+
+[node name="TakeDamage" type="Node" parent="MovementStates"]
+script = ExtResource( 8 )
 
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="MovementStates/Dash" method="_on_DashCooldown_timeout"]
