@@ -1,11 +1,5 @@
 extends KinematicBody2D
 
-#is the player currently moving using the WASD keys
-var moving = false
-#is the player in the process of dashing
-var dashing = false
-#is the player not dashing (can't move while dashing)
-var can_move = true
 #used in _ready to get parent node
 var player
 
@@ -56,21 +50,23 @@ func _ready():
 	player = get_node(".")
 	player.set_z_index(1)
 
-func apply_weapon_rotation():
+#check for movement input, dash, move character
+func _physics_process(_delta):	
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
-	set_weapon_rotation()
+	
+	get_input()
+	
+	if current_weapon != null:
+		set_weapon_rotation()
+			
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
 
-func dash():
-	if $DashCooldown.is_stopped():
-		SPEED *= 5
-		dashing = true
-		can_move = false
-		$DashTimer.start()
-
-func handle_ranged_input():
+#get input for WASD, left and right mouse buttons
+func get_input():	
 	if Input.is_action_pressed("shoot"):
 #		only equip ranged if currently equipped melee
-		if current_weapon != null:
+		if equipped_ranged != null:
 			if current_weapon == melee:
 				equip(equipped_ranged_id)
 			count += 1
@@ -81,13 +77,12 @@ func handle_ranged_input():
 				shoot_weapon(equipped_ammo, ammo_speed)
 				count = 0
 		
-		if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
-			shoot_charged()
-
-func handle_melee_input():
+	if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
+		shoot_charged()
+		
 	if Input.is_action_just_pressed("melee"):
 #		only equip melee if currently equipped ranged
-		if current_weapon != null:
+		if equipped_melee != null:
 			if current_weapon == ranged:
 				current_weapon = melee
 				equip(equipped_melee_id)
@@ -95,10 +90,11 @@ func handle_melee_input():
 				melee_attack()
 
 func pickup(id):
-	if current_weapon == melee:
-		melee.queue_free()
-	elif current_weapon == ranged:
-		ranged.queue_free()
+	if current_weapon != null:
+		if current_weapon == melee:
+			melee.queue_free()
+		elif current_weapon == ranged:
+			ranged.queue_free()
 	equip(id)
 
 func equip(id):
@@ -158,8 +154,7 @@ func shoot_charged():
 		count = 0
 
 func melee_attack():
-	print("attack")
-	
+	melee.playAnim("attack")
 	melee_attack_cooldown.start()
 
 func set_weapon_rotation():
@@ -179,14 +174,3 @@ func set_weapon_rotation():
 			side = 0
 		else:
 			current_weapon.position.x = 15
-
-#timer that sets how long and how fast you dash
-func _on_DashTimer_timeout():
-	SPEED = 300
-	can_move = true
-	dashing = false
-	$DashCooldown.start()
-
-#timer for a cooldown after you dash (can't spam)
-func _on_DashCooldown_timeout():
-	$DashCooldown.stop()

@@ -13,7 +13,9 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 100, 100, 100, 1 )
+modulate = Color( 0.447059, 0.145098, 0.145098, 1 )
+self_modulate = Color( 0.627451, 0.337255, 0.337255, 1 )
 texture = ExtResource( 2 )
+
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Area2D_body_exited"]
