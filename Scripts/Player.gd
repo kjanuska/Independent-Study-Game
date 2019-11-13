@@ -92,10 +92,14 @@ func get_input():
 	if Input.is_action_pressed("ui_right"):
 		motion.x = SPEED
 		moving = true
+		$Sprite.flip_h = false
+		$AnimationPlayer.play("walk")
 	
 	if Input.is_action_pressed("ui_left"):
 		motion.x = -SPEED
 		moving = true
+		$Sprite.flip_h = true
+		$AnimationPlayer.play("walk")
 	
 	if Input.is_action_pressed("ui_up"):
 		motion.y = -SPEED
@@ -117,7 +121,7 @@ func get_input():
 			else:
 				shoot_weapon(equipped_ammo, ammo_speed)
 				count = 0
-
+		
 	if Input.is_action_just_released("shoot") && equipped_ranged == bow_load:
 		shoot_charged()
 		
