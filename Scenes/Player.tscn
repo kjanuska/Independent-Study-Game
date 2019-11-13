@@ -68,7 +68,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "invulnerable"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -83,7 +83,7 @@ tracks/0/keys = {
 "values": [ Color( 0.945098, 0, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 step = 0.01
@@ -103,7 +103,6 @@ tracks/0/keys = {
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-scale = Vector2( 2.16, 2.16 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -153,8 +152,8 @@ one_shot = true
 anims/dash = SubResource( 4 )
 anims/hurt = SubResource( 5 )
 anims/idle = SubResource( 6 )
-anims/invulnerable = SubResource( 8 )
-anims/walk = SubResource( 7 )
+anims/invulnerable = SubResource( 7 )
+anims/walk = SubResource( 8 )
 
 [node name="MovementStates" type="Node" parent="."]
 script = ExtResource( 4 )
