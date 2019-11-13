@@ -1,7 +1,5 @@
 extends Node
 
-signal state_changed(current_state)
-
 export(NodePath) var START_STATE
 var states_map = {}
 
@@ -49,7 +47,7 @@ func _change_state(state_name):
 	else:
 		states_stack[0] = states_map[state_name]
 	current_state = states_stack[0]
-	emit_signal("state_changed", current_state)
+	current_state.enter()
 	
 	if state_name != "previous":
 		current_state.enter()
