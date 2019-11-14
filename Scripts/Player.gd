@@ -108,7 +108,7 @@ func equip(id):
 				ranged.queue_free()
 			melee = equipped_melee.instance()
 			player.add_child(melee)
-			melee.set_global_position(player.get_global_position())
+			melee.set_global_position(player.get_position())
 			melee_attack_cooldown = melee.get_node("MeleeAttack")
 			current_weapon = melee
 		elif id >= 10:
@@ -169,8 +169,12 @@ func set_weapon_rotation():
 			side = 1
 		else:
 			current_weapon.position.x = -15
+			current_weapon.position.y = 5
+			get_node("Sprite").flip_h = true
 	elif side == 1:
 		if abs(mouse_rotation) >= (3 * PI)/4:
 			side = 0
 		else:
-			current_weapon.position.x = 15
+			current_weapon.position.x = 10
+			current_weapon.position.y = 5
+			get_node("Sprite").flip_h = false
