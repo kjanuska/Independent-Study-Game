@@ -6,7 +6,6 @@ export (float) var SPEED = 300
 onready var dash_cooldown = owner.get_node("DashCooldown")
 
 func enter():
-	move_direction = Vector2()
 	owner.get_node("AnimationPlayer").play("walk")
 
 func handle_input(event):
@@ -19,3 +18,7 @@ func update(_delta):
 		emit_signal("finished", "idle")
 	.move(SPEED, move_direction)
 
+
+
+func _on_DashTimer_timeout():
+	pass # Replace with function body.

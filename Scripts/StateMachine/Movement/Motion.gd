@@ -1,4 +1,4 @@
-extends "States.gd"
+extends "../States.gd"
 
 var move_direction = Vector2()
 var speed = 0.0

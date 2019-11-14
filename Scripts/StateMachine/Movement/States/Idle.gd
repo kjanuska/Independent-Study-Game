@@ -1,4 +1,4 @@
-extends "res://Scripts/StateMachine/Motion.gd"
+extends "../Motion.gd"
 
 func enter():
 	owner.get_node("AnimationPlayer").play("idle")

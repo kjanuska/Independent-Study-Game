@@ -55,9 +55,6 @@ func _physics_process(_delta):
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
 	
 	get_input()
-	
-	if current_weapon != null:
-		set_weapon_rotation()
 			
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
@@ -89,16 +86,39 @@ func get_input():
 			if melee_attack_cooldown.is_stopped():
 				melee_attack()
 
-func pickup(id):
-	if current_weapon != null:
-		if current_weapon == melee:
-			melee.queue_free()
-		elif current_weapon == ranged:
-			ranged.queue_free()
-	equip(id)
 
-func equip(id):
-	if id != null:
+func get_input_rotation():
+	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
+	if abs(mouse_rotation) < PI/2: get_node("Sprite").flip_h = false
+	if abs(mouse_rotation) > PI/4: get_node("Sprite").flip_h = true
+	return mouse_rotation
+"""
+below is old rotation code that rotated weapon around a point in the player's hand depending on which side
+the player was facing
+
+	if sign(mouse_rotation) == -1:
+		current_weapon.set_z_index(-1)
+	else:
+		current_weapon.set_z_index(1)
+
+	if side == 0:
+		if abs(mouse_rotation) <= PI/4:
+			side = 1
+		else:
+			current_weapon.position.x = -15
+			current_weapon.position.y = 5
+			get_node("Sprite").flip_h = true
+	elif side == 1:
+		if abs(mouse_rotation) >= (3 * PI)/4:
+			side = 0
+		else:
+			current_weapon.position.x = 10
+			current_weapon.position.y = 5
+			get_node("Sprite").flip_h = false
+"""
+
+func equip_melee(id):
+	if id:
 		if id < 10:
 			match id:
 				0:
@@ -130,6 +150,22 @@ func equip(id):
 			shot_cooldown = ranged.get_node("ShotCooldown")
 			current_weapon = ranged
 
+func pickup(id):
+	if current_weapon != null:
+		if current_weapon == melee:
+			melee.queue_free()
+		elif current_weapon == ranged:
+			ranged.queue_free()
+	equip(id)
+
+
+
+
+
+
+
+
+
 func shoot_weapon(ammo_load, speed):
 	if shot_cooldown.is_stopped():
 		var projectile = ammo_load.instance()
@@ -156,25 +192,3 @@ func shoot_charged():
 func melee_attack():
 	melee.playAnim("attack")
 	melee_attack_cooldown.start()
-
-func set_weapon_rotation():
-	current_weapon.set_rotation(mouse_rotation)
-	if sign(mouse_rotation) == -1:
-		current_weapon.set_z_index(-1)
-	else:
-		current_weapon.set_z_index(1)
-
-	if side == 0:
-		if abs(mouse_rotation) <= PI/4:
-			side = 1
-		else:
-			current_weapon.position.x = -15
-			current_weapon.position.y = 5
-			get_node("Sprite").flip_h = true
-	elif side == 1:
-		if abs(mouse_rotation) >= (3 * PI)/4:
-			side = 0
-		else:
-			current_weapon.position.x = 10
-			current_weapon.position.y = 5
-			get_node("Sprite").flip_h = false

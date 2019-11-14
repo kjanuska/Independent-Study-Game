@@ -1,13 +1,17 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
 [ext_resource path="res://Scripts/PlayerHurtbox.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/MovementStateMachine.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/StateMachine/States/Idle.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/StateMachine/States/Walk.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/StateMachine/States/Dash.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/StateMachine/States/TakeDamage.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/StateMachine/Movement/MovementStates.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Idle.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Walk.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Dash.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/TakeDamage.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/StateMachine/Weapons/WeaponStates.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Empty.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
@@ -171,21 +175,32 @@ anims/walk = SubResource( 8 )
 script = ExtResource( 4 )
 START_STATE = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="MovementStates"]
-position = Vector2( 2.3992, -0.102094 )
+[node name="Idle" type="Node" parent="MovementStates"]
 script = ExtResource( 5 )
 
-[node name="Walk" type="Node2D" parent="MovementStates"]
-position = Vector2( 2.3992, -0.102094 )
+[node name="Walk" type="Node" parent="MovementStates"]
 script = ExtResource( 6 )
 
-[node name="Dash" type="Node2D" parent="MovementStates"]
-position = Vector2( 2.3992, -0.102094 )
+[node name="Dash" type="Node" parent="MovementStates"]
 script = ExtResource( 7 )
 
 [node name="TakeDamage" type="Node" parent="MovementStates"]
 script = ExtResource( 8 )
 
+[node name="WeaponStates" type="Node" parent="."]
+script = ExtResource( 9 )
+START_STATE = NodePath("Empty")
+
+[node name="Melee" type="Node" parent="WeaponStates"]
+script = ExtResource( 10 )
+
+[node name="Ranged" type="Node" parent="WeaponStates"]
+script = ExtResource( 11 )
+
+[node name="Empty" type="Node" parent="WeaponStates"]
+script = ExtResource( 12 )
+
+[node name="Transition" type="Node" parent="WeaponStates"]
+
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
-[connection signal="timeout" from="DashCooldown" to="MovementStates/Dash" method="_on_DashCooldown_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]
