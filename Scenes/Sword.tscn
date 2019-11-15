@@ -3,8 +3,7 @@
 [ext_resource path="res://Scripts/Weapons/Melee/Sword/Sword.gd" type="Script" id=1]
 [ext_resource path="res://Assets/sword slice.png" type="Texture" id=2]
 
-
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
@@ -79,16 +78,16 @@ scale = Vector2( 0.880542, 1 )
 position = Vector2( -104.179, 22.4676 )
 rotation = 1.5708
 scale = Vector2( -2.43022, 1.44657 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 2 )
 anims/idle = SubResource( 3 )
 
-[node name="MeleeAttack" type="Timer" parent="."]
+[node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
 
 [connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="timeout" from="MeleeAttack" to="." method="_on_MeleeAttack_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]

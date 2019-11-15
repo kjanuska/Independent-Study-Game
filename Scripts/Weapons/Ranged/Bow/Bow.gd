@@ -1,4 +1,4 @@
 extends Sprite
 
-func _on_ShotCooldown_timeout():
-	$ShotCooldown.stop()
+func _on_AttackCooldown_timeout():
+	$AttackCooldown.stop()

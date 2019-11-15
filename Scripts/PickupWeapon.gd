@@ -16,5 +16,6 @@ func _on_Area2D_body_exited(body):
 
 func _input(_event):
 	if Input.is_action_pressed("Interact") && is_colliding:
-		player.pickup(weapon_id)
+		player.id = weapon_id
+		emit_signal("finished", "transition")
 		queue_free()

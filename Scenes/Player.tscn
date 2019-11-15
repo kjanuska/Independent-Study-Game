@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/StateMachine/Weapons/States/Empty.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Transition.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
@@ -201,6 +204,15 @@ script = ExtResource( 11 )
 script = ExtResource( 12 )
 
 [node name="Transition" type="Node" parent="WeaponStates"]
+script = ExtResource( 13 )
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="ProjectileSpawner" type="Node2D" parent="Spawners"]
+script = ExtResource( 14 )
+
+[node name="WeaponSpawner" type="Node2D" parent="Spawners"]
+script = ExtResource( 15 )
 
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]

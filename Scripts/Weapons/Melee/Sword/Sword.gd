@@ -3,9 +3,9 @@ extends Node
 func playAnim(animation):
 	$AnimationPlayer.play(animation)
 
-func _on_MeleeAttack_timeout():
+func _on_AttackCooldown_timeout():
 	playAnim("idle")
-	$MeleeAttack.stop()
+	$AttackCooldown.stop()
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("hurtbox"):
