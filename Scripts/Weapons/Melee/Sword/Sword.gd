@@ -1,5 +1,7 @@
 extends Node
 
+var id = 0
+
 func playAnim(animation):
 	$AnimationPlayer.play(animation)
 

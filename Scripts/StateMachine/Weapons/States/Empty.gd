@@ -1,12 +1,16 @@
 extends "../InputParse.gd"
 
+func _ready():
+	SignalManager.connect("weapon_changed", self, "_change_state")
+
 func enter():
-	pass
+	print("empty")
 
 func update(_delta):
-	if current_weapon:
-		emit_signal("finished", "transition")
 	.get_input_rotation()
 
 func handle_input(event):
 	return .handle_input(event)
+
+func _change_state():
+	emit_signal("finished", "transition")

@@ -39,7 +39,6 @@ modulate = Color( 0.670588, 0.137255, 0.137255, 1 )
 [node name="Pickup Melee" parent="." instance=ExtResource( 3 )]
 position = Vector2( 580.256, 211.974 )
 scale = Vector2( 0.5136, 0.462272 )
-weapon_id = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.411765, 0.313726, 0.0509804, 1 )

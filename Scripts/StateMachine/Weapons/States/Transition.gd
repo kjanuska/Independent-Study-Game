@@ -1,12 +1,12 @@
 extends "../InputParse.gd"
 
-signal weapon_changed(id)
-
-func ready():
-	self.connect("weapon_changed", self, "_assign_id")
-
 func enter():
-	print("transition")
+	if owner.current_weapon:
+		owner.current_weapon.queue_free()
+	_assign_id(owner.id)
+
+func update(_delta):
+	.get_input_rotation()
 
 # specific weapon ids for each type
 # melee in 1s
@@ -20,12 +20,18 @@ func _assign_id(id):
 		match id:
 			0:
 				melee = weapon_spawner.sword_load
+		owner.current_weapon = melee
+		previous_weapon = melee
+		emit_signal("finished", "melee")
 	elif id >= 10:
 		match id:
 			10:
 				ranged = weapon_spawner.bow_load
-				ammo = projectile_spawner.arrow_load
+				owner.ammo = projectile_spawner.arrow_load
 			11:
 				ranged = weapon_spawner.gun_load
-				ammo = projectile_spawner.bullet_load
-				ammo_speed = 3000
+				owner.ammo = projectile_spawner.bullet_load
+				owner.ammo_speed = 3000
+		owner.current_weapon = ranged
+		previous_weapon = ranged
+		emit_signal("finished", "ranged")

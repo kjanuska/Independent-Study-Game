@@ -3,12 +3,6 @@ extends KinematicBody2D
 #used in _ready to get parent node
 var player
 
-#used later to assign to loaded ranged weapon scene
-var ranged
-
-#used later to assign to loaded melee weapon scene
-var melee
-
 var attack_cooldown
 
 # weapon currently in hand
@@ -65,25 +59,25 @@ the player was facing
 """
 
 func equip():
-	current_weapon = melee.instance()
+	current_weapon = current_weapon.instance()
 	player.add_child(current_weapon)
 	current_weapon.set_global_position(player.get_position())
 	attack_cooldown = current_weapon.get_node("AttackCooldown")
 
-func pickup(id):
-	if current_weapon != null:
-		if current_weapon == melee:
-			melee.queue_free()
-		elif current_weapon == ranged:
-			ranged.queue_free()
-	equip()
+#func pickup(id):
+#	if current_weapon != null:
+#		if current_weapon == melee:
+#			melee.queue_free()
+#		elif current_weapon == ranged:
+#			ranged.queue_free()
+#	equip()
 
 func shoot_weapon(ammo_load, speed):
 	if attack_cooldown.is_stopped():
-		var projectile = ammo_load.instance()
+		var projectile = ammo.instance()
 		var projectile_rotation = mouse_rotation
 		projectile.set_rotation(projectile_rotation)
-		projectile.set_global_position(ranged.get_global_position())
+		projectile.set_global_position(current_weapon.get_global_position())
 		player.add_child(projectile)
 		var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
 		projectile.direction = direction_vector
@@ -102,5 +96,5 @@ func shoot_charged():
 		count = 0
 
 func melee_attack():
-	melee.playAnim("attack")
+	current_weapon.playAnim("attack")
 	attack_cooldown.start()
