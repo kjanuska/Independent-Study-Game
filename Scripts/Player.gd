@@ -7,6 +7,7 @@ var attack_cooldown
 
 # weapon currently in hand
 var current_weapon
+var previous_weapon
 
 var id
 
@@ -64,15 +65,7 @@ func equip():
 	current_weapon.set_global_position(player.get_position())
 	attack_cooldown = current_weapon.get_node("AttackCooldown")
 
-#func pickup(id):
-#	if current_weapon != null:
-#		if current_weapon == melee:
-#			melee.queue_free()
-#		elif current_weapon == ranged:
-#			ranged.queue_free()
-#	equip()
-
-func shoot_weapon(ammo_load, speed):
+func shoot_weapon():
 	if attack_cooldown.is_stopped():
 		var projectile = ammo.instance()
 		var projectile_rotation = mouse_rotation
@@ -81,18 +74,18 @@ func shoot_weapon(ammo_load, speed):
 		player.add_child(projectile)
 		var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
 		projectile.direction = direction_vector
-		projectile.set_speed(speed)
+		projectile.set_speed(ammo_speed)
 		attack_cooldown.start()
 
 func shoot_charged():
 	if count >= 80:
 		ammo_speed = 3000
 		$Charged.hide()
-		shoot_weapon(ammo, ammo_speed)
+		shoot_weapon()
 		count = 0
 	elif count < 80:
 		ammo_speed = 1000
-		shoot_weapon(ammo, ammo_speed)
+		shoot_weapon()
 		count = 0
 
 func melee_attack():

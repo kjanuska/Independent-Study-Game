@@ -21,17 +21,16 @@ func _assign_id(id):
 			0:
 				melee = weapon_spawner.sword_load
 		owner.current_weapon = melee
-		previous_weapon = melee
 		emit_signal("finished", "melee")
 	elif id >= 10:
 		match id:
 			10:
 				ranged = weapon_spawner.bow_load
 				owner.ammo = projectile_spawner.arrow_load
+				owner.ammo_speed = 1000
 			11:
 				ranged = weapon_spawner.gun_load
 				owner.ammo = projectile_spawner.bullet_load
 				owner.ammo_speed = 3000
 		owner.current_weapon = ranged
-		previous_weapon = ranged
 		emit_signal("finished", "ranged")

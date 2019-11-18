@@ -12,7 +12,7 @@ func get_ranged_input():
 			if count >= 80:
 				$Charged.popup()
 		else:
-			owner.shoot_weapon(ammo, ammo_speed)
+			owner.shoot_weapon()
 			count = 0
 
 	if Input.is_action_just_released("shoot") && charge_ranged:
