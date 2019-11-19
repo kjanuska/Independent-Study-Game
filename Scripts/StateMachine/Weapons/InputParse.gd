@@ -7,8 +7,6 @@ var charge_ranged
 var ammo
 var ammo_speed
 
-var previous_weapon
-
 var mouse_rotation
 
 onready var weapon_spawner = owner.get_node("Spawners").get_node("WeaponSpawner")
