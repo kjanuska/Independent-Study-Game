@@ -7,7 +7,7 @@ var attack_cooldown
 
 # weapon currently in hand
 var current_weapon
-var previous_weapon
+var previous_weapon_id
 
 var id
 
