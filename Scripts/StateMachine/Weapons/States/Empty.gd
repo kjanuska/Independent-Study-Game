@@ -4,7 +4,7 @@ func _ready():
 	SignalManager.connect("weapon_changed", self, "_change_state")
 
 func enter():
-	print("empty")
+	pass
 
 func update(_delta):
 	.get_input_rotation()

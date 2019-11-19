@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Weapons/Melee/Sword/Sword.gd" type="Script" id=1]
-[ext_resource path="res://Assets/sword slice.png" type="Texture" id=2]
+[ext_resource path="res://outline.material" type="Material" id=2]
+[ext_resource path="res://Assets/sword slice.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -63,11 +64,13 @@ tracks/1/keys = {
 }
 
 [node name="Sword" type="Node2D"]
+position = Vector2( -1.52588e-05, 3.8147e-06 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 5.10843, 0.340561 )
-texture = ExtResource( 2 )
+material = ExtResource( 2 )
+position = Vector2( 17.65, 0 )
+texture = ExtResource( 3 )
 hframes = 6
 
 [node name="Area2D" type="Area2D" parent="Sprite"]
@@ -75,7 +78,7 @@ position = Vector2( 101.697, -19.8672 )
 scale = Vector2( 0.880542, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
-position = Vector2( -104.179, 22.4676 )
+position = Vector2( -111.02, 18.9567 )
 rotation = 1.5708
 scale = Vector2( -2.43022, 1.44657 )
 shape = SubResource( 1 )
@@ -88,6 +91,5 @@ anims/idle = SubResource( 3 )
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
-
 [connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]

@@ -4,6 +4,7 @@ extends KinematicBody2D
 var player
 
 var attack_cooldown
+var weapon_animation_player
 
 # weapon currently in hand
 var current_weapon
@@ -64,9 +65,11 @@ func equip():
 	player.add_child(current_weapon)
 	current_weapon.set_global_position(player.get_position())
 	attack_cooldown = current_weapon.get_node("AttackCooldown")
+	weapon_animation_player = current_weapon.get_node("AnimationPlayer")
 
 func shoot_weapon():
 	if attack_cooldown.is_stopped():
+		weapon_animation_player.play("attack")
 		var projectile = ammo.instance()
 		var projectile_rotation = mouse_rotation
 		projectile.set_rotation(projectile_rotation)
@@ -78,6 +81,7 @@ func shoot_weapon():
 		attack_cooldown.start()
 
 func shoot_charged():
+	weapon_animation_player.play("charge")
 	if count >= 80:
 		ammo_speed = 3000
 		$Charged.hide()

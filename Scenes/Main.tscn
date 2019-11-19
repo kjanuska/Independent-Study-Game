@@ -165,4 +165,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Path" type="TileMap" parent="."]
+format = 1
+
 [editable path="Pickup Gun"]

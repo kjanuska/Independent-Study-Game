@@ -5,11 +5,11 @@ var is_vulnerable = true
 
 func take_damage():
 	if is_vulnerable:
-		print("yikes")
+		print(health)
 		health -= 1
 		if health == 0:
 			print("you died")
-			return
+			get_tree().reload_current_scene()
 		is_vulnerable = false
 		get_parent().get_node("AnimationPlayer").play("invulnerable")
 		$InvincibilityPeriod.start()

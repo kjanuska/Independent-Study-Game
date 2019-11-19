@@ -8,7 +8,8 @@ func set_weapon_rotation():
 func get_ranged_input():
 	if Input.is_action_pressed("shoot"):
 		count += 1
-		if ranged == weapon_spawner.bow_load:
+		print(count)
+		if charge_ranged:
 			if count >= 80:
 				$Charged.popup()
 		else:
