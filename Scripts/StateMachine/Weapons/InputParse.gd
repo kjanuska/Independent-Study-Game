@@ -7,7 +7,7 @@ var charge_ranged
 var ammo
 var ammo_speed
 
-var previous_weapon
+var previous_weapon_id
 
 var mouse_rotation
 

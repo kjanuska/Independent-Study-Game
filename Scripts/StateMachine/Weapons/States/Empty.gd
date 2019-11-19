@@ -13,5 +13,4 @@ func handle_input(event):
 	return .handle_input(event)
 
 func _change_state():
-	owner.previous_weapon = owner.current_weapon
 	emit_signal("finished", "transition")

@@ -2,6 +2,7 @@ extends "../InputParse.gd"
 
 func enter():
 	if owner.current_weapon:
+		owner.previous_weapon_id = owner.current_weapon.id
 		owner.current_weapon.queue_free()
 	_assign_id(owner.id)
 
