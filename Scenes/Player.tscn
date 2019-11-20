@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
@@ -78,16 +78,16 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=7]
 resource_name = "invulnerable"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 8.87653, 1 ),
-"update": 0,
-"values": [ Color( 0.945098, 0, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -106,6 +106,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+
+[sub_resource type="AnimationNodeStateMachine" id=9]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -161,6 +165,11 @@ anims/hurt = SubResource( 5 )
 anims/idle = SubResource( 6 )
 anims/invulnerable = SubResource( 7 )
 anims/walk = SubResource( 8 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 9 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 10 )
 
 [node name="MovementStates" type="Node" parent="."]
 script = ExtResource( 4 )

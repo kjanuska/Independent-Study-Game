@@ -34,6 +34,7 @@ texture = ExtResource( 2 )
 
 [node name="FallTimer" type="Timer" parent="."]
 wait_time = 2.0
+
 [connection signal="area_entered" from="Empty/Spikes" to="." method="_on_Spikes_area_entered"]
 [connection signal="area_exited" from="Empty/Spikes" to="." method="_on_Spikes_area_exited"]
 [connection signal="timeout" from="FallTimer" to="." method="_on_FallTimer_timeout"]
