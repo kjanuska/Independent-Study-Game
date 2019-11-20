@@ -73,6 +73,7 @@ func equip():
 	current_weapon = current_weapon.instance()
 	player.add_child(current_weapon)
 	current_weapon.set_global_position(player.get_position())
+	current_weapon.set_rotation(get_input_rotation())
 	attack_cooldown = current_weapon.get_node("AttackCooldown")
 	weapon_animation_player = current_weapon.get_node("AnimationPlayer")
 

@@ -3,7 +3,6 @@ extends Node
 var id = 0
 
 func playAnim(animation):
-	print("attack")
 	$AnimationPlayer.play(animation)
 
 func _on_AttackCooldown_timeout():

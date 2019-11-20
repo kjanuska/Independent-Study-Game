@@ -203,6 +203,10 @@ current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
+[node name="WeaponTimers" type="Node" parent="."]
+
+[node name="AttackCooldown" type="Timer" parent="WeaponTimers"]
+
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
