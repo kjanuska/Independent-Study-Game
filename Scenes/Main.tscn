@@ -6,10 +6,10 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/River.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Tree.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/SpawnLocation.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Log.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/SpawnLocation.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Log.tscn" type="PackedScene" id=9]
+[ext_resource path="res://trees.tres" type="TileSet" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -73,38 +73,13 @@ position = Vector2( 843.882, 146.833 )
 [node name="StaticBody2D5" parent="Rocks" instance=ExtResource( 6 )]
 position = Vector2( 893.298, 132.665 )
 
-[node name="Trees" type="Node" parent="."]
-editor/display_folded = true
-
-[node name="Node2D" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 503.529, -109.453 )
-
-[node name="Node2D2" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 705.136, -71.9745 )
-
-[node name="Node2D3" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 870.942, -119.792 )
-z_index = -1
-
-[node name="Node2D4" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 1016.59, -84.8981 )
-
-[node name="Node2D5" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 1204.03, -102.991 )
-
-[node name="Node2D6" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 1364.91, -93.0711 )
-
-[node name="Node2D7" parent="Trees" instance=ExtResource( 7 )]
-position = Vector2( 1527.12, -162.439 )
-
-[node name="SpawnLocation" parent="." instance=ExtResource( 8 )]
+[node name="SpawnLocation" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1050, 213.564 )
 
-[node name="Target" parent="." instance=ExtResource( 9 )]
+[node name="Target" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1550.86, 202.004 )
 
-[node name="Log" parent="." instance=ExtResource( 10 )]
+[node name="Log" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1641, 105.806 )
 
 [node name="Obstacles" type="Node2D" parent="."]
@@ -165,7 +140,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Path" type="TileMap" parent="."]
+[node name="Trees2" type="TileMap" parent="."]
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
 format = 1
+tile_data = PoolIntArray( -65470, 1610612736, 65540, 65, 1610612736, 65540, 66, 1610612736, 65540, 67, 1610612736, 65540, 68, 1610612736, 65540, 69, 1610612736, 65540, 70, 1610612736, 65540, 71, 1610612736, 65540, 72, 1610612736, 65540, 73, 1610612736, 65540, 74, 1610612736, 65540, 75, 1610612736, 65540, 76, 1610612736, 65540, 77, 1610612736, 65540, 78, 1610612736, 65540, 65600, 1610612736, 65540, 65601, 1610612736, 65540, 65602, 1610612736, 65540, 65603, 1610612736, 65540, 65604, 1610612736, 65540, 65605, 1610612736, 65540, 65606, 1610612736, 65540, 65607, 1610612736, 65540, 65608, 1610612736, 65540, 65609, 1610612736, 65540, 65610, 1610612736, 65540, 65611, 1610612736, 65540, 65612, 1610612736, 65540, 65613, 1610612736, 65540, 65614, 1610612736, 65540, 65615, 1610612736, 65540, 65616, 1610612736, 65540, 65617, 1610612736, 65540, 65618, 1610612736, 65540, 65619, 1610612736, 65540, 131137, 1610612736, 65540, 131138, 1610612736, 65540, 131139, 1610612736, 65540, 131140, 1610612736, 65540, 131141, 1610612736, 65540, 131142, 1610612736, 65540, 131143, 1610612736, 65540, 131144, 1610612736, 65540, 131145, 1610612736, 65540, 131146, 1610612736, 65540, 131147, 1610612736, 65540, 131148, 1610612736, 65540, 131149, 1610612736, 65540, 131150, 1610612736, 65540, 131151, 1610612736, 65540, 131152, 1610612736, 65540, 131174, -536870912, 3, 196674, 1610612736, 65540, 196675, 1610612736, 65540, 196676, 1610612736, 65540, 196677, 1610612736, 65540, 196678, 1610612736, 65540, 196679, 1610612736, 65540, 196680, 1610612736, 65540, 196681, 1610612736, 65540, 196682, 1610612736, 65540, 196683, 1610612736, 65540, 196684, 1610612736, 65540, 196685, 1610612736, 65540, 196686, 1610612736, 65540, 196710, -536870912, 3, 262212, 1610612736, 65540, 262213, 1610612736, 65540, 262214, 1610612736, 65540, 262215, 1610612736, 65540, 262216, 1610612736, 65540, 262217, 1610612736, 65540, 262218, 1610612736, 65540, 262219, 1610612736, 65540, 262220, 1610612736, 65540, 262221, 1610612736, 65540, 262246, -536870912, 2, 327749, 1610612736, 65540, 327750, 1610612736, 65540, 327751, 1610612736, 65540, 327752, 1610612736, 65540, 327753, 1610612736, 65540, 327754, 1610612736, 65540, 327755, 1610612736, 65540, 327756, 1610612736, 65540, 327757, 1610612736, 65540, 327782, -2147483648, 2, 393318, -2147483648, 2, 393319, -536870912, 0, 458853, 0, 65537, 458854, 0, 65538, 458855, 0, 65539 )
 
 [editable path="Pickup Gun"]
