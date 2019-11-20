@@ -61,4 +61,5 @@ wait_time = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hurt = SubResource( 4 )
+
 [connection signal="timeout" from="FallTimer" to="Hurtbox" method="_on_FallTimer_timeout"]

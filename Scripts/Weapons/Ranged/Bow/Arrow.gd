@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 1000
+var speed
 
 var direction = Vector2()
 
@@ -19,6 +19,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 func _on_Arrow_area_entered(area):
-	if area.is_in_group("hurtbox") && area.get_parent() != self.get_parent():
+	if area.is_in_group("hurtbox"):
 		area.take_damage()
-		queue_free()
+		speed = 0
