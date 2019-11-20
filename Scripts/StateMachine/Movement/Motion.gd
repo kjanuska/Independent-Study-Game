@@ -3,6 +3,8 @@ extends "../States.gd"
 var move_direction = Vector2()
 var speed = 0.0
 
+onready var player_animation = owner.get_node("AnimationTree").get("parameters/playback")
+
 func get_input_direction():
 	#player direction vector
 	move_direction = Vector2()

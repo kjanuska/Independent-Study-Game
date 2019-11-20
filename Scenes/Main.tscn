@@ -168,5 +168,4 @@ __meta__ = {
 [node name="Path" type="TileMap" parent="."]
 format = 1
 
-
 [editable path="Pickup Gun"]

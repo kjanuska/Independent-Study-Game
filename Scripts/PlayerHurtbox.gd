@@ -9,9 +9,9 @@ func take_damage():
 		health -= 1
 		if health == 0:
 			print("you died")
-			get_tree().reload_current_scene()
+			get_parent().player_animation.travel("death")
 		is_vulnerable = false
-		get_parent().get_node("AnimationPlayer").play("invulnerable")
+		get_parent().player_animation.travel("hurt")
 		$InvincibilityPeriod.start()
 
 func _on_InvincibilityPeriod_timeout():

@@ -6,6 +6,7 @@ var player_animation
 
 var attack_cooldown
 var weapon_animation_player
+var is_flipped
 
 # weapon currently in hand
 var current_weapon
@@ -33,11 +34,7 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 
-func play_anim(name):
-	player_animation.travel(name)
-
 func get_input_rotation():
-	var is_flipped
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
 	if abs(mouse_rotation) < PI/2:
 		is_flipped = false

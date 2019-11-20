@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
@@ -57,7 +57,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=5]
 resource_name = "death"
 length = 0.001
 tracks/0/type = "value"
@@ -73,7 +73,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:self_modulate")
@@ -88,7 +88,7 @@ tracks/0/keys = {
 "values": [ Color( 0.521569, 0.0862745, 0.0862745, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -101,6 +101,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -123,63 +135,59 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "dash"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "death"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "hurt"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "walk"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-switch_mode = 2
-auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-
-[sub_resource type="AnimationNodeStateMachine" id=14]
+[sub_resource type="AnimationNodeStateMachine" id=23]
 states/dash/node = SubResource( 9 )
 states/dash/position = Vector2( 988, 153 )
-states/death/node = SubResource( 27 )
-states/death/position = Vector2( 586.266, 290 )
-states/hurt/node = SubResource( 17 )
+states/death/node = SubResource( 10 )
+states/death/position = Vector2( 560.266, 311 )
+states/hurt/node = SubResource( 11 )
 states/hurt/position = Vector2( 415, 98 )
-states/idle/node = SubResource( 11 )
+states/idle/node = SubResource( 12 )
 states/idle/position = Vector2( 609, 206 )
 states/walk/node = SubResource( 13 )
 states/walk/position = Vector2( 684, 46 )
-transitions = [ "idle", "walk", SubResource( 18 ), "walk", "dash", SubResource( 19 ), "idle", "hurt", SubResource( 20 ), "walk", "hurt", SubResource( 21 ), "hurt", "idle", SubResource( 22 ), "hurt", "walk", SubResource( 23 ), "dash", "idle", SubResource( 24 ), "dash", "walk", SubResource( 25 ), "walk", "idle", SubResource( 26 ), "idle", "death", SubResource( 28 ) ]
+transitions = [ "idle", "walk", SubResource( 14 ), "walk", "dash", SubResource( 15 ), "idle", "hurt", SubResource( 16 ), "walk", "hurt", SubResource( 17 ), "hurt", "idle", SubResource( 18 ), "dash", "idle", SubResource( 19 ), "dash", "walk", SubResource( 20 ), "walk", "idle", SubResource( 21 ), "idle", "death", SubResource( 22 ) ]
 start_node = "idle"
 end_node = "death"
-graph_offset = Vector2( -25.7339, 18.2407 )
+graph_offset = Vector2( -25.7339, 9.19093 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -214,7 +222,6 @@ margin_bottom = 14.0
 text = "Shink"
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 1 )
 texture = ExtResource( 2 )
 hframes = 4
 
@@ -224,7 +231,7 @@ hframes = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -0.569174, -8.9407e-008 )
+position = Vector2( -0.569174, -8.9407e-08 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
@@ -232,16 +239,16 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/dash = SubResource( 4 )
-anims/death = SubResource( 16 )
-anims/hurt = SubResource( 5 )
-anims/idle = SubResource( 6 )
+anims/death = SubResource( 5 )
+anims/hurt = SubResource( 6 )
+anims/idle = SubResource( 7 )
 anims/walk = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 14 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 15 )
+parameters/playback = SubResource( 24 )
 
 [node name="MovementStates" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -282,6 +289,5 @@ script = ExtResource( 14 )
 
 [node name="WeaponSpawner" type="Node2D" parent="Spawners"]
 script = ExtResource( 15 )
-
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]
