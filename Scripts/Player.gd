@@ -9,6 +9,7 @@ var weapon_animation_player
 # weapon currently in hand
 var current_weapon
 var previous_weapon_id
+var charge_ranged
 
 var id
 
@@ -31,9 +32,15 @@ func _physics_process(_delta):
 		get_tree().quit()
 
 func get_input_rotation():
+	var is_flipped
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
-	if abs(mouse_rotation) < PI/2: get_node("Sprite").flip_h = false
-	if abs(mouse_rotation) > PI/4: get_node("Sprite").flip_h = true
+	if abs(mouse_rotation) < PI/2:
+		is_flipped = false
+	if abs(mouse_rotation) > PI/2:
+		is_flipped = true
+	get_node("Sprite").flip_h = is_flipped
+	if current_weapon:
+			current_weapon.get_node("Sprite").flip_v = is_flipped
 	return mouse_rotation
 """
 below is old rotation code that rotated weapon around a point in the player's hand depending on which side
@@ -81,10 +88,9 @@ func shoot_weapon():
 		attack_cooldown.start()
 
 func shoot_charged():
-	weapon_animation_player.play("charge")
-	if count >= 80:
+	weapon_animation_player.play("attack")
+	if count == 80:
 		ammo_speed = 3000
-		$Charged.hide()
 		shoot_weapon()
 		count = 0
 	elif count < 80:

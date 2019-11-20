@@ -29,11 +29,11 @@ func _assign_id(id):
 				ranged = weapon_spawner.bow_load
 				owner.ammo = projectile_spawner.arrow_load
 				owner.ammo_speed = 1000
-				charge_ranged = true
+				owner.charge_ranged = true
 			11:
 				ranged = weapon_spawner.gun_load
 				owner.ammo = projectile_spawner.bullet_load
 				owner.ammo_speed = 3000
-				charge_ranged = false
+				owner.charge_ranged = false
 		owner.current_weapon = ranged
 		emit_signal("finished", "ranged")

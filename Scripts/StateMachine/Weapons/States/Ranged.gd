@@ -2,6 +2,7 @@ extends "../AttackEquipped.gd"
 
 func enter():
 	owner.equip()
+	owner.weapon_animation_player.play("idle")
 
 func update(_delta):
 	.set_weapon_rotation()

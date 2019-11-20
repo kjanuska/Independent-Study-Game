@@ -99,7 +99,7 @@ position = Vector2( 1364.91, -93.0711 )
 position = Vector2( 1527.12, -162.439 )
 
 [node name="SpawnLocation" parent="." instance=ExtResource( 8 )]
-position = Vector2( 290, 70 )
+position = Vector2( 1050, 213.564 )
 
 [node name="Target" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1550.86, 202.004 )
@@ -167,5 +167,6 @@ __meta__ = {
 
 [node name="Path" type="TileMap" parent="."]
 format = 1
+
 
 [editable path="Pickup Gun"]
