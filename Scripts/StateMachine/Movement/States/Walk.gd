@@ -6,7 +6,7 @@ export (float) var SPEED = 300
 onready var dash_cooldown = owner.get_node("DashCooldown")
 
 func enter():
-	owner.get_node("AnimationPlayer").play("walk")
+	owner.player_animation.travel("walk")
 
 func handle_input(event):
 	if event.is_action_pressed("dash") && dash_cooldown.is_stopped():

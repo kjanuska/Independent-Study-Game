@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 #used in _ready to get parent node
 var player
+var player_animation
 
 var attack_cooldown
 var weapon_animation_player
@@ -26,10 +27,14 @@ var count = 0
 func _ready():
 	player = get_node(".")
 	player.set_z_index(1)
+	player_animation = $AnimationTree.get("parameters/playback")
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+
+func play_anim(name):
+	player_animation.travel(name)
 
 func get_input_rotation():
 	var is_flipped

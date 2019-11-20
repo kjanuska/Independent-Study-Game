@@ -5,7 +5,7 @@ onready var dash_cooldown = owner.get_node("DashCooldown")
 func enter():
 	speed = 1500.0
 	move_direction = get_input_direction()
-	owner.get_node("AnimationPlayer").play("dash")
+	owner.player_animation.travel("dash")
 	owner.get_node("DashTimer").start()
 
 func update(_delta):
