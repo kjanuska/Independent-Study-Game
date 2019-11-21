@@ -1,21 +1,20 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Camera.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=3]
-[ext_resource path="res://Scripts/PlayerHurtbox.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/StateMachine/Movement/MovementStates.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/Idle.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/Walk.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/Dash.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/TakeDamage.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/StateMachine/Weapons/WeaponStates.gd" type="Script" id=10]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=11]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=12]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Empty.gd" type="Script" id=13]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Transition.gd" type="Script" id=14]
-[ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=15]
-[ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=16]
+[ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
+[ext_resource path="res://Scripts/PlayerHurtbox.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/StateMachine/Movement/MovementStates.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Idle.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Walk.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Dash.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/TakeDamage.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/StateMachine/Weapons/WeaponStates.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Empty.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Transition.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
@@ -203,7 +202,6 @@ shape = SubResource( 1 )
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-script = ExtResource( 2 )
 
 [node name="WeaponTimers" type="Node" parent="."]
 
@@ -230,16 +228,17 @@ margin_bottom = 14.0
 text = "Shink"
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 hframes = 4
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "player_hurtbox",
 ]]
-script = ExtResource( 4 )
+editor/display_folded = true
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -0.569174, -8.9407e-08 )
+position = Vector2( -0.569174, -8.9407e-008 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
@@ -259,43 +258,46 @@ active = true
 parameters/playback = SubResource( 24 )
 
 [node name="MovementStates" type="Node" parent="."]
-script = ExtResource( 5 )
+editor/display_folded = true
+script = ExtResource( 4 )
 START_STATE = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="MovementStates"]
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="Walk" type="Node" parent="MovementStates"]
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="Dash" type="Node" parent="MovementStates"]
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="TakeDamage" type="Node" parent="MovementStates"]
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 
 [node name="WeaponStates" type="Node" parent="."]
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 START_STATE = NodePath("Empty")
 
 [node name="Melee" type="Node" parent="WeaponStates"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="Ranged" type="Node" parent="WeaponStates"]
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="Empty" type="Node" parent="WeaponStates"]
-script = ExtResource( 13 )
+script = ExtResource( 12 )
 
 [node name="Transition" type="Node" parent="WeaponStates"]
-script = ExtResource( 14 )
+script = ExtResource( 13 )
 
 [node name="Spawners" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="ProjectileSpawner" type="Node2D" parent="Spawners"]
-script = ExtResource( 15 )
+script = ExtResource( 14 )
 
 [node name="WeaponSpawner" type="Node2D" parent="Spawners"]
-script = ExtResource( 16 )
+script = ExtResource( 15 )
+
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]

@@ -6,7 +6,6 @@ var direction = Vector2()
 
 func _ready():
 	set_as_toplevel(true)
-	$".".set_z_index(-2)
 
 func _physics_process(delta):
 	position.x += direction.x * speed * delta

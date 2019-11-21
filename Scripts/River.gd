@@ -4,14 +4,15 @@ var overlapping = false
 var entity
 
 func _ready():
-	$"Flowing2".queue_free()
+	$Empty/Spikes/CollisionShape2D.disabled = true
 
 func _physics_process(delta):
 	if overlapping:
 		entity.take_damage()
 
 func _on_FallTimer_timeout():
-	$"Flowing2".queue_free()
+	$Flowing.queue_free()
+	$Empty/Spikes/CollisionShape2D.disabled = false
 	$FallTimer.stop()
 
 func _on_Spikes_area_entered(area):

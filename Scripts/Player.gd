@@ -5,6 +5,7 @@ var player
 var player_animation
 
 var attack_cooldown
+var timer
 var weapon_animation_player
 var is_flipped
 
@@ -74,7 +75,7 @@ func equip():
 	player.add_child(current_weapon)
 	current_weapon.set_global_position(player.get_position())
 	current_weapon.set_rotation(get_input_rotation())
-	attack_cooldown = current_weapon.get_node("AttackCooldown")
+	attack_cooldown = timer
 	weapon_animation_player = current_weapon.get_node("AnimationPlayer")
 
 func shoot_weapon():
@@ -93,11 +94,11 @@ func shoot_weapon():
 func shoot_charged():
 	weapon_animation_player.play("attack")
 	if count == 80:
-		ammo_speed = 3000
+		ammo_speed = 1500
 		shoot_weapon()
 		count = 0
 	elif count < 80:
-		ammo_speed = 1000
+		ammo_speed = 700
 		shoot_weapon()
 		count = 0
 
