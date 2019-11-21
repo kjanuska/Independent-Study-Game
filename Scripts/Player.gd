@@ -4,9 +4,11 @@ extends KinematicBody2D
 var player
 var player_animation
 
-var attack_cooldown
+var melee_cooldown
+var ranged_cooldown
 var timer
 var weapon_animation_player
+var anim_finished = false
 var is_flipped
 
 # weapon currently in hand
@@ -30,6 +32,8 @@ func _ready():
 	player = get_node(".")
 	player.set_z_index(1)
 	player_animation = $AnimationTree.get("parameters/playback")
+	melee_cooldown = $WeaponTimers/MeleeCooldown
+	ranged_cooldown = $WeaponTimers/RangedCooldown
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -45,6 +49,7 @@ func get_input_rotation():
 	if current_weapon:
 			current_weapon.get_node("Sprite").flip_v = is_flipped
 	return mouse_rotation
+
 """
 below is old rotation code that rotated weapon around a point in the player's hand depending on which side
 the player was facing
@@ -73,23 +78,24 @@ the player was facing
 func equip():
 	current_weapon = current_weapon.instance()
 	player.add_child(current_weapon)
-	current_weapon.set_global_position(player.get_position())
+	current_weapon.set_global_position(player.get_global_position())
 	current_weapon.set_rotation(get_input_rotation())
-	attack_cooldown = timer
+	timer = current_weapon.time
 	weapon_animation_player = current_weapon.get_node("AnimationPlayer")
 
 func shoot_weapon():
-	if attack_cooldown.is_stopped():
-		weapon_animation_player.play("attack")
-		var projectile = ammo.instance()
-		var projectile_rotation = mouse_rotation
-		projectile.set_rotation(projectile_rotation)
-		projectile.set_global_position(current_weapon.get_global_position())
-		player.add_child(projectile)
-		var direction_vector = (get_global_mouse_position() - self.get_position()).normalized()
-		projectile.direction = direction_vector
-		projectile.set_speed(ammo_speed)
-		attack_cooldown.start()
+	weapon_animation_player.play("attack")
+	var projectile = ammo.instance()
+	var projectile_rotation = mouse_rotation
+	projectile.set_rotation(projectile_rotation)
+	projectile.set_global_position(current_weapon.get_global_position())
+	player.add_child(projectile)
+	var direction_vector = (get_global_mouse_position() - self.get_global_position()).normalized()
+	projectile.direction = direction_vector
+	projectile.set_speed(ammo_speed)
+	if anim_finished:
+		anim_finished = false
+		ranged_cooldown.start()
 
 func shoot_charged():
 	weapon_animation_player.play("attack")
@@ -104,4 +110,13 @@ func shoot_charged():
 
 func melee_attack():
 	current_weapon.playAnim("attack")
-	attack_cooldown.start()
+	if anim_finished:
+		anim_finished = false
+		current_weapon.playAnim("idle")
+		melee_cooldown.start()
+
+func _on_MeleeCooldown_timeout():
+	$WeaponTimers/MeleeCooldown.stop()
+
+func _on_RangedCooldown_timeout():
+	$WeaponTimers/RangedCooldown.stop()

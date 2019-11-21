@@ -10,7 +10,6 @@ func enter():
 
 func update(_delta):
 	.get_input_rotation()
-
 # specific weapon ids for each type
 # melee in 1s
 # 0 = sword

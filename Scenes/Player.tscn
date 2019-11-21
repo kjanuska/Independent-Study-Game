@@ -238,7 +238,7 @@ editor/display_folded = true
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -0.569174, -8.9407e-008 )
+position = Vector2( -0.569174, -8.9407e-08 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
@@ -298,6 +298,7 @@ script = ExtResource( 14 )
 
 [node name="WeaponSpawner" type="Node2D" parent="Spawners"]
 script = ExtResource( 15 )
-
+[connection signal="timeout" from="WeaponTimers/MeleeCooldown" to="." method="_on_MeleeCooldown_timeout"]
+[connection signal="timeout" from="WeaponTimers/RangedCooldown" to="." method="_on_RangedCooldown_timeout"]
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]

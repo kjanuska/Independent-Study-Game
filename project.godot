@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SignalManager="*res://Scripts/SignalManager.gd"
+PlayerVar="*res://Scripts/PlayerVar.gd"
 
 [debug]
 
