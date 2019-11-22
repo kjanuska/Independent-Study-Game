@@ -8,7 +8,7 @@ var melee_cooldown
 var ranged_cooldown
 var timer
 var weapon_animation_player
-var anim_finished = false
+var anim_finished = true
 var is_flipped
 
 # weapon currently in hand
@@ -109,10 +109,9 @@ func shoot_charged():
 		count = 0
 
 func melee_attack():
-	current_weapon.playAnim("attack")
 	if anim_finished:
 		anim_finished = false
-		current_weapon.playAnim("idle")
+		weapon_animation_player.play("attack")
 		melee_cooldown.start()
 
 func _on_MeleeCooldown_timeout():

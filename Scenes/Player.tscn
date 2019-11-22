@@ -1,20 +1,21 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Final Protaganist (walking).png" type="Texture" id=2]
-[ext_resource path="res://Scripts/PlayerHurtbox.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/StateMachine/Movement/MovementStates.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/Idle.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/Walk.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/Dash.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/TakeDamage.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/StateMachine/Weapons/WeaponStates.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=10]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=11]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Empty.gd" type="Script" id=12]
-[ext_resource path="res://Scripts/StateMachine/Weapons/States/Transition.gd" type="Script" id=13]
-[ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=14]
-[ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=15]
+[ext_resource path="res://outline.material" type="Material" id=2]
+[ext_resource path="res://Assets/Sprite Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/PlayerHurtbox.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/StateMachine/Movement/MovementStates.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Idle.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Walk.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Dash.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/TakeDamage.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/StateMachine/Weapons/WeaponStates.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Empty.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/StateMachine/Weapons/States/Transition.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=15]
+[ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
@@ -32,29 +33,18 @@ extents = Vector2( 10, 10.7607 )
 [sub_resource type="Animation" id=4]
 resource_name = "dash"
 length = 0.25
+step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 7.72748, 1 ),
-"update": 0,
-"values": [ Color( 0, 0.0862745, 1, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.14, 0.16, 0.19, 0.21, 0.23, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -88,8 +78,10 @@ tracks/0/keys = {
 "values": [ Color( 0.521569, 0.0862745, 0.0862745, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-length = 0.5
+[sub_resource type="Animation" id=25]
+resource_name = "idle"
+loop = true
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -97,25 +89,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ 13, 14 ]
 }
 
 [sub_resource type="Animation" id=8]
+resource_name = "walk"
 length = 0.6
 loop = true
 step = 0.01
@@ -126,10 +107,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.14, 0.28, 0.43, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 26, 27, 28, 29, 30 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=9]
@@ -141,48 +122,52 @@ animation = "death"
 [sub_resource type="AnimationNodeAnimation" id=11]
 animation = "hurt"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
 [sub_resource type="AnimationNodeStateMachine" id=23]
 states/dash/node = SubResource( 9 )
-states/dash/position = Vector2( 988, 153 )
+states/dash/position = Vector2( 1005, 135 )
 states/death/node = SubResource( 10 )
-states/death/position = Vector2( 560.266, 311 )
+states/death/position = Vector2( 651.266, 347 )
 states/hurt/node = SubResource( 11 )
-states/hurt/position = Vector2( 415, 98 )
-states/idle/node = SubResource( 12 )
-states/idle/position = Vector2( 609, 206 )
-states/walk/node = SubResource( 13 )
-states/walk/position = Vector2( 684, 46 )
-transitions = [ "idle", "walk", SubResource( 14 ), "walk", "dash", SubResource( 15 ), "idle", "hurt", SubResource( 16 ), "walk", "hurt", SubResource( 17 ), "hurt", "idle", SubResource( 18 ), "dash", "idle", SubResource( 19 ), "dash", "walk", SubResource( 20 ), "walk", "idle", SubResource( 21 ), "idle", "death", SubResource( 22 ) ]
+states/hurt/position = Vector2( 269, 144 )
+states/idle/node = SubResource( 26 )
+states/idle/position = Vector2( 651.266, 234.191 )
+states/walk/node = SubResource( 27 )
+states/walk/position = Vector2( 651.266, 72.1909 )
+transitions = [ "idle", "walk", SubResource( 28 ), "walk", "dash", SubResource( 29 ), "walk", "hurt", SubResource( 30 ), "dash", "walk", SubResource( 31 ), "hurt", "idle", SubResource( 32 ), "idle", "death", SubResource( 33 ), "dash", "idle", SubResource( 34 ), "idle", "hurt", SubResource( 35 ), "hurt", "walk", SubResource( 36 ), "walk", "idle", SubResource( 37 ) ]
 start_node = "idle"
 end_node = "death"
 graph_offset = Vector2( -25.7339, 9.19093 )
@@ -228,17 +213,20 @@ margin_bottom = 14.0
 text = "Shink"
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-hframes = 4
+material = ExtResource( 2 )
+texture = ExtResource( 3 )
+vframes = 3
+hframes = 13
+frame = 27
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "player_hurtbox",
 ]]
 editor/display_folded = true
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -0.569174, -8.9407e-08 )
+position = Vector2( -0.569174, -8.9407e-008 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
@@ -248,7 +236,7 @@ one_shot = true
 anims/dash = SubResource( 4 )
 anims/death = SubResource( 5 )
 anims/hurt = SubResource( 6 )
-anims/idle = SubResource( 7 )
+anims/idle = SubResource( 25 )
 anims/walk = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -258,46 +246,46 @@ active = true
 parameters/playback = SubResource( 24 )
 
 [node name="MovementStates" type="Node" parent="."]
-editor/display_folded = true
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 START_STATE = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="MovementStates"]
-script = ExtResource( 5 )
-
-[node name="Walk" type="Node" parent="MovementStates"]
 script = ExtResource( 6 )
 
-[node name="Dash" type="Node" parent="MovementStates"]
+[node name="Walk" type="Node" parent="MovementStates"]
 script = ExtResource( 7 )
 
-[node name="TakeDamage" type="Node" parent="MovementStates"]
+[node name="Dash" type="Node" parent="MovementStates"]
 script = ExtResource( 8 )
 
-[node name="WeaponStates" type="Node" parent="."]
+[node name="TakeDamage" type="Node" parent="MovementStates"]
 script = ExtResource( 9 )
+
+[node name="WeaponStates" type="Node" parent="."]
+script = ExtResource( 10 )
 START_STATE = NodePath("Empty")
 
 [node name="Melee" type="Node" parent="WeaponStates"]
-script = ExtResource( 10 )
-
-[node name="Ranged" type="Node" parent="WeaponStates"]
 script = ExtResource( 11 )
 
-[node name="Empty" type="Node" parent="WeaponStates"]
+[node name="Ranged" type="Node" parent="WeaponStates"]
 script = ExtResource( 12 )
 
-[node name="Transition" type="Node" parent="WeaponStates"]
+[node name="Empty" type="Node" parent="WeaponStates"]
 script = ExtResource( 13 )
+
+[node name="Transition" type="Node" parent="WeaponStates"]
+script = ExtResource( 14 )
 
 [node name="Spawners" type="Node" parent="."]
 editor/display_folded = true
 
 [node name="ProjectileSpawner" type="Node2D" parent="Spawners"]
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 
 [node name="WeaponSpawner" type="Node2D" parent="Spawners"]
-script = ExtResource( 15 )
+script = ExtResource( 16 )
+
 [connection signal="timeout" from="WeaponTimers/MeleeCooldown" to="." method="_on_MeleeCooldown_timeout"]
 [connection signal="timeout" from="WeaponTimers/RangedCooldown" to="." method="_on_RangedCooldown_timeout"]
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
