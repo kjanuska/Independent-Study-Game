@@ -163,6 +163,7 @@ position = Vector2( 1560, 131.871 )
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
 position = Vector2( 286.732, 149.764 )
+
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]

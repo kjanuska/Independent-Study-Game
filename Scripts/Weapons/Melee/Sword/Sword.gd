@@ -8,5 +8,6 @@ func _on_Area2D_area_entered(area):
 		area.take_damage()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	$AnimationPlayer.play("idle")
-	PlayerVar.player.anim_finished = true
+	if anim_name == "attack":
+		$AnimationPlayer.play("idle")
+		PlayerVar.player.anim_finished = true

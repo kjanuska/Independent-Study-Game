@@ -15,7 +15,8 @@ func set_speed(speed_value):
 	speed = speed_value
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	pass
+#	queue_free()
 
 func _on_Arrow_area_entered(area):
 	if area.is_in_group("hurtbox"):

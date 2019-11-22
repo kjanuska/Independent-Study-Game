@@ -64,4 +64,5 @@ position = Vector2( 14.8419, 0.994411 )
 texture = ExtResource( 3 )
 hframes = 16
 frame = 12
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

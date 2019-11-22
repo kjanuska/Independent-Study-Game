@@ -10,6 +10,10 @@ func take_damage():
 		if health == 0:
 			print("you died")
 			get_parent().player_animation.travel("death")
+			owner.get_node("MovementStates").set_physics_process(false)
+			owner.get_node("WeaponStates").set_physics_process(false)
+			is_vulnerable = false
+			return
 		is_vulnerable = false
 		get_parent().player_animation.travel("hurt")
 		$InvincibilityPeriod.start()

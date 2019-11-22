@@ -7,13 +7,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.7303, 176.565 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 16, 0, 0, 8, 0, 8, 16, 16, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="TileSet" id=4]
 0/name = "Spikes"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -42,13 +42,13 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -68,7 +68,7 @@ tile_data = PoolIntArray( -655361, 0, 0, -720896, 0, 0, -589825, 0, 0, -655360, 
 shape = SubResource( 1 )
 
 [node name="Flowing" type="TileMap" parent="."]
-tile_set = SubResource( 3 )
+tile_set = SubResource( 4 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( -655361, 1610612737, 1, -720896, 1, 0, -589825, 1610612737, 1, -655360, 1, 0, -524289, 1610612737, 1, -589824, 1, 0, -458753, 1610612737, 1, -524288, 1, 0, -393217, 1610612737, 1, -458752, 1, 0, -327681, 1610612737, 1, -393216, 1, 0, -262145, 1610612737, 1, -327680, 1, 0, -196609, 1610612737, 1, -262144, 1, 0, -131073, 1610612737, 1, -196608, 1, 0, -65537, 1610612737, 1, -131072, 1, 0, -1, 1610612737, 1, -65536, 1, 0, 65535, 1610612737, 1, 0, 1, 0, 131071, 1610612737, 1, 65536, 1, 0, 196607, 1610612737, 1, 131072, 1, 0, 262143, 1610612737, 1, 196608, 1, 0, 327679, 1610612737, 1, 262144, 1, 0, 393215, 1610612737, 1, 327680, 1, 0, 458751, 1610612737, 1, 393216, 1, 0, 524287, 1610612737, 1, 458752, 1, 0, 589823, 1610612737, 1, 524288, 1, 0, 655359, 1610612737, 1, 589824, 1, 0, 720895, 1610612737, 1, 655360, 1, 0 )

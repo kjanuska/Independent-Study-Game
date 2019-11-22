@@ -1,7 +1,7 @@
 extends "../Motion.gd"
 
 func enter():
-	player_animation.travel("idle")
+	player_animation.start("idle")
 
 func handle_input(event):
 	return .handle_input(event)

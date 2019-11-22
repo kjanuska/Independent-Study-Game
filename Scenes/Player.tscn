@@ -28,11 +28,11 @@ func _on_PopupTimer_timeout():
 "
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 10.7607 )
+extents = Vector2( 7.45749, 10.7607 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "dash"
-length = 0.25
+length = 0.15
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -41,7 +41,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.14, 0.16, 0.19, 0.21, 0.23, 0.25 ),
+"times": PoolRealArray( 0, 0.01, 0.02, 0.04, 0.05, 0.07, 0.09, 0.1, 0.12, 0.13, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "values": [ Color( 0.521569, 0.0862745, 0.0862745, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=7]
 resource_name = "idle"
 loop = true
 step = 0.5
@@ -122,57 +122,57 @@ animation = "death"
 [sub_resource type="AnimationNodeAnimation" id=11]
 animation = "hurt"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
-[sub_resource type="AnimationNodeStateMachine" id=23]
+[sub_resource type="AnimationNodeStateMachine" id=24]
 states/dash/node = SubResource( 9 )
 states/dash/position = Vector2( 1005, 135 )
 states/death/node = SubResource( 10 )
 states/death/position = Vector2( 651.266, 347 )
 states/hurt/node = SubResource( 11 )
 states/hurt/position = Vector2( 269, 144 )
-states/idle/node = SubResource( 26 )
+states/idle/node = SubResource( 12 )
 states/idle/position = Vector2( 651.266, 234.191 )
-states/walk/node = SubResource( 27 )
+states/walk/node = SubResource( 13 )
 states/walk/position = Vector2( 651.266, 72.1909 )
-transitions = [ "idle", "walk", SubResource( 28 ), "walk", "dash", SubResource( 29 ), "walk", "hurt", SubResource( 30 ), "dash", "walk", SubResource( 31 ), "hurt", "idle", SubResource( 32 ), "idle", "death", SubResource( 33 ), "dash", "idle", SubResource( 34 ), "idle", "hurt", SubResource( 35 ), "hurt", "walk", SubResource( 36 ), "walk", "idle", SubResource( 37 ) ]
+transitions = [ "idle", "walk", SubResource( 14 ), "walk", "dash", SubResource( 15 ), "walk", "hurt", SubResource( 16 ), "dash", "walk", SubResource( 17 ), "hurt", "idle", SubResource( 18 ), "idle", "death", SubResource( 19 ), "dash", "idle", SubResource( 20 ), "idle", "hurt", SubResource( 21 ), "hurt", "walk", SubResource( 22 ), "walk", "idle", SubResource( 23 ) ]
 start_node = "idle"
 end_node = "death"
-graph_offset = Vector2( -25.7339, 9.19093 )
+graph_offset = Vector2( -25.7339, 30.6469 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -195,7 +195,7 @@ drag_margin_v_enabled = false
 [node name="RangedCooldown" type="Timer" parent="WeaponTimers"]
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.15
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
@@ -217,12 +217,11 @@ material = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 13
-frame = 27
+frame = 28
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "player_hurtbox",
 ]]
-editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -236,16 +235,17 @@ one_shot = true
 anims/dash = SubResource( 4 )
 anims/death = SubResource( 5 )
 anims/hurt = SubResource( 6 )
-anims/idle = SubResource( 25 )
+anims/idle = SubResource( 7 )
 anims/walk = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 23 )
+tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 24 )
+parameters/playback = SubResource( 25 )
 
 [node name="MovementStates" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 5 )
 START_STATE = NodePath("Idle")
 
