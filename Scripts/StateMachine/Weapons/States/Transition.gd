@@ -4,9 +4,8 @@ var wait_time
 
 func enter():
 	if owner.current_weapon:
-		owner.previous_weapon_id = owner.current_weapon.id
 		owner.current_weapon.queue_free()
-	_assign_id(owner.id)
+	_assign_id(PlayerVar.current_weapon_id)
 
 func update(_delta):
 	.get_input_rotation()
@@ -33,13 +32,13 @@ func _assign_id(id):
 				ranged = weapon_spawner.bow_load
 				owner.ammo = projectile_spawner.arrow_load
 				owner.ammo_speed = 700
-				owner.charge_ranged = true
+				PlayerVar.charge_ranged = true
 				wait_time = 1
 			11:
 				ranged = weapon_spawner.gun_load
 				owner.ammo = projectile_spawner.bullet_load
 				owner.ammo_speed = 1500
-				owner.charge_ranged = false
+				PlayerVar.charge_ranged = false
 				wait_time = 0.2
 		owner.current_weapon = ranged
 		owner.get_node("WeaponTimers").get_node("RangedCooldown").wait_time = wait_time

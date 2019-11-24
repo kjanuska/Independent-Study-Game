@@ -9,7 +9,7 @@ func get_ranged_input():
 	if owner.ranged_cooldown.is_stopped():
 		if Input.is_action_pressed("shoot"):
 			count += 1
-			if owner.charge_ranged:
+			if PlayerVar.charge_ranged:
 				if count == 80:
 					owner.weapon_animation_player.play("charge")
 					owner.count = count
@@ -17,7 +17,7 @@ func get_ranged_input():
 				owner.shoot_weapon()
 				count = 0
 	
-		if Input.is_action_just_released("shoot") && owner.charge_ranged:
+		if Input.is_action_just_released("shoot") && PlayerVar.charge_ranged:
 			owner.shoot_charged()
 			count = owner.count
 
