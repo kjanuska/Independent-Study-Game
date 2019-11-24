@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SpawnLocation.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Bow Shot.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Log.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Transition.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -42,12 +43,12 @@ position = Vector2( 1050, 213.564 )
 position = Vector2( 1550.86, 202.004 )
 
 [node name="Obstacles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="River" parent="Obstacles" instance=ExtResource( 4 )]
 position = Vector2( 1470, 220 )
 
 [node name="Beach" type="TileMap" parent="Obstacles"]
-editor/display_folded = true
 position = Vector2( -8.42889, -4.59758 )
 scale = Vector2( 1.04173, 0.895032 )
 tile_set = ExtResource( 5 )
@@ -171,6 +172,10 @@ position = Vector2( 1508.76, 113.814 )
 
 [node name="Player" parent="." instance=ExtResource( 13 )]
 position = Vector2( 286.732, 149.764 )
+
+[node name="Transition" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1278.76, 211.151 )
+world_scene = "res://Rooms1.tscn"
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

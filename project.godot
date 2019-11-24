@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 SignalManager="*res://Scripts/SignalManager.gd"
 PlayerVar="*res://Scripts/PlayerVar.gd"
+SceneChanger="*res://SceneChanger.tscn"
 
 [debug]
 

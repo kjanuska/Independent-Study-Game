@@ -8,7 +8,7 @@
 [ext_resource path="res://Scripts/StateMachine/Movement/States/Idle.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/StateMachine/Movement/States/Walk.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/StateMachine/Movement/States/Dash.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/StateMachine/Movement/States/TakeDamage.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/StateMachine/Movement/States/Die.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/StateMachine/Weapons/WeaponStates.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/StateMachine/Weapons/States/Melee.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/StateMachine/Weapons/States/Ranged.gd" type="Script" id=12]
@@ -217,7 +217,7 @@ material = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 13
-frame = 28
+frame = 13
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "player_hurtbox",
@@ -245,7 +245,6 @@ active = true
 parameters/playback = SubResource( 25 )
 
 [node name="MovementStates" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 START_STATE = NodePath("Idle")
 
@@ -258,7 +257,7 @@ script = ExtResource( 7 )
 [node name="Dash" type="Node" parent="MovementStates"]
 script = ExtResource( 8 )
 
-[node name="TakeDamage" type="Node" parent="MovementStates"]
+[node name="Die" type="Node" parent="MovementStates"]
 script = ExtResource( 9 )
 
 [node name="WeaponStates" type="Node" parent="."]

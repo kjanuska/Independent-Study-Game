@@ -1,3 +1,10 @@
 extends Node
 
-onready var player = get_tree().get_root().get_node("Main").get_node("Player")
+var player
+
+func _ready():
+	_scene_changed()
+	SignalManager.connect("scene_changed", self, "_scene_changed")
+
+func _scene_changed():
+	player = get_tree().get_current_scene().get_node("Player")
