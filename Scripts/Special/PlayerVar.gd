@@ -4,7 +4,7 @@ var player
 
 var previous_weapon_id
 var current_weapon_id
-var id
+var temp_id
 
 var charge_ranged
 

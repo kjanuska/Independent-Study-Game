@@ -13,4 +13,7 @@ func handle_input(event):
 	return .handle_input(event)
 
 func _change_state():
-	emit_signal("finished", "transition")
+	if PlayerVar.current_weapon_id != null:
+		emit_signal("finished", "transition")
+	else:
+		emit_signal("finished", "empty")

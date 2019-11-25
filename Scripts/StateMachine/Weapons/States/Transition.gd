@@ -5,10 +5,9 @@ var wait_time
 func enter():
 	if owner.current_weapon:
 		owner.current_weapon.queue_free()
-	_assign_id(PlayerVar.current_weapon_id)
+	if PlayerVar.current_weapon_id != null:
+		_assign_id(PlayerVar.current_weapon_id)
 
-func update(_delta):
-	.get_input_rotation()
 # specific weapon ids for each type
 # melee in 1s
 # 0 = sword
