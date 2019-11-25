@@ -1,12 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Special Nodes/SpawnLocation.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Environment/Target.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Environment/River.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TileMaps/Beach Level/beach.tres" type="TileSet" id=5]
-[ext_resource path="res://Scenes/Environment/Rock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://TileMaps/Beach Level/palms.tres" type="TileSet" id=7]
+[ext_resource path="res://TileMaps/Beach Level/palms.tres" type="TileSet" id=6]
+[ext_resource path="res://Scenes/Environment/Rock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Weapons/PickupWeapon.gd" type="Script" id=8]
 [ext_resource path="res://Materials/Outline/outline.material" type="Material" id=9]
 [ext_resource path="res://Assets/Weapons/sword slice.png" type="Texture" id=10]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Scenes/Environment/Log.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Special Nodes/Transition.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Special Nodes/Generator.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -43,7 +44,6 @@ position = Vector2( 1050, 213.564 )
 position = Vector2( 1550.86, 202.004 )
 
 [node name="Obstacles" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="River" parent="Obstacles" instance=ExtResource( 4 )]
 position = Vector2( 1470, 220 )
@@ -65,25 +65,9 @@ scale = Vector2( 129.406, 32.4289 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Beach/Ocean"]
 shape = SubResource( 1 )
 
-[node name="Rocks" type="Node2D" parent="Obstacles"]
-
-[node name="Rock" parent="Obstacles/Rocks" instance=ExtResource( 6 )]
-position = Vector2( 814.235, 213.108 )
-
-[node name="StaticBody2D2" parent="Obstacles/Rocks" instance=ExtResource( 6 )]
-position = Vector2( 835.059, 273.31 )
-
-[node name="StaticBody2D3" parent="Obstacles/Rocks" instance=ExtResource( 6 )]
-position = Vector2( 885.48, 293.669 )
-
-[node name="StaticBody2D4" parent="Obstacles/Rocks" instance=ExtResource( 6 )]
-position = Vector2( 843.882, 146.833 )
-
-[node name="StaticBody2D5" parent="Obstacles/Rocks" instance=ExtResource( 6 )]
-position = Vector2( 893.298, 132.665 )
-
 [node name="Trees" type="TileMap" parent="Obstacles"]
-tile_set = ExtResource( 7 )
+editor/display_folded = true
+tile_set = ExtResource( 6 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( -1310716, 0, 3, -1310709, 0, 3, -1310650, 0, 1, -1310648, 0, 1, -1245161, 0, 3, -1245144, 0, 3, -1245135, 0, 3, -1245109, 0, 1, -1245100, 0, 1, -1179618, 0, 3, -1179593, 0, 1, -1179585, 0, 3, -1179570, 0, 1, -1114111, 0, 3, -1114106, 0, 2, -1114102, 0, 2, -1114054, 0, 3, -1114044, 0, 3, -1114037, 0, 1, -1114031, 0, 1, -1114022, 0, 1, -983046, 0, 2, -1048550, 0, 2, -1048534, 0, 3, -1048505, 0, 3, -1048501, 0, 1, -1048483, 0, 1, -917506, 0, 2, -983008, 0, 3, -983003, 0, 3, -983002, 0, 3, -982987, 0, 1, -982958, 0, 1, -917500, 0, 2, -917494, 0, 2, -917481, 0, 3, -917458, 0, 3, -917453, 0, 3, -917451, 0, 3, -917416, 0, 1, -851941, 0, 2, -851937, 0, 3, -851905, 0, 3, -851900, 0, 3, -851895, 0, 3, -851890, 0, 3, -851881, 0, 1, -786393, 0, 2, -786381, 0, 3, -655361, 0, 2, -720888, 0, 1, -720875, 0, 2, -720857, 0, 3, -720848, 0, 3, -720839, 0, 3, -720835, 0, 3, -720814, 0, 2, -720808, 0, 1, -655358, 0, 1, -655327, 0, 3, -655322, 0, 3, -655318, 0, 3, -655294, 0, 2, -655289, 0, 0, -655284, 0, 2, -589819, 0, 1, -589813, 0, 2, -589786, 0, 3, -589779, 0, 1, -589773, 0, 3, -589772, 0, 1, -589744, 0, 3, -589740, 0, 1, -589732, 0, 1, -458754, 0, 2, -524263, 0, 0, -524259, 0, 0, -524247, 0, 0, -524231, 0, 1, -524226, 0, 0, -524200, 0, 1, -458749, 0, 1, -458744, 0, 2, -458707, 0, 1, -458703, 0, 1, -458697, 0, 2, -458693, 0, 2, -458687, 0, 1, -458682, 0, 1, -458679, 0, 0, -458662, 0, 2, -458657, 0, 1, -327690, 0, 3, -327686, 0, 3, -327685, 0, 3, -393214, 0, 2, -393194, 0, 0, -393180, 0, 1, -393177, 0, 3, -393150, 0, 2, -393139, 0, 0, -393133, 0, 0, -262148, 0, 2, -327657, 0, 1, -327647, 0, 0, -327634, 0, 1, -327625, 0, 0, -327624, 0, 2, -327599, 0, 3, -262117, 0, 1, -262103, 0, 1, -262100, 0, 1, -262094, 0, 0, -262091, 0, 1, -262086, 0, 0, -262083, 0, 1, -262077, 0, 0, -262074, 0, 0, -262065, 0, 0, -262061, 0, 2, -262057, 0, 0, -196605, 0, 2, -196601, 0, 3, -196597, 0, 2, -196580, 0, 2, -196576, 0, 0, -196569, 0, 3, -196562, 0, 1, -196536, 0, 0, -196533, 0, 1, -196516, 0, 1, -65543, 0, 3, -65542, 0, 3, -65539, 0, 2, -131047, 0, 2, -131042, 0, 1, -131029, 0, 1, -131014, 0, 0, -131009, 0, 2, -131008, 0, 0, -130987, 0, 0, -15, 0, 3, -11, 0, 3, -65535, 0, 1, -65529, 0, 2, -65514, 0, 1, -65502, 0, 0, -65501, 0, 0, -65499, 0, 0, -65495, 0, 0, -65488, 0, 1, -65480, 0, 0, -65470, 0, 1, -65457, 0, 1, 65524, 0, 3, 65526, 0, 3, 65531, 0, 3, 26, 0, 0, 33, 0, 2, 61, 0, 2, 69, 0, 1, 74, 0, 0, 131065, 0, 3, 65540, 0, 3, 65541, 0, 3, 65558, 0, 0, 65571, 0, 0, 65585, 0, 0, 65588, 0, 0, 65591, 0, 1, 65593, 0, 0, 65597, 0, 0, 196606, 0, 2, 131073, 0, 1, 131079, 0, 2, 131085, 0, 2, 131094, 0, 0, 131097, 0, 2, 131099, 0, 0, 131102, 0, 0, 131114, 0, 1, 131116, 0, 0, 131118, 0, 1, 131123, 0, 0, 131139, 0, 1, 131141, 0, 1, 131142, 0, 1, 131147, 0, 0, 131150, 0, 0, 131154, 0, 0, 131155, 0, 3, 131159, 0, 0, 262132, 0, 3, 196633, 0, 2, 196639, 0, 1, 196644, 0, 1, 196647, 0, 0, 196663, 0, 0, 196668, 0, 0, 196673, 0, 0, 196678, 0, 0, 196689, 0, 3, 196693, 0, 2, 262154, 0, 2, 393200, 0, 3, 327681, 0, 2, 458731, 0, 0, 458738, 0, 3, 458741, 0, 0, 524256, 0, 3, 524261, 0, 3, 524269, 0, 3, 524280, 0, 3, 589794, 0, 3, 589799, 0, 0, 589817, 0, 0, 655340, 0, 0, 655345, 0, 3, 655348, 0, 0, 851948, 0, 0, 851952, 0, 0, 851959, 0, 0, 917475, 0, 0, 983008, 0, 3, 983015, 0, 0, 983029, 0, 3, 1048554, 0, 3, 1048562, 0, 3, 1048568, 0, 3, 1114093, 0, 0, 1114095, 0, 3, 1114098, 0, 0, 1114102, 0, 0, 1179621, 0, 3 )
@@ -132,13 +116,31 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Rocks" type="Node2D" parent="Obstacles"]
+editor/display_folded = true
+
+[node name="Rock" parent="Obstacles/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 814.235, 213.108 )
+
+[node name="StaticBody2D2" parent="Obstacles/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 835.059, 273.31 )
+
+[node name="StaticBody2D3" parent="Obstacles/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 885.48, 293.669 )
+
+[node name="StaticBody2D4" parent="Obstacles/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 843.882, 146.833 )
+
+[node name="StaticBody2D5" parent="Obstacles/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 893.298, 132.665 )
+
 [node name="Pickup Melee" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 580.256, 211.974 )
 scale = Vector2( 0.5136, 0.462272 )
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Melee"]
-position = Vector2( 0, -1.78033 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Pickup Melee"]
@@ -177,6 +179,9 @@ position = Vector2( 286.732, 149.764 )
 position = Vector2( 1278.76, 211.974 )
 world_scene = "res://Scenes/Levels/Room1.tscn"
 
+[node name="Generator" parent="." instance=ExtResource( 15 )]
+position = Vector2( 355.787, 190.71 )
+path = "res://Scenes/Levels/Level 1"
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]
