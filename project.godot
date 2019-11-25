@@ -16,12 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="PASP"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/Levels/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-SignalManager="*res://Scripts/SignalManager.gd"
+SignalManager="*res://Scripts/Special/SignalManager.gd"
+PlayerVar="*res://Scripts/Special/PlayerVar.gd"
+SceneChanger="*res://Scenes/Special Nodes/SceneChanger.tscn"
 
 [debug]
 
@@ -36,7 +38,7 @@ window/size/width=640
 window/size/height=360
 window/size/test_width=1280
 window/size/test_height=720
-mouse_cursor/custom_image="res://Assets/Crosshair.png"
+mouse_cursor/custom_image="res://Assets/Weapons/Crosshair.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -97,4 +99,5 @@ dash={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
