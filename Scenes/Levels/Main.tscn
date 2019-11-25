@@ -133,12 +133,12 @@ __meta__ = {
 }
 
 [node name="Pickup Melee" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 580.256, 211.974 )
 scale = Vector2( 0.5136, 0.462272 )
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Melee"]
+position = Vector2( 0, -1.78033 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Pickup Melee"]
