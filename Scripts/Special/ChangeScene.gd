@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-func change_scene(path):	
+func change_scene(path):
 	$AnimationPlayer.play("fade")
 	yield($AnimationPlayer, "animation_finished")
 	assert(get_tree().change_scene(path) == OK)
