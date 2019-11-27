@@ -1,27 +1,31 @@
 extends Node2D
 
-var levels
-
-var start_levels = []
-var regular_levels = []
-var end_levels = []
+var start_rooms = []
+var regular_rooms = []
+var end_rooms = []
 
 export(String, DIR) var path
 var temp_path
 
+export(int) var level_number
+export(int) var number_of_rooms
+
 func _ready():
+#	randomize seed
+	randomize()
 	_get_files_in_directory()
-	print(start_levels)
-	print(regular_levels)
-	print(end_levels)
+
+func _input(event):
+	if Input.is_action_just_pressed("ui_accept"):
+		_place_rooms()
 
 func _get_files_in_directory():
 	temp_path = str(path, "/Start")
-	_create_list(temp_path, start_levels)
+	_create_list(temp_path, start_rooms)
 	temp_path = str(path, "/Regular")
-	_create_list(temp_path, regular_levels)
+	_create_list(temp_path, regular_rooms)
 	temp_path = str(path, "/End")
-	_create_list(temp_path, end_levels)
+	_create_list(temp_path, end_rooms)
 
 func _create_list(path_to_folder, save_var):
 	var dir = Directory.new()
@@ -35,14 +39,27 @@ func _create_list(path_to_folder, save_var):
 			save_var.append(str(path_to_folder, "/", file))
 	dir.list_dir_end()
 
+func _place_rooms():
+#	chose 1 random start and end room since there can only be one of each type in the level
+	var start_room = start_rooms[randi() % start_rooms.size()]
+	var end_room = end_rooms[randi() % end_rooms.size()]
+#	get 5 random rooms from regular rooms
+	var rooms = _get_random_rooms()
+	for r in rooms.size():
+		rooms[r] = load(rooms[r])
+		rooms[r] = rooms[r].instance()
+		get_parent().add_child(rooms[r])
+		rooms[r].position.x += 30 + r*10
 
-
-
-
-
-
-
-
-
-
-
+func _get_random_rooms():
+	if number_of_rooms > regular_rooms.size():
+		print("More rooms chosen than rooms available!")
+		return
+	var random = []
+	for r in regular_rooms.size():
+		random.append(r + 1)
+	random.shuffle()
+	var result = []
+	for i in number_of_rooms:
+		result.append(str("res://Scenes/Levels/Level", level_number, "/Regular/Room", random[i], ".tscn"))
+	return result

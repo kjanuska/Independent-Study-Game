@@ -1,9 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://TileMaps/Beach Level/beach.tres" type="TileSet" id=1]
-[ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Special Nodes/Transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Special Nodes/Generator.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 10 )
@@ -27,16 +24,4 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit2"]
 position = Vector2( 0, 130 )
 shape = SubResource( 1 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-
-[node name="Transition" parent="." instance=ExtResource( 3 )]
-position = Vector2( 80, -40 )
-world_scene = "res://Scenes/Levels/Main.tscn"
-
-[node name="Generator" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20, 0 )
-path = "res://Scenes/Levels/Level1"
-level_number = 1
-number_of_rooms = 3
 

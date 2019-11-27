@@ -2,11 +2,8 @@
 
 [ext_resource path="res://Scenes/Special Nodes/Generator.tscn" type="PackedScene" id=1]
 
-[node name="Room2" type="Node2D"]
+[node name="Empty" type="Node2D"]
 
 [node name="Generator" parent="." instance=ExtResource( 1 )]
-position = Vector2( 10, -20 )
 path = "res://Scenes/Levels/Level1"
-level_number = 1
-number_of_rooms = 3
 
