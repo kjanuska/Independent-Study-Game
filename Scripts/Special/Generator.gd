@@ -11,6 +11,7 @@ export(int) var level_number
 export(int) var number_of_rooms
 export(int) var hori_spread
 export(int) var vert_spread
+export(int) var empty_zone
 
 func _ready():
 #	randomize seed
@@ -40,14 +41,15 @@ func _create_list(path_to_folder, save_var):
 		elif not file.begins_with("."):
 			save_var.append(str(path_to_folder, "/", file))
 	dir.list_dir_end()
-var old_pos = []
+
 func _place_rooms():
 #	chose 1 random start and end room since there can only be one of each type in the level
 	var start_room = start_rooms[randi() % start_rooms.size()]
 	var end_room = end_rooms[randi() % end_rooms.size()]
 #	get 5 random rooms from regular rooms
 	var rooms = _get_random_rooms()
-#	var old_pos = []
+	var old_pos = []
+	print(rooms)
 	for r in rooms.size():
 		rooms[r] = load(rooms[r])
 		rooms[r] = rooms[r].instance()
@@ -56,14 +58,11 @@ func _place_rooms():
 		var size = rooms[r].get_map_size()
 		var pos = rooms[r].get_map_position()
 		for o in old_pos.size():
-			if (Rect2(pos[0], pos[1]).intersects(old_pos[o])):
-				print("intersects")
-		old_pos.append(Rect2(pos[0], pos[1]))
-		update()
-
-func _draw():
-	for o in old_pos.size():
-		draw_rect(old_pos[o], Color(255, 255, 255), false)
+			if (Rect2(pos[0], pos[1]).intersects(Rect2(old_pos[o][0], old_pos[o][1]))):
+				rooms[r].position = Vector2(randi() % hori_spread + empty_zone, randi() % vert_spread + empty_zone)
+				pos = rooms[r].get_map_position()
+				print("intersect")
+		old_pos.append([pos[0], pos[1]])
 
 func _get_random_rooms():
 	if number_of_rooms > regular_rooms.size():
