@@ -41,7 +41,7 @@ func _create_list(path_to_folder, save_var):
 		elif not file.begins_with("."):
 			save_var.append(str(path_to_folder, "/", file))
 	dir.list_dir_end()
-
+var intersecting
 func _place_rooms():
 #	chose 1 random start and end room since there can only be one of each type in the level
 	var start_room = start_rooms[randi() % start_rooms.size()]
@@ -54,14 +54,22 @@ func _place_rooms():
 		rooms[r] = load(rooms[r])
 		rooms[r] = rooms[r].instance()
 		get_parent().add_child(rooms[r])
-		rooms[r].position = Vector2(randi() % hori_spread, randi() % vert_spread)
+		rooms[r].position = Vector2(randi() % hori_spread + empty_zone, randi() % vert_spread + empty_zone)
 		var size = rooms[r].get_map_size()
 		var pos = rooms[r].get_map_position()
 		for o in old_pos.size():
 			if (Rect2(pos[0], pos[1]).intersects(Rect2(old_pos[o][0], old_pos[o][1]))):
-				rooms[r].position = Vector2(randi() % hori_spread + empty_zone, randi() % vert_spread + empty_zone)
+				intersecting = true
+			else:
+				intersecting = false
+			while intersecting:
+				rooms[r].position = Vector2((randi() % hori_spread), (randi() % vert_spread))
 				pos = rooms[r].get_map_position()
-				print("intersect")
+				for q in old_pos.size():
+					if (Rect2(pos[0], pos[1]).intersects(Rect2(old_pos[q][0], old_pos[q][1]))):
+						intersecting = true
+					else:
+						intersecting = false
 		old_pos.append([pos[0], pos[1]])
 
 func _get_random_rooms():
