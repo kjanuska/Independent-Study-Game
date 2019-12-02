@@ -32,6 +32,7 @@ func _ready():
 	ranged_cooldown = $WeaponTimers/RangedCooldown
 
 func _physics_process(_delta):
+	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 
