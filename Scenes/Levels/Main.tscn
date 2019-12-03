@@ -176,7 +176,6 @@ position = Vector2( 286.732, 149.764 )
 [node name="Transition" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1278.76, 211.974 )
 world_scene = "res://Scenes/Levels/Level1/Start/Start1.tscn"
-
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]

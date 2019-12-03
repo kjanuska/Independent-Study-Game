@@ -8,7 +8,7 @@ onready var Map = $TileMap
 var tile_size = 16  # size of a tile in the TileMap
 var num_rooms = 50  # number of rooms to generate
 var min_size = 6  # minimum room size (in tiles)
-var max_size = 15  # maximum room size (in tiles)
+var max_size = 8  # maximum room size (in tiles)
 var hspread = 400  # horizontal spread (in pixels)
 var cull = 0.5  # chance to cull room
 
@@ -57,10 +57,10 @@ func make_rooms():
 	path = find_mst(room_positions)
 			
 func _draw():
-	if start_room:
-		draw_string(font, start_room.position-Vector2(125,0), "start", Color(1,1,1))
-	if end_room:
-		draw_string(font, end_room.position-Vector2(125,0), "end", Color(1,1,1))
+#	if start_room:
+#		draw_string(font, start_room.position-Vector2(125,0), "start", Color(1,1,1))
+#	if end_room:
+#		draw_string(font, end_room.position-Vector2(125,0), "end", Color(1,1,1))
 	if play_mode:
 		return
 	for room in $Rooms.get_children():
@@ -91,6 +91,7 @@ func _input(event):
 	if event.is_action_pressed('ui_focus_next'):
 		make_map()
 	if event.is_action_pressed('ui_cancel'):
+		remove_rooms()
 		player = Player.instance()
 		add_child(player)
 		player.position = start_room.position
@@ -227,6 +228,10 @@ func find_start_room():
 		if room.position.x < min_x:
 			start_room = room
 			min_x = room.position.x
+
+func remove_rooms():
+	for room in $Rooms.get_children():
+		room.queue_free()
 
 func find_end_room():
 	var max_x = -INF
