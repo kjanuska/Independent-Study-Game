@@ -41,7 +41,9 @@ func _create_list(path_to_folder, save_var):
 		elif not file.begins_with("."):
 			save_var.append(str(path_to_folder, "/", file))
 	dir.list_dir_end()
+
 var intersecting
+
 func _place_rooms():
 #	chose 1 random start and end room since there can only be one of each type in the level
 	var start_room = start_rooms[randi() % start_rooms.size()]
