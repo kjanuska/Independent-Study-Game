@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/beachtileset.png-24bba2450e5e8d9397dc1508ddba6fb8.stex"
+path="res://.import/Bow Shot.png-61c16cb7e35a9ca24c04c1312278c24b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/beachtileset.png"
-dest_files=[ "res://.import/beachtileset.png-24bba2450e5e8d9397dc1508ddba6fb8.stex" ]
+source_file="res://Assets/Sprites/Weapons/Bow Shot.png"
+dest_files=[ "res://.import/Bow Shot.png-61c16cb7e35a9ca24c04c1312278c24b.stex" ]
 
 [params]
 

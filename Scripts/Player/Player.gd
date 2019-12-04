@@ -33,8 +33,8 @@ func _ready():
 
 func _physics_process(_delta):
 	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
-#	if Input.is_action_just_pressed("ui_cancel"):
-#		get_tree().quit()
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
 
 func get_input_rotation():
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()

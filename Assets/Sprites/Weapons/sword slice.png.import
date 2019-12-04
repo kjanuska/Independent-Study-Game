@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprite Sheet.png-5146f1c4d96d43feec3c4d4eb2db540a.stex"
+path="res://.import/sword slice.png-74d137bb224ca2559ac742931b008a11.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Sprite Sheet.png"
-dest_files=[ "res://.import/Sprite Sheet.png-5146f1c4d96d43feec3c4d4eb2db540a.stex" ]
+source_file="res://Assets/Sprites/Weapons/sword slice.png"
+dest_files=[ "res://.import/sword slice.png-74d137bb224ca2559ac742931b008a11.stex" ]
 
 [params]
 

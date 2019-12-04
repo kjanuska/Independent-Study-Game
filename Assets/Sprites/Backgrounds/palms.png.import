@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Stone_Tileset (1).png-cba9107f5450ccd335e5b6511c6dbc19.stex"
+path="res://.import/palms.png-f0846d9f53901e95adecf4a839706f9b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/Stone_Tileset (1).png"
-dest_files=[ "res://.import/Stone_Tileset (1).png-cba9107f5450ccd335e5b6511c6dbc19.stex" ]
+source_file="res://Assets/Sprites/Backgrounds/palms.png"
+dest_files=[ "res://.import/palms.png-f0846d9f53901e95adecf4a839706f9b.stex" ]
 
 [params]
 

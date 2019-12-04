@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tutorial_Rock-Sheet.png-8d6551b720b51bba2f5e83373c696bc1.stex"
+path="res://.import/Sprite Sheet.png-10b88f3b532ff4083438a89d0336bf38.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/Tutorial_Rock-Sheet.png"
-dest_files=[ "res://.import/Tutorial_Rock-Sheet.png-8d6551b720b51bba2f5e83373c696bc1.stex" ]
+source_file="res://Assets/Sprites/Characters/Sprite Sheet.png"
+dest_files=[ "res://.import/Sprite Sheet.png-10b88f3b532ff4083438a89d0336bf38.stex" ]
 
 [params]
 

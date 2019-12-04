@@ -1,21 +1,21 @@
 extends Node2D
 
-var Room = preload("res://Room.tscn")
+var Room = preload("res://Scenes/Special Nodes/Room.tscn")
 var Player = preload("res://Scenes/Characters/Player.tscn")
-var font = preload("res://Roboto.tres")
+var font = preload("res://Assets/Fonts/Roboto.tres")
 onready var Map = $TileMap
 
 var tile_size = 16  # size of a tile in the TileMap
 var num_rooms = 50  # number of rooms to generate
 var min_size = 6  # minimum room size (in tiles)
 var max_size = 8  # maximum room size (in tiles)
-var hspread = 400  # horizontal spread (in pixels)
+var hspread = 1000  # horizontal spread (in pixels)
 var cull = 0.5  # chance to cull room
 
 var path  # AStar pathfinding object
 var start_room = null
 var end_room = null
-var play_mode = false  
+var play_mode = false
 var player = null
 
 var start_rooms = []
@@ -24,14 +24,19 @@ var end_rooms = []
 
 export(int) var level_number
 
-export(String, DIR) var file_path
+export(String, DIR) var room_file_path
 var temp_path
 
 func _ready():
 	randomize()
 	_get_files_in_directory()
+	for n in $Rooms.get_children():
+		n.queue_free()
+	path = null
+	start_room = null
+	end_room = null
 	make_rooms()
-	
+
 func make_rooms():
 	for i in range(num_rooms):
 		var pos = Vector2(rand_range(-hspread, hspread), 0)
@@ -55,7 +60,9 @@ func make_rooms():
 	yield(get_tree(), 'idle_frame')
 	# generate a minimum spanning tree connecting the rooms
 	path = find_mst(room_positions)
-			
+	yield(get_tree().create_timer(0.5), 'timeout')
+	make_map()
+
 func _draw():
 #	if start_room:
 #		draw_string(font, start_room.position-Vector2(125,0), "start", Color(1,1,1))
@@ -76,26 +83,6 @@ func _draw():
 
 func _process(delta):
 	update()
-	
-func _input(event):
-	if event.is_action_pressed('ui_select'):
-		if play_mode:
-			player.queue_free()
-			play_mode = false
-		for n in $Rooms.get_children():
-			n.queue_free()
-		path = null
-		start_room = null
-		end_room = null
-		make_rooms()
-	if event.is_action_pressed('ui_focus_next'):
-		make_map()
-	if event.is_action_pressed('ui_cancel'):
-		remove_rooms()
-		player = Player.instance()
-		add_child(player)
-		player.position = start_room.position
-		play_mode = true
 
 func find_mst(nodes):
 	# Prim's algorithm
@@ -132,11 +119,11 @@ func find_mst(nodes):
 	return path
 
 func _get_files_in_directory():
-	temp_path = str(file_path, "/Start")
+	temp_path = str(room_file_path, "/Start")
 	_create_list(temp_path, start_rooms)
-	temp_path = str(file_path, "/Regular")
+	temp_path = str(room_file_path, "/Regular")
 	_create_list(temp_path, regular_rooms)
-	temp_path = str(file_path, "/End")
+	temp_path = str(room_file_path, "/End")
 	_create_list(temp_path, end_rooms)
 
 func _create_list(path_to_folder, save_var):
@@ -170,7 +157,6 @@ func make_map():
 	
 	# Carve rooms
 	var corridors = []  # One corridor per connection
-	var index = 0
 #	var place_rooms = _get_random_rooms()
 	for room in $Rooms.get_children():
 		var s = (room.size / tile_size).floor()
@@ -181,7 +167,7 @@ func make_map():
 				Map.set_cell(ul.x + x, ul.y + y, 0)
 		var place_room = load(regular_rooms[randi() % regular_rooms.size()])
 		place_room = place_room.instance()
-		get_parent().add_child(place_room)
+		get_parent().call_deferred("add_child" ,place_room)
 		place_room.position = pos
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, room.position.y, 0))
@@ -191,7 +177,7 @@ func make_map():
 				var end = Map.world_to_map(Vector2(path.get_point_position(conn).x, path.get_point_position(conn).y))
 				carve_path(start, end)
 		corridors.append(p)
-		index += 1
+	add_player()
 
 func _get_random_rooms():
 	var random = []
@@ -202,6 +188,14 @@ func _get_random_rooms():
 	for i in regular_rooms.size():
 		result.append(str("res://Scenes/Levels/Level", level_number, "/Regular/Room", random[i], ".tscn"))
 	return result
+
+func add_player():
+	remove_rooms()
+	player = Player.instance()
+	add_child(player)
+	player.position = start_room.position
+	play_mode = true
+	SignalManager.emit_signal("scene_loaded")
 
 func carve_path(pos1, pos2):
 	# Carve a path between two points

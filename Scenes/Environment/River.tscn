@@ -2,7 +2,8 @@
 
 [ext_resource path="res://Scripts/Environment/River.gd" type="Script" id=1]
 [ext_resource path="res://TileMaps/Beach Level/River.tres" type="TileSet" id=2]
-[ext_resource path="res://Assets/Backgrounds/Island_Set.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Backgrounds/Island_Set.png" type="Texture" id=3]
+
 
 
 
