@@ -58,28 +58,6 @@ signal tag_buff(tag) # When the _buffer reaches a buff which is tagged
 signal buff_cleared() # When the buffer's been cleared of text
 # ===============================================
 
-func _on_Button_pressed():
-	reset()
-	set_color(Color(1, 1, 1))
-	# Buff text: "Text", duration (in seconds) of each letter
-	buff_text("This is a song, ", 0.1)
-	buff_text("lalala\n", 0.2)
-	# Buff silence: Duration of the silence (in seconds)
-	buff_silence(1)
-	buff_text("It is so beautiful, ", 0.1)
-	buff_text("lalala\n", 0.2)
-	buff_silence(1)
-	buff_text("I love this song, ", 0.1)
-	buff_text("lalala\n", 0.2)
-	buff_silence(1)
-	buff_text("But now I'll ", 0.1) # WAIT FOR THE DROP
-	buff_text("DROP", 0.02) # ?????
-	buff_silence(0.4)
-	buff_text(" THE BASS\n", 0.02) # !!!!!
-	buff_silence(0.4)
-	set_state(STATE_OUTPUT)
-
-
 func buff_debug(f, lab = false, arg0 = null, push_front = false): # For simple debug purposes; use with care
 	var b = {"buff_type":BUFF_DEBUG,"debug_function":f,"debug_label":lab,"debug_arg":arg0}
 	if(! push_front):
@@ -166,6 +144,9 @@ func set_font_byresource(font): # Changes font of the text (uses the resource)
 
 func set_color(c): # Changes the color of the text
 	_label.add_color_override("font_color", c)
+
+func set_size(s):
+	_label.get_font("font").size = s
 
 func set_state(i): # Changes the state of the Text Interface Engine
 	emit_signal("state_change", int(i))

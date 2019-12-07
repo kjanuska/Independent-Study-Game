@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Special Nodes/SpawnLocation.tscn" type="PackedScene" id=2]
@@ -14,9 +14,7 @@
 [ext_resource path="res://Scenes/Environment/Log.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Special Nodes/TransitionArea.tscn" type="PackedScene" id=14]
-[ext_resource path="res://addons/GodotTIE/text_interface_engine.gd" type="Script" id=15]
-[ext_resource path="res://addons/GodotTIE/GodotTIE_icon.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Fonts/Roboto.tres" type="DynamicFont" id=17]
+[ext_resource path="res://Scenes/Characters/MrWalker.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -40,13 +38,12 @@ __meta__ = {
 }
 
 [node name="SpawnLocation" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1050, 213.564 )
+position = Vector2( 298, 213.564 )
 
 [node name="Target" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1550.86, 202.004 )
 
 [node name="Obstacles" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="River" parent="Obstacles" instance=ExtResource( 4 )]
 position = Vector2( 1470, 220 )
@@ -180,27 +177,10 @@ position = Vector2( 286.732, 149.764 )
 position = Vector2( 1278.76, 211.974 )
 world_scene = "res://Scenes/Levels/Level1/Level1.tscn"
 
-[node name="TextInterfaceEngine" type="ReferenceRect" parent="."]
-margin_left = 1082.1
-margin_top = 353.814
-margin_right = 1332.1
-margin_bottom = 483.814
-script = ExtResource( 15 )
-__meta__ = {
-"_editor_icon": ExtResource( 16 )
-}
-FONT = ExtResource( 17 )
-
-[node name="Button" type="Button" parent="."]
-margin_left = 1178.76
-margin_top = 313.814
-margin_right = 1225.76
-margin_bottom = 333.814
-action_mode = 0
-text = "Press"
+[node name="MrWalker" parent="." instance=ExtResource( 15 )]
+position = Vector2( 197.566, 213.215 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_exited"]
-[connection signal="pressed" from="Button" to="TextInterfaceEngine" method="_on_Button_pressed"]
