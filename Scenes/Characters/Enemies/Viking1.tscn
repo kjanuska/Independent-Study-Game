@@ -5,6 +5,7 @@
 [node name="Viking1" type="KinematicBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 0 )
 shape = SubResource( 1 )
 
 [node name="States" type="Node" parent="."]
