@@ -23,6 +23,8 @@ var mouse_rotation
 # check how long shoot button has been pressed
 var count = 0
 
+var camera
+
 # equip gun as soon as the player is loaded
 func _ready():
 	player = get_node(".")
@@ -30,6 +32,7 @@ func _ready():
 	player_animation = $AnimationTree.get("parameters/playback")
 	melee_cooldown = $WeaponTimers/MeleeCooldown
 	ranged_cooldown = $WeaponTimers/RangedCooldown
+	camera = $Camera
 
 func _physics_process(_delta):
 	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
@@ -116,3 +119,18 @@ func _on_MeleeCooldown_timeout():
 
 func _on_RangedCooldown_timeout():
 	ranged_cooldown.stop()
+
+func camera_limit(right_limit, left_limit):
+	camera.limit_right = right_limit
+	camera.limit_left = left_limit
+
+func camera_limit_reset():
+	camera_limit(100000, -100000)
+
+func camera_zoom(x, y):
+	camera.set_zoom(Vector2(x,y))
+
+
+
+
+

@@ -17,7 +17,6 @@
 [ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=16]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Special Nodes/SpawnLocation.tscn" type="PackedScene" id=2]
@@ -12,9 +12,10 @@
 [ext_resource path="res://Assets/Sprites/Weapons/sword slice.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Sprites/Weapons/Bow Shot.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Environment/Log.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Special Nodes/TransitionArea.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Characters/MrWalker.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Characters/MrWalker.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Special Nodes/TransitionArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Special Nodes/CameraLimiter.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -44,6 +45,7 @@ position = Vector2( 298, 213.564 )
 position = Vector2( 1550.86, 202.004 )
 
 [node name="Obstacles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="River" parent="Obstacles" instance=ExtResource( 4 )]
 position = Vector2( 1470, 220 )
@@ -133,6 +135,7 @@ __meta__ = {
 }
 
 [node name="Pickup Melee" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 580.256, 211.974 )
 scale = Vector2( 0.5136, 0.462272 )
 script = ExtResource( 8 )
@@ -170,15 +173,22 @@ hframes = 16
 [node name="Log" parent="." instance=ExtResource( 12 )]
 position = Vector2( 1508.76, 113.814 )
 
-[node name="Player" parent="." instance=ExtResource( 13 )]
+[node name="MrWalker" parent="." instance=ExtResource( 13 )]
+position = Vector2( 197.566, 213.215 )
+
+[node name="Player" parent="." instance=ExtResource( 14 )]
 position = Vector2( 286.732, 149.764 )
 
-[node name="Transition" parent="." instance=ExtResource( 14 )]
+[node name="Transition" parent="." instance=ExtResource( 15 )]
 position = Vector2( 1278.76, 211.974 )
 world_scene = "res://Scenes/Levels/Level1/Level1.tscn"
 
-[node name="MrWalker" parent="." instance=ExtResource( 15 )]
-position = Vector2( 197.566, 213.215 )
+[node name="CameraLimiter" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1248.76, 223.814 )
+right_limit = 1400
+
+[node name="CameraLimiter2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1718.76, 213.814 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
