@@ -1,20 +1,33 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/EnemyStates.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Idle.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Patrol.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Chase.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Attack.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
 [node name="Viking1" type="KinematicBody2D"]
 
+[node name="Sprite" type="Sprite" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 0 )
 shape = SubResource( 1 )
 
 [node name="States" type="Node" parent="."]
+script = ExtResource( 1 )
+START_STATE = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="States"]
+script = ExtResource( 2 )
 
-[node name="Patrolling" type="Node" parent="States"]
+[node name="Patrol" type="Node" parent="States"]
+script = ExtResource( 3 )
 
-[node name="Chasing" type="Node" parent="States"]
+[node name="Chase" type="Node" parent="States"]
+script = ExtResource( 4 )
 
 [node name="Attack" type="Node" parent="States"]
+script = ExtResource( 5 )
 
