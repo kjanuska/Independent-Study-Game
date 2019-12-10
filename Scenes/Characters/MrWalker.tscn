@@ -11,8 +11,7 @@
 [sub_resource type="CapsuleShape2D" id=1]
 height = 6.03484
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -44,7 +43,7 @@ tracks/0/keys = {
 "values": [ 4, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 22.6923, 23.0904 )
 
 [sub_resource type="Animation" id=6]
@@ -78,13 +77,13 @@ hframes = 5
 frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 2 )
+anims/idle = SubResource( 3 )
 anims/talk = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Text" type="Node2D" parent="."]
 script = ExtResource( 3 )

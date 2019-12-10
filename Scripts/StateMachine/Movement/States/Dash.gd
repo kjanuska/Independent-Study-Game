@@ -4,7 +4,7 @@ onready var dash_cooldown = owner.get_node("DashCooldown")
 
 func enter():
 	owner.get_node("Hurtbox").is_vulnerable = false
-	speed = 1500.0
+	speed = 1000.0
 	move_direction = get_input_direction()
 	player_animation.travel("dash")
 	owner.get_node("DashTimer").start()
