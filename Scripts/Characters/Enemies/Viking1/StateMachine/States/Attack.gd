@@ -1,4 +1,4 @@
-extends Node
+extends "../Motion.gd"
 
 func enter():
 	pass
