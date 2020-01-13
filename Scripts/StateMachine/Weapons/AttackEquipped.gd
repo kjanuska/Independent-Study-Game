@@ -20,8 +20,29 @@ func get_ranged_input():
 		if Input.is_action_just_released("shoot") && PlayerVar.charge_ranged:
 			owner.shoot_charged()
 			count = owner.count
-
+ 
 func get_melee_input():
 	if owner.melee_cooldown.is_stopped():
 		if Input.is_action_just_pressed("melee"):
 			owner.melee_attack()
+
+func get_ability_input():
+	if owner.ability_cooldown.is_stopped():
+		if Input.is_action_just_pressed("use_ability"):
+			owner.use_ability()
+
+func check_for_melee():
+	if Input.is_action_just_pressed("melee") && PlayerVar.previous_weapon_id != null && owner.anim_finished:
+		PlayerVar.temp_id = PlayerVar.current_weapon_id
+		PlayerVar.current_weapon_id = PlayerVar.previous_weapon_id
+		PlayerVar.previous_weapon_id = PlayerVar.temp_id
+		emit_signal("finished", "transition")
+
+func check_for_ranged():
+	if Input.is_action_just_pressed("shoot") && PlayerVar.previous_weapon_id != null && owner.anim_finished:
+		PlayerVar.temp_id = PlayerVar.current_weapon_id
+		PlayerVar.current_weapon_id = PlayerVar.previous_weapon_id
+		PlayerVar.previous_weapon_id = PlayerVar.temp_id
+		emit_signal("finished", "transition")
+
+

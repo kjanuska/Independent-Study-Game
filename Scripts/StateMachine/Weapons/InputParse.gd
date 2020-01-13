@@ -3,6 +3,7 @@ extends "../States.gd"
 var current_weapon
 var melee
 var ranged
+var ability
 var ammo
 var ammo_speed
 

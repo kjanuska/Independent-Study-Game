@@ -38,6 +38,12 @@ func _physics_process(_delta):
 	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+	if Input.is_action_just_pressed("ui_focus_next"):
+		$RadialMenu.show()
+		Engine.time_scale = 0.02
+	if Input.is_action_just_released("ui_focus_next"):
+		$RadialMenu.hide()
+		Engine.time_scale = 1
 
 func get_input_rotation():
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
@@ -113,6 +119,9 @@ func melee_attack():
 		anim_finished = false
 		weapon_animation_player.play("attack")
 		melee_cooldown.start()
+
+func use_ability():
+	current_weapon.activate()
 
 func _on_MeleeCooldown_timeout():
 	melee_cooldown.stop()

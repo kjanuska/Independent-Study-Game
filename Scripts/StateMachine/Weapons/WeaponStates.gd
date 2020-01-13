@@ -4,6 +4,7 @@ func _ready():
 	states_map = {
 		"melee": $Melee,
 		"ranged": $Ranged,
+		"ability": $Ability,
 		"empty": $Empty,
 		"transition": $Transition
 	}
