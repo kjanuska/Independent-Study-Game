@@ -7,7 +7,7 @@ func enter():
 	var projectile_rotation = owner.get_angle_to_player()
 	projectile.set_rotation(projectile_rotation)
 	projectile.set_global_position(owner.get_global_position())
-	owner.add_child(projectile)
+	owner.call_deferred("add_child", projectile)
 	var direction_vector = Vector2(PlayerVar.player.position.x - owner.position.x, PlayerVar.player.position.y - owner.position.y).normalized()
 	projectile.direction = direction_vector
 	projectile.set_speed(100)

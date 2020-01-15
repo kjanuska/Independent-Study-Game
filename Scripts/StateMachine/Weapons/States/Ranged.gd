@@ -6,7 +6,8 @@ func enter():
 	owner.weapon_animation_player.play("idle")
 
 func update(_delta):
-	.set_weapon_rotation()
+	.set_weapon_rotation(owner.current_weapon)
 	.get_ranged_input()
 	.check_for_melee()
+	.check_for_ability()
 

@@ -196,6 +196,8 @@ editor/display_folded = true
 
 [node name="RangedCooldown" type="Timer" parent="WeaponTimers"]
 
+[node name="AbilityCooldown" type="Timer" parent="."]
+
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
@@ -220,7 +222,7 @@ material = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 13
-frame = 13
+frame = 14
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "player_hurtbox",
@@ -229,7 +231,7 @@ editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -0.569174, -8.9407e-08 )
+position = Vector2( -0.569174, -8.9407e-008 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
@@ -285,7 +287,6 @@ script = ExtResource( 14 )
 script = ExtResource( 15 )
 
 [node name="Spawners" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="ProjectileSpawner" type="Node2D" parent="Spawners"]
 script = ExtResource( 16 )
@@ -293,28 +294,37 @@ script = ExtResource( 16 )
 [node name="WeaponSpawner" type="Node2D" parent="Spawners"]
 script = ExtResource( 17 )
 
+[node name="AbilitySpawner" type="Node2D" parent="Spawners"]
+script = ExtResource( 16 )
+
 [node name="Label" type="Label" parent="."]
 margin_left = -20.0
 margin_top = -40.0
 margin_right = 20.0
 margin_bottom = -26.0
 
-[node name="Control" type="Control" parent="."]
+[node name="RadialMenu" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="RadialMenu" type="Container" parent="Control"]
-margin_left = -33.0
-margin_top = -55.0
-margin_right = 33.0
-margin_bottom = -15.0
+[node name="Shield" type="Button" parent="RadialMenu"]
+margin_left = -70.0
+margin_top = -40.0
+margin_right = -19.0
+margin_bottom = -20.0
+text = "Shield"
 
-[node name="Button" type="Button" parent="Control/RadialMenu"]
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="Freeze" type="Button" parent="RadialMenu"]
+margin_left = 14.0
+margin_top = -40.0
+margin_right = 69.0
+margin_bottom = -20.0
+text = "Freeze"
 
 [connection signal="timeout" from="WeaponTimers/MeleeCooldown" to="." method="_on_MeleeCooldown_timeout"]
 [connection signal="timeout" from="WeaponTimers/RangedCooldown" to="." method="_on_RangedCooldown_timeout"]
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]
+[connection signal="pressed" from="RadialMenu/Shield" to="WeaponStates/Ability" method="_on_Shield_pressed"]
+[connection signal="pressed" from="RadialMenu/Freeze" to="WeaponStates/Ability" method="_on_Freeze_pressed"]

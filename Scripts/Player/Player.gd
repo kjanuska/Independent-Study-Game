@@ -6,13 +6,17 @@ var player_animation
 
 var melee_cooldown
 var ranged_cooldown
+var ability_cooldown
 var timer
 var weapon_animation_player
-var anim_finished = true
+var ability_animation_player
+var weapon_anim_finished = true
+var ability_anim_finished = true
 var is_flipped
 
 # weapon currently in hand
 var current_weapon
+var current_ability
 
 var ammo
 var ammo_speed
@@ -32,6 +36,7 @@ func _ready():
 	player_animation = $AnimationTree.get("parameters/playback")
 	melee_cooldown = $WeaponTimers/MeleeCooldown
 	ranged_cooldown = $WeaponTimers/RangedCooldown
+	ability_cooldown = $AbilityCooldown
 	camera = $Camera
 
 func _physics_process(_delta):
@@ -40,10 +45,10 @@ func _physics_process(_delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("ui_focus_next"):
 		$RadialMenu.show()
-		Engine.time_scale = 0.02
+#		Engine.time_scale = 0.02
 	if Input.is_action_just_released("ui_focus_next"):
 		$RadialMenu.hide()
-		Engine.time_scale = 1
+#		Engine.time_scale = 1
 
 func get_input_rotation():
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
@@ -56,30 +61,12 @@ func get_input_rotation():
 			current_weapon.get_node("Sprite").flip_v = is_flipped
 	return mouse_rotation
 
-"""
-below is old rotation code that rotated weapon around a point in the player's hand depending on which side
-the player was facing
-
-	if sign(mouse_rotation) == -1:
-		current_weapon.set_z_index(-1)
-	else:
-		current_weapon.set_z_index(1)
-
-	if side == 0:
-		if abs(mouse_rotation) <= PI/4:
-			side = 1
-		else:
-			current_weapon.position.x = -15
-			current_weapon.position.y = 5
-			get_node("Sprite").flip_h = true
-	elif side == 1:
-		if abs(mouse_rotation) >= (3 * PI)/4:
-			side = 0
-		else:
-			current_weapon.position.x = 10
-			current_weapon.position.y = 5
-			get_node("Sprite").flip_h = false
-"""
+func equip_ability():
+	current_ability = current_ability.instance()
+	player.add_child(current_ability)
+	current_ability.set_global_position(player.get_global_position())
+	timer = current_ability.time
+	ability_animation_player = current_ability.get_node("AnimationPlayer")
 
 func equip():
 	current_weapon = current_weapon.instance()
@@ -99,8 +86,8 @@ func shoot_weapon():
 	var direction_vector = (get_global_mouse_position() - self.get_global_position()).normalized()
 	projectile.direction = direction_vector
 	projectile.set_speed(ammo_speed)
-	if anim_finished:
-		anim_finished = false
+	if weapon_anim_finished:
+		weapon_anim_finished = false
 		ranged_cooldown.start()
 
 func shoot_charged():
@@ -115,8 +102,8 @@ func shoot_charged():
 		count = 0
 
 func melee_attack():
-	if anim_finished:
-		anim_finished = false
+	if weapon_anim_finished:
+		weapon_anim_finished = false
 		weapon_animation_player.play("attack")
 		melee_cooldown.start()
 
