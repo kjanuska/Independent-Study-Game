@@ -1,8 +1,6 @@
 extends KinematicBody2D
 
 func get_angle_to_player():
-	print(PlayerVar.player.rotation)
-	print(self.rotation)
 	return PlayerVar.player.get_rotation() + self.get_rotation()
 
 func _on_FindArea_body_entered(body):

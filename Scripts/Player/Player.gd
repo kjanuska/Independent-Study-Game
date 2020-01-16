@@ -45,10 +45,10 @@ func _physics_process(_delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("ui_focus_next"):
 		$RadialMenu.show()
-#		Engine.time_scale = 0.02
+		Engine.time_scale = 0.02
 	if Input.is_action_just_released("ui_focus_next"):
 		$RadialMenu.hide()
-#		Engine.time_scale = 1
+		Engine.time_scale = 1
 
 func get_input_rotation():
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
@@ -57,8 +57,8 @@ func get_input_rotation():
 	if abs(mouse_rotation) > PI/2:
 		is_flipped = true
 	get_node("Sprite").flip_h = is_flipped
-	if current_weapon:
-			current_weapon.get_node("Sprite").flip_v = is_flipped
+	if current_weapon != null:
+		current_weapon.get_node("Sprite").flip_v = is_flipped
 	return mouse_rotation
 
 func equip_ability():
@@ -115,6 +115,9 @@ func _on_MeleeCooldown_timeout():
 
 func _on_RangedCooldown_timeout():
 	ranged_cooldown.stop()
+	
+func _on_AbilityCooldown_timeout():
+	ability_cooldown.stop()
 
 func camera_limit(right_limit, left_limit):
 	camera.limit_right = right_limit
@@ -125,8 +128,5 @@ func camera_limit_reset():
 
 func camera_zoom(x, y):
 	camera.set_zoom(Vector2(x,y))
-
-
-
 
 

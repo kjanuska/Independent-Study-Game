@@ -14,7 +14,7 @@ onready var projectile_spawner = owner.get_node("Spawners").get_node("Projectile
 onready var ability_spawner = owner.get_node("Spawners").get_node("AbilitySpawner")
 
 func check_for_ability():
-	if owner.ability_cooldown.is_stopped() && owner.weapon_anim_finished && owner.current_ability != null:
+	if owner.ability_cooldown.is_stopped() && owner.ability_anim_finished && owner.current_ability != null:
 		if Input.is_action_just_pressed("use_ability"):
 			emit_signal("finished", "ability")
 

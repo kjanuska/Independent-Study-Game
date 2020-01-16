@@ -12,5 +12,5 @@ func get_random_direction():
 	return move_direction
 
 func move(speed_value, direction):
-	var motion = direction.normalized() * speed_value
+	var motion = direction.normalized() * speed_value * AbilityVar.slowdown
 	owner.move_and_slide(motion)

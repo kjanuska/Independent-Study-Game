@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 SignalManager="*res://Scripts/Special/Autoload/SignalManager.gd"
 PlayerVar="*res://Scripts/Special/Autoload/PlayerVar.gd"
 SceneChanger="*res://Scenes/Special Nodes/SceneChanger.tscn"
+AbilityVar="*res://Scripts/Abilities/AbilityVar.gd"
 
 [debug]
 

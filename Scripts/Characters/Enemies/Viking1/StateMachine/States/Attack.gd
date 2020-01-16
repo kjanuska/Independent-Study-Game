@@ -1,6 +1,6 @@
 extends "../Motion.gd"
 
-var ammo = preload("res://Scenes/Weapons/Ranged/Gun/Bullet.tscn")
+var ammo = preload("res://Scenes/Weapons/Ranged/Bow/Arrow.tscn")
 
 func enter():
 	var projectile = ammo.instance()
@@ -10,8 +10,7 @@ func enter():
 	owner.call_deferred("add_child", projectile)
 	var direction_vector = Vector2(PlayerVar.player.position.x - owner.position.x, PlayerVar.player.position.y - owner.position.y).normalized()
 	projectile.direction = direction_vector
-	projectile.set_speed(100)
-	projectile.set_z_index(1)
+	projectile.set_speed(500)
 
 func _on_AttackRange_body_exited(body):
 	emit_signal("finished", "chase")

@@ -27,14 +27,14 @@ func get_melee_input():
 			owner.melee_attack()
 
 func check_for_melee():
-	if Input.is_action_just_pressed("melee") && PlayerVar.previous_weapon_id != null && owner.anim_finished:
+	if Input.is_action_just_pressed("melee") && PlayerVar.previous_weapon_id != null && owner.weapon_anim_finished:
 		PlayerVar.temp_id = PlayerVar.current_weapon_id
 		PlayerVar.current_weapon_id = PlayerVar.previous_weapon_id
 		PlayerVar.previous_weapon_id = PlayerVar.temp_id
 		emit_signal("finished", "transition")
 
 func check_for_ranged():
-	if Input.is_action_just_pressed("shoot") && PlayerVar.previous_weapon_id != null && owner.anim_finished:
+	if Input.is_action_just_pressed("shoot") && PlayerVar.previous_weapon_id != null && owner.weapon_anim_finished:
 		PlayerVar.temp_id = PlayerVar.current_weapon_id
 		PlayerVar.current_weapon_id = PlayerVar.previous_weapon_id
 		PlayerVar.previous_weapon_id = PlayerVar.temp_id

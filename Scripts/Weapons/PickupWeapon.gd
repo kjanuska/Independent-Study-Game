@@ -16,6 +16,6 @@ func _input(_event):
 	if Input.is_action_pressed("Interact") && overlapping:
 		PlayerVar.previous_weapon_id = PlayerVar.current_weapon_id
 		PlayerVar.current_weapon_id = weapon_id
-		PlayerVar.player.anim_finished = true
+		PlayerVar.player.weapon_anim_finished = true
 		SignalManager.emit_signal("weapon_changed")
 		queue_free()

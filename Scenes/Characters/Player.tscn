@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Materials/Outline/outline.material" type="Material" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Scripts/StateMachine/Weapons/States/Transition.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/Weapons/Ranged/ProjectileSpawner.gd" type="Script" id=16]
 [ext_resource path="res://Scripts/Weapons/WeaponSpawner.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/Abilities/AbilitySpawner.gd" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
@@ -190,7 +191,6 @@ drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
 [node name="WeaponTimers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="MeleeCooldown" type="Timer" parent="WeaponTimers"]
 
@@ -222,7 +222,7 @@ material = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 13
-frame = 14
+frame = 13
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "player_hurtbox",
@@ -287,6 +287,7 @@ script = ExtResource( 14 )
 script = ExtResource( 15 )
 
 [node name="Spawners" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="ProjectileSpawner" type="Node2D" parent="Spawners"]
 script = ExtResource( 16 )
@@ -295,7 +296,7 @@ script = ExtResource( 16 )
 script = ExtResource( 17 )
 
 [node name="AbilitySpawner" type="Node2D" parent="Spawners"]
-script = ExtResource( 16 )
+script = ExtResource( 18 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -20.0
@@ -324,6 +325,7 @@ text = "Freeze"
 
 [connection signal="timeout" from="WeaponTimers/MeleeCooldown" to="." method="_on_MeleeCooldown_timeout"]
 [connection signal="timeout" from="WeaponTimers/RangedCooldown" to="." method="_on_RangedCooldown_timeout"]
+[connection signal="timeout" from="AbilityCooldown" to="." method="_on_AbilityCooldown_timeout"]
 [connection signal="timeout" from="DashTimer" to="MovementStates/Dash" method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="Hurtbox/InvincibilityPeriod" to="Hurtbox" method="_on_InvincibilityPeriod_timeout"]
 [connection signal="pressed" from="RadialMenu/Shield" to="WeaponStates/Ability" method="_on_Shield_pressed"]
