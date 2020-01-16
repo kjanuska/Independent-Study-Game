@@ -8,3 +8,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		PlayerVar.player.ability_anim_finished = true
 		PlayerVar.player.ability_cooldown.start()
 
+func _on_Area2D_area_entered(area):
+	area.queue_free()

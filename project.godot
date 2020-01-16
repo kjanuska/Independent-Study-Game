@@ -110,6 +110,20 @@ use_ability={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="walls"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemies"
+2d_physics/layer_4="destrucibles"
+2d_physics/layer_5="pickups"
+2d_physics/layer_6="NPCs"
+2d_physics/layer_7="shields"
+2d_physics/layer_8="player_projectiles"
+2d_physics/layer_9="player_weapons"
+2d_physics/layer_10="enemy_projectiles"
+2d_physics/layer_11="enemy_weapons"
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

@@ -12,7 +12,6 @@ func update(_delta):
 
 func _on_StopChaseArea_body_exited(body):
 	if body.get_name() == "Player":
-		print("lost")
 		emit_signal("finished", "idle")
 
 func _on_AttackRange_body_entered(body):
