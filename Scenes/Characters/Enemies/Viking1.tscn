@@ -8,16 +8,18 @@
 [ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Chase.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Attack.gd" type="Script" id=7]
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 12.6119
 
 [sub_resource type="CircleShape2D" id=3]
+radius = 12.309
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 18.5889
+radius = 28.9161
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=5]
 
 [node name="Viking1" type="KinematicBody2D"]
 collision_layer = 4
@@ -27,7 +29,7 @@ script = ExtResource( 1 )
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.625, 0.625 )
@@ -54,6 +56,8 @@ script = ExtResource( 7 )
 [node name="IdleTime" type="Timer" parent="Timers"]
 
 [node name="PatrolTime" type="Timer" parent="Timers"]
+
+[node name="ShotCooldown" type="Timer" parent="Timers"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_margin_h_enabled = false
@@ -87,7 +91,7 @@ scale = Vector2( 7.12, 7.16 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]

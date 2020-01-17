@@ -16,7 +16,7 @@ func get_ranged_input():
 			else:
 				owner.shoot_weapon()
 				count = 0
-	
+
 		if Input.is_action_just_released("shoot") && PlayerVar.charge_ranged:
 			owner.shoot_charged()
 			count = owner.count

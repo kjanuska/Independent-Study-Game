@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Abilities/Freeze.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "activate"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -42,8 +42,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
+[sub_resource type="Animation" id=2]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -111,6 +110,8 @@ scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 2 )
 
 [node name="FreezeArea" type="Area2D" parent="Sprite"]
+collision_layer = 2
+collision_mask = 1540
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/FreezeArea"]
 scale = Vector2( 2.79167, 1 )
@@ -118,8 +119,8 @@ polygon = PoolVector2Array( 0, 0, 32, -32, 64, -64, 128, -96, 192, -128, 192, 12
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/activate = SubResource( 2 )
-anims/idle = SubResource( 1 )
+anims/activate = SubResource( 1 )
+anims/idle = SubResource( 2 )
 
 [connection signal="timeout" from="Timers/FreezeTime" to="." method="_on_FreezeTime_timeout"]
 [connection signal="timeout" from="Timers/SlowdownTimer" to="." method="_on_SlowdownTimer_timeout"]

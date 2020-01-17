@@ -3,6 +3,9 @@ extends "../Motion.gd"
 var ammo = preload("res://Scenes/Weapons/Ranged/Bow/Arrow.tscn")
 
 func enter():
+	shoot()
+
+func shoot():
 	var projectile = ammo.instance()
 	var projectile_rotation = owner.get_angle_to_player()
 	projectile.set_rotation(projectile_rotation)
