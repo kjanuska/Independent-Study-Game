@@ -1,6 +1,8 @@
 extends Node2D
 
-onready var player = get_tree().get_root().get_node("Main").get_node("Player")
+export(NodePath) var player
 
 func _ready():
+#	= get_tree().get_node("Main").get_node("World").get_node("Player")
+	player = get_node(player)
 	player.position = self.position

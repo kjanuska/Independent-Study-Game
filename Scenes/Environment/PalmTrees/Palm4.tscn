@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/Backgrounds/palms.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.59882, 3.59869 )
+
+[node name="Palm4" type="Sprite"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -30 )
+hframes = 4
+frame = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( -0.30822, 7.97836 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -0.339653, 0.30822 )
+shape = SubResource( 1 )
+
