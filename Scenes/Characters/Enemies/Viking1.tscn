@@ -58,6 +58,7 @@ script = ExtResource( 7 )
 [node name="PatrolTime" type="Timer" parent="Timers"]
 
 [node name="ShotCooldown" type="Timer" parent="Timers"]
+wait_time = 0.7
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_margin_h_enabled = false
@@ -95,6 +96,7 @@ shape = SubResource( 5 )
 
 [connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]
+[connection signal="timeout" from="Timers/ShotCooldown" to="States/Attack" method="_on_ShotCooldown_timeout"]
 [connection signal="body_entered" from="FindArea" to="." method="_on_FindArea_body_entered"]
 [connection signal="body_exited" from="StopChaseArea" to="States/Chase" method="_on_StopChaseArea_body_exited"]
 [connection signal="body_entered" from="AttackRange" to="States/Chase" method="_on_AttackRange_body_entered"]
