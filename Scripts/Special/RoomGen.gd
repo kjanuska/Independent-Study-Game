@@ -192,7 +192,7 @@ func _get_random_rooms():
 func add_player():
 	remove_rooms()
 	player = Player.instance()
-	add_child(player)
+	get_tree().get_root().get_node("Main").get_node("World").add_child(player)
 	player.position = start_room.position
 	play_mode = true
 	SignalManager.emit_signal("scene_loaded")

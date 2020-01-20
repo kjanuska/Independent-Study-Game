@@ -195,7 +195,7 @@ position = Vector2( 420, -122.162 )
 position = Vector2( -350, 120.496 )
 
 [node name="SpawnLocation" parent="World" instance=ExtResource( 12 )]
-position = Vector2( 29.242, 49.75 )
+position = Vector2( 1010, 17.3629 )
 player = NodePath("../Player")
 
 [node name="Player" parent="World" instance=ExtResource( 13 )]
