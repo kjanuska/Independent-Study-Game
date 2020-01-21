@@ -6,9 +6,9 @@ var font = preload("res://Assets/Fonts/Roboto.tres")
 onready var Map = $TileMap
 
 var tile_size = 16  # size of a tile in the TileMap
-var num_rooms = 50  # number of rooms to generate
-var min_size = 6  # minimum room size (in tiles)
-var max_size = 8  # maximum room size (in tiles)
+var num_rooms = 10  # number of rooms to generate
+var min_size = 64  # minimum room size (in tiles)
+var max_size = 64  # maximum room size (in tiles)
 var hspread = 1000  # horizontal spread (in pixels)
 var cull = 0.5  # chance to cull room
 
@@ -41,9 +41,9 @@ func make_rooms():
 	for i in range(num_rooms):
 		var pos = Vector2(rand_range(-hspread, hspread), 0)
 		var r = Room.instance()
-		var w = 19
+		var w = 32
 #		min_size + randi() % (max_size - min_size)
-		var h = 15
+		var h = 32
 #		min_size + randi() % (max_size - min_size)
 		r.make_room(pos, Vector2(w, h) * tile_size)
 		$Rooms.add_child(r)
@@ -167,7 +167,7 @@ func make_map():
 				Map.set_cell(ul.x + x, ul.y + y, 0)
 		var place_room = load(regular_rooms[randi() % regular_rooms.size()])
 		place_room = place_room.instance()
-		get_parent().call_deferred("add_child" ,place_room)
+		get_parent().call_deferred("add_child", place_room)
 		place_room.position = pos
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, room.position.y, 0))
@@ -195,6 +195,7 @@ func add_player():
 	get_tree().get_root().get_node("Main").get_node("World").add_child(player)
 	player.position = start_room.position
 	play_mode = true
+	player.set_z_index(1)
 	SignalManager.emit_signal("scene_loaded")
 
 func carve_path(pos1, pos2):
