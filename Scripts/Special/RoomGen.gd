@@ -61,6 +61,7 @@ func make_rooms():
 	# generate a minimum spanning tree connecting the rooms
 	path = find_mst(room_positions)
 	yield(get_tree().create_timer(0.5), 'timeout')
+	
 	make_map()
 
 func _draw():
@@ -159,13 +160,19 @@ func make_map():
 	var corridors = []  # One corridor per connection
 #	var place_rooms = _get_random_rooms()
 	for room in $Rooms.get_children():
-		var s = (room.size / tile_size).floor()
 		var pos = room.position
+		var s = (room.size / tile_size).floor()
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 - 1):
 			for y in range(2, s.y * 2 - 1):
 				Map.set_cell(ul.x + x, ul.y + y, 0)
-		var place_room = load(regular_rooms[randi() % regular_rooms.size()])
+		var place_room
+		if pos == start_room.position:
+			place_room = load(start_rooms[randi() % start_rooms.size()])
+		elif pos == end_room.position:
+			place_room = load(end_rooms[randi() % end_rooms.size()])
+		else:
+			place_room = load(regular_rooms[randi() % regular_rooms.size()])
 		place_room = place_room.instance()
 		get_parent().call_deferred("add_child", place_room)
 		place_room.position = pos
