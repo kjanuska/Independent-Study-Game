@@ -105,7 +105,7 @@ script = ExtResource( 1 )
 modulate = Color( 1, 1, 1, 0.266667 )
 position = Vector2( 0, -3.63798e-12 )
 texture = ExtResource( 2 )
-hframes = 7
+hframes = 13
 
 [node name="Area2D" type="Area2D" parent="Sprite"]
 rotation = -1.5708
