@@ -10,3 +10,4 @@ format = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+
