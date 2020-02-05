@@ -10,3 +10,18 @@ format = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+
+[node name="connectors" type="Node2D" parent="."]
+
+[node name="top" type="Position2D" parent="connectors"]
+position = Vector2( 0, -512 )
+
+[node name="right" type="Position2D" parent="connectors"]
+position = Vector2( 512, 0 )
+
+[node name="bottom" type="Position2D" parent="connectors"]
+position = Vector2( 0, 512 )
+
+[node name="left" type="Position2D" parent="connectors"]
+position = Vector2( -512, 0 )
+
