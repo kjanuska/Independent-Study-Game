@@ -6,9 +6,9 @@ var font = preload("res://Assets/Fonts/Roboto.tres")
 onready var Map = $TileMap
 
 var tile_size = 16  # size of a tile in the TileMap
-var num_rooms = 50  # number of rooms to generate
-var min_size = 6  # minimum room size (in tiles)
-var max_size = 8  # maximum room size (in tiles)
+var num_rooms = 10  # number of rooms to generate
+var min_size = 64  # minimum room size (in tiles)
+var max_size = 64  # maximum room size (in tiles)
 var hspread = 1000  # horizontal spread (in pixels)
 var cull = 0.5  # chance to cull room
 
@@ -41,9 +41,9 @@ func make_rooms():
 	for i in range(num_rooms):
 		var pos = Vector2(rand_range(-hspread, hspread), 0)
 		var r = Room.instance()
-		var w = 19
+		var w = 32
 #		min_size + randi() % (max_size - min_size)
-		var h = 15
+		var h = 32
 #		min_size + randi() % (max_size - min_size)
 		r.make_room(pos, Vector2(w, h) * tile_size)
 		$Rooms.add_child(r)
@@ -51,16 +51,19 @@ func make_rooms():
 	yield(get_tree().create_timer(1.1), 'timeout')
 	# cull rooms
 	var room_positions = []
+	var room_nodes = []
 	for room in $Rooms.get_children():
 		if randf() < cull:
 			room.queue_free()
 		else:
 			room.mode = RigidBody2D.MODE_STATIC
 			room_positions.append(Vector3(room.position.x, room.position.y, 0))
+			room_nodes.append(room)
 	yield(get_tree(), 'idle_frame')
 	# generate a minimum spanning tree connecting the rooms
-	path = find_mst(room_positions)
+	path = find_mst(room_positions, room_nodes)
 	yield(get_tree().create_timer(0.5), 'timeout')
+	
 	make_map()
 
 func _draw():
@@ -84,7 +87,7 @@ func _draw():
 func _process(delta):
 	update()
 
-func find_mst(nodes):
+func find_mst(node_locations, nodes):
 	# Prim's algorithm
 	# Given an array of positions (nodes), generates a minimum
 	# spanning tree
@@ -92,30 +95,32 @@ func find_mst(nodes):
 	
 	# Initialize the AStar and add the first point
 	var path = AStar.new()
-	path.add_point(path.get_available_point_id(), nodes.pop_front())
+	path.add_point(path.get_available_point_id(), node_locations.pop_front())
 	
 	# Repeat until no more nodes remain
-	while nodes:
-		var min_dist = INF  # Minimum distance so far
-		var min_p = null  # Position of that node
-		var p = null  # Current position
+	while node_locations:
+		var min_dist_to_node = INF  # Minimum distance to node so far
+		var min_node_position = null  # Position of that node
+		var node_position = null  # Current position of node
+		var current_connectors = []
 		# Loop through points in path
 		for p1 in path.get_points():
 			p1 = path.get_point_position(p1)
 			# Loop through the remaining nodes
-			for p2 in nodes:
+			current_connectors.append(nodes)
+			for p2 in node_locations:
 				# If the node is closer, make it the closest
-				if p1.distance_to(p2) < min_dist:
-					min_dist = p1.distance_to(p2)
-					min_p = p2
-					p = p1
+				if p1.distance_to(p2) < min_dist_to_node:
+					min_dist_to_node = p1.distance_to(p2)
+					min_node_position = p2
+					node_position = p1
 		# Insert the resulting node into the path and add
 		# its connection
 		var n = path.get_available_point_id()
-		path.add_point(n, min_p)
-		path.connect_points(path.get_closest_point(p), n)
+		path.add_point(n, min_node_position)
+		path.connect_points(path.get_closest_point(node_position), n)
 		# Remove the node from the array so it isn't visited again
-		nodes.erase(min_p)
+		node_locations.erase(min_node_position)
 	return path
 
 func _get_files_in_directory():
@@ -159,15 +164,21 @@ func make_map():
 	var corridors = []  # One corridor per connection
 #	var place_rooms = _get_random_rooms()
 	for room in $Rooms.get_children():
-		var s = (room.size / tile_size).floor()
 		var pos = room.position
+		var s = (room.size / tile_size).floor()
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 - 1):
 			for y in range(2, s.y * 2 - 1):
 				Map.set_cell(ul.x + x, ul.y + y, 0)
-		var place_room = load(regular_rooms[randi() % regular_rooms.size()])
+		var place_room
+		if pos == start_room.position:
+			place_room = load(start_rooms[randi() % start_rooms.size()])
+		elif pos == end_room.position:
+			place_room = load(end_rooms[randi() % end_rooms.size()])
+		else:
+			place_room = load(regular_rooms[randi() % regular_rooms.size()])
 		place_room = place_room.instance()
-		get_parent().call_deferred("add_child" ,place_room)
+		get_parent().call_deferred("add_child", place_room)
 		place_room.position = pos
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, room.position.y, 0))
@@ -192,9 +203,10 @@ func _get_random_rooms():
 func add_player():
 	remove_rooms()
 	player = Player.instance()
-	add_child(player)
+	get_tree().get_root().get_node("Main").get_node("World").add_child(player)
 	player.position = start_room.position
 	play_mode = true
+	player.set_z_index(1)
 	SignalManager.emit_signal("scene_loaded")
 
 func carve_path(pos1, pos2):

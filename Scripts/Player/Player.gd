@@ -32,7 +32,6 @@ var camera
 # equip gun as soon as the player is loaded
 func _ready():
 	player = get_node(".")
-	player.set_z_index(1)
 	player_animation = $AnimationTree.get("parameters/playback")
 	melee_cooldown = $WeaponTimers/MeleeCooldown
 	ranged_cooldown = $WeaponTimers/RangedCooldown

@@ -13,4 +13,4 @@ func _ready():
 	SignalManager.connect("scene_changed", self, "_scene_changed")
 
 func _scene_changed():
-	player = get_tree().get_current_scene().get_node("Player")
+	player = get_tree().get_current_scene().get_node("World").get_node("Player")
