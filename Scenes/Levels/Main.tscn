@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Special Nodes/SpawnLocation.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Special Nodes/TransitionArea.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Special Nodes/CameraLimiter.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Characters/Enemies/Viking1.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -138,6 +139,8 @@ __meta__ = {
 editor/display_folded = true
 position = Vector2( 580.256, 211.974 )
 scale = Vector2( 0.5136, 0.462272 )
+collision_layer = 16
+collision_mask = 3
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Melee"]
@@ -156,6 +159,8 @@ hframes = 6
 editor/display_folded = true
 position = Vector2( 1099.06, 211.151 )
 scale = Vector2( 0.520005, 0.480001 )
+collision_layer = 16
+collision_mask = 3
 script = ExtResource( 8 )
 weapon_id = 10
 
@@ -175,9 +180,11 @@ position = Vector2( 1508.76, 113.814 )
 
 [node name="MrWalker" parent="." instance=ExtResource( 13 )]
 position = Vector2( 197.566, 213.215 )
+collision_mask = 47
 
 [node name="Player" parent="." instance=ExtResource( 14 )]
-position = Vector2( 286.732, 149.764 )
+position = Vector2( 298.758, 153.814 )
+collision_mask = 61
 
 [node name="Transition" parent="." instance=ExtResource( 15 )]
 position = Vector2( 1278.76, 211.974 )
@@ -189,6 +196,10 @@ right_limit = 1400
 
 [node name="CameraLimiter2" parent="." instance=ExtResource( 16 )]
 position = Vector2( 1718.76, 213.814 )
+
+[node name="Viking1" parent="." instance=ExtResource( 17 )]
+position = Vector2( 493.661, 255.109 )
+collision_mask = 47
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

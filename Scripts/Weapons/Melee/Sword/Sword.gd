@@ -10,4 +10,4 @@ func _on_Area2D_area_entered(area):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "attack":
 		$AnimationPlayer.play("idle")
-		PlayerVar.player.anim_finished = true
+		PlayerVar.player.weapon_anim_finished = true

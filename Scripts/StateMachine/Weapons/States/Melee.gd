@@ -5,10 +5,7 @@ func enter():
 	owner.get_node("WeaponTimers").get_node("MeleeCooldown").wait_time = owner.timer
 
 func update(_delta):
-	.set_weapon_rotation()
+	.set_weapon_rotation(owner.current_weapon)
 	.get_melee_input()
-	if Input.is_action_just_pressed("shoot") && PlayerVar.previous_weapon_id != null && owner.anim_finished:
-		PlayerVar.temp_id = PlayerVar.current_weapon_id
-		PlayerVar.current_weapon_id = PlayerVar.previous_weapon_id
-		PlayerVar.previous_weapon_id = PlayerVar.temp_id
-		emit_signal("finished", "transition")
+	.check_for_ranged()
+	.check_for_ability()

@@ -8,8 +8,8 @@ func _ready():
 	set_as_toplevel(true)
 
 func _physics_process(delta):
-	position.x += direction.x * speed * delta
-	position.y += direction.y * speed * delta
+	position.x += direction.x * speed * delta * AbilityVar.slowdown
+	position.y += direction.y * speed * delta * AbilityVar.slowdown
 
 func set_speed(speed_value):
 	speed = speed_value

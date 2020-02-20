@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 SignalManager="*res://Scripts/Special/Autoload/SignalManager.gd"
 PlayerVar="*res://Scripts/Special/Autoload/PlayerVar.gd"
 SceneChanger="*res://Scenes/Special Nodes/SceneChanger.tscn"
+AbilityVar="*res://Scripts/Abilities/AbilityVar.gd"
 
 [debug]
 
@@ -52,6 +53,11 @@ ui_accept={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_focus_next={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_left={
@@ -98,6 +104,25 @@ dash={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+use_ability={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="walls"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemies"
+2d_physics/layer_4="destrucibles"
+2d_physics/layer_5="pickups"
+2d_physics/layer_6="NPCs"
+2d_physics/layer_7="shields"
+2d_physics/layer_8="player_projectiles"
+2d_physics/layer_9="player_weapons"
+2d_physics/layer_10="enemy_projectiles"
+2d_physics/layer_11="enemy_weapons"
 
 [rendering]
 

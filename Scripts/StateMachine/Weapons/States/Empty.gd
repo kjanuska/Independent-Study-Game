@@ -8,6 +8,7 @@ func enter():
 
 func update(_delta):
 	.get_input_rotation()
+	.check_for_ability()
 
 func handle_input(event):
 	return .handle_input(event)

@@ -15,6 +15,7 @@ func enter():
 # ranged in 10s
 # 10 = bow
 # 11 = gun
+
 func _assign_id(id):
 	if id < 10:
 		match id:
@@ -43,3 +44,12 @@ func _assign_id(id):
 		owner.get_node("WeaponTimers").get_node("RangedCooldown").wait_time = wait_time
 		owner.timer = owner.get_node("WeaponTimers").get_node("RangedCooldown")
 		emit_signal("finished", "ranged")
+
+
+
+
+
+
+
+
+

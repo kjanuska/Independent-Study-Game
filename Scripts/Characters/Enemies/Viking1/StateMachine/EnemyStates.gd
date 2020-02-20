@@ -1,12 +1,12 @@
 extends "StateMachine.gd"
 
 func _ready():
+	randomize()
 	states_map = {
-		"melee": $Melee,
-		"ranged": $Ranged,
-		"ability": $Ability,
-		"empty": $Empty,
-		"transition": $Transition
+		"idle": $Idle,
+		"patrol": $Patrol,
+		"chase": $Chase,
+		"attack": $Attack
 	}
 
 func _change_state(state_name):
