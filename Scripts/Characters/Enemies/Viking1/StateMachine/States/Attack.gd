@@ -7,7 +7,8 @@ func enter():
 	pass
 
 func update(_delta):
-	shoot()
+	if AbilityVar.slowdown != 0:
+		shoot()
 
 func shoot():
 	if can_shoot:

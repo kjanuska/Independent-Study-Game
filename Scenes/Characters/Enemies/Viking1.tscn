@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scripts/Characters/Enemies/Viking1/Viking.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/EnemyStates.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Idle.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Patrol.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Chase.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Attack.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Characters/Enemies/Viking1.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/Viking.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/EnemyStates.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Idle.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Patrol.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Chase.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Attack.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -21,83 +22,87 @@ radius = 28.9161
 
 [sub_resource type="CapsuleShape2D" id=5]
 
-[node name="Viking1" type="KinematicBody2D"]
-collision_layer = 4
-collision_mask = 495
+[node name="Viking" type="Navigation2D"]
 script = ExtResource( 1 )
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Viking1" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 495
+script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="Hurtbox" type="Area2D" parent="Viking1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viking1/Hurtbox"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="Viking1"]
 scale = Vector2( 0.625, 0.625 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
-[node name="States" type="Node" parent="."]
-script = ExtResource( 3 )
-START_STATE = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="States"]
+[node name="States" type="Node" parent="Viking1"]
 script = ExtResource( 4 )
+START_STATE = NodePath("../../../Viking/Viking1/States/Idle")
 
-[node name="Patrol" type="Node" parent="States"]
+[node name="Idle" type="Node" parent="Viking1/States"]
 script = ExtResource( 5 )
 
-[node name="Chase" type="Node" parent="States"]
+[node name="Patrol" type="Node" parent="Viking1/States"]
 script = ExtResource( 6 )
 
-[node name="Attack" type="Node" parent="States"]
+[node name="Chase" type="Node" parent="Viking1/States"]
 script = ExtResource( 7 )
+SPEED = null
 
-[node name="Timers" type="Node" parent="."]
+[node name="Attack" type="Node" parent="Viking1/States"]
+script = ExtResource( 8 )
 
-[node name="IdleTime" type="Timer" parent="Timers"]
+[node name="Timers" type="Node" parent="Viking1"]
 
-[node name="PatrolTime" type="Timer" parent="Timers"]
+[node name="IdleTime" type="Timer" parent="Viking1/Timers"]
 
-[node name="ShotCooldown" type="Timer" parent="Timers"]
+[node name="PatrolTime" type="Timer" parent="Viking1/Timers"]
+
+[node name="ShotCooldown" type="Timer" parent="Viking1/Timers"]
 wait_time = 0.7
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Viking1"]
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
-[node name="FindArea" type="Area2D" parent="."]
+[node name="FindArea" type="Area2D" parent="Viking1"]
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FindArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viking1/FindArea"]
 scale = Vector2( 11.1006, 10.9816 )
 shape = SubResource( 2 )
 
-[node name="StopChaseArea" type="Area2D" parent="."]
+[node name="StopChaseArea" type="Area2D" parent="Viking1"]
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StopChaseArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viking1/StopChaseArea"]
 scale = Vector2( 17.08, 17.08 )
 shape = SubResource( 3 )
 
-[node name="AttackRange" type="Area2D" parent="."]
+[node name="AttackRange" type="Area2D" parent="Viking1"]
 scale = Vector2( 0.68, 0.68 )
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viking1/AttackRange"]
 modulate = Color( 0.886275, 0.235294, 0.235294, 1 )
 self_modulate = Color( 0.796078, 0.262745, 0.262745, 1 )
 scale = Vector2( 7.12, 7.16 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viking1"]
 shape = SubResource( 5 )
 
-[connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
-[connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]
-[connection signal="timeout" from="Timers/ShotCooldown" to="States/Attack" method="_on_ShotCooldown_timeout"]
-[connection signal="body_entered" from="FindArea" to="." method="_on_FindArea_body_entered"]
-[connection signal="body_exited" from="StopChaseArea" to="States/Chase" method="_on_StopChaseArea_body_exited"]
-[connection signal="body_entered" from="AttackRange" to="States/Chase" method="_on_AttackRange_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="States/Attack" method="_on_AttackRange_body_exited"]
+[connection signal="timeout" from="Viking1/Timers/IdleTime" to="Viking1/States/Idle" method="_on_IdleTime_timeout"]
+[connection signal="timeout" from="Viking1/Timers/PatrolTime" to="Viking1/States/Patrol" method="_on_PatrolTime_timeout"]
+[connection signal="timeout" from="Viking1/Timers/ShotCooldown" to="Viking1/States/Attack" method="_on_ShotCooldown_timeout"]
+[connection signal="body_entered" from="Viking1/FindArea" to="Viking1" method="_on_FindArea_body_entered"]
+[connection signal="body_exited" from="Viking1/StopChaseArea" to="Viking1/States/Chase" method="_on_StopChaseArea_body_exited"]
+[connection signal="body_entered" from="Viking1/AttackRange" to="Viking1/States/Chase" method="_on_AttackRange_body_entered"]
+[connection signal="body_exited" from="Viking1/AttackRange" to="Viking1/States/Attack" method="_on_AttackRange_body_exited"]

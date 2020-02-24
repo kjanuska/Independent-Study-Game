@@ -28,6 +28,7 @@ extents = Vector2( 31.4229, 34.4232 )
 [node name="Main" type="Node"]
 
 [node name="Beach" type="TileMap" parent="."]
+editor/display_folded = true
 position = Vector2( -277.187, -168.412 )
 scale = Vector2( 1.04173, 0.895032 )
 tile_set = ExtResource( 1 )
@@ -240,11 +241,8 @@ position = Vector2( 1240, -50 )
 [node name="MrWalker" parent="World" instance=ExtResource( 18 )]
 position = Vector2( -71.192, 49.401 )
 
-[node name="Viking1" parent="." instance=ExtResource( 17 )]
-position = Vector2( 493.661, 255.109 )
-
-[node name="Viking2" parent="." instance=ExtResource( 19 )]
-position = Vector2( 451.124, -32.8217 )
+[node name="Viking1" parent="." instance=ExtResource( 19 )]
+position = Vector2( 441.347, -34.9167 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

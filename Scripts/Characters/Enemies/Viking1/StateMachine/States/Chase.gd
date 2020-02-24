@@ -1,14 +1,16 @@
 extends "../Motion.gd"
 
-export(int) var SPEED = 200
 var direction
+
+export(int) var SPEED = 200.0
 
 func enter():
 	pass
 
 func update(_delta):
-	direction = Vector2(PlayerVar.player.position.x - owner.position.x, PlayerVar.player.position.y - owner.position.y)
-	.move(SPEED, direction)
+	var walk_distance = character_speed * delta
+	
+	move_along_path(walk_distance)
 
 func _on_StopChaseArea_body_exited(body):
 	if body.get_name() == "Player":
