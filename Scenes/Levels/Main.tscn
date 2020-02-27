@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://TileMaps/Beach Level/beach.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/Weapons/PickupWeapon.gd" type="Script" id=2]
@@ -24,6 +24,11 @@
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.4229, 34.4232 )
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( -237.719, 61.1689, -262.161, 31.8389, -275.429, -4.47445, -122.494, -50.5645, 135.191, -49.8662, 212.008, 176.394, 222.483, -101.543, 130.303, -95.2578, -318.027, 57.6773, -294.982, 26.9506, -198.612, -86.8778, -118.304, -80.5928, -240.512, 119.829, -591.774, 158.237, -311.044, 98.1806, -614.819, -12.8545, -451.409, -17.0445, -429.063, -49.1678, -291.491, -95.2578, -295.681, -12.1561 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 5, 4, 7 ), PoolIntArray( 1, 0, 8, 9 ), PoolIntArray( 10, 6, 7, 11 ), PoolIntArray( 12, 0, 5 ), PoolIntArray( 12, 5, 13 ), PoolIntArray( 14, 12, 13 ), PoolIntArray( 14, 13, 15, 16, 8 ), PoolIntArray( 8, 16, 17, 18, 19 ), PoolIntArray( 10, 11, 3, 2 ), PoolIntArray( 18, 10, 2, 19 ), PoolIntArray( 8, 19, 9 ) ]
+outlines = [ PoolVector2Array( -451.409, -17.0445, -429.063, -49.1678, -291.491, -95.2578, -198.612, -86.8778, 222.483, -101.543, 212.008, 176.394, -591.774, 158.237, -614.819, -12.8545 ), PoolVector2Array( -318.027, 57.6773, -311.044, 98.1806, -240.512, 119.829, -237.719, 61.1689 ), PoolVector2Array( -295.681, -12.1561, -294.982, 26.9506, -262.161, 31.8389, -275.429, -4.47445 ), PoolVector2Array( -118.304, -80.5928, -122.494, -50.5645, 135.191, -49.8662, 130.303, -95.2578 ) ]
 
 [node name="Main" type="Node"]
 
@@ -243,6 +248,10 @@ position = Vector2( -71.192, 49.401 )
 
 [node name="Viking1" parent="." instance=ExtResource( 19 )]
 position = Vector2( 441.347, -34.9167 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Viking1"]
+position = Vector2( -1.39667, 0 )
+navpoly = SubResource( 3 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

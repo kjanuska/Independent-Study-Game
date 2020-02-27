@@ -8,6 +8,9 @@ var temp_id
 
 var charge_ranged
 
+# enemy variables
+var chasing
+
 func _ready():
 	_scene_changed()
 	SignalManager.connect("scene_changed", self, "_scene_changed")

@@ -1,7 +1,9 @@
 extends "States.gd"
 
-onready var idle_time = owner.get_node("Timers/IdleTime")
-onready var patrol_time = owner.get_node("Timers/PatrolTime")
+onready var idle_time = owner.get_node("Viking1/Timers/IdleTime")
+onready var patrol_time = owner.get_node("Viking1/Timers/PatrolTime")
+
+onready var enemy = owner.get_node("Viking1")
 
 var move_direction = Vector2()
 
@@ -13,4 +15,4 @@ func get_random_direction():
 
 func move(speed_value, direction):
 	var motion = direction.normalized() * speed_value * AbilityVar.slowdown
-	owner.move_and_slide(motion)
+	enemy.move_and_slide(motion)

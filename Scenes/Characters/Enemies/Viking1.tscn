@@ -41,7 +41,7 @@ texture = ExtResource( 3 )
 
 [node name="States" type="Node" parent="Viking1"]
 script = ExtResource( 4 )
-START_STATE = NodePath("../../../Viking/Viking1/States/Idle")
+START_STATE = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="Viking1/States"]
 script = ExtResource( 5 )
@@ -51,7 +51,6 @@ script = ExtResource( 6 )
 
 [node name="Chase" type="Node" parent="Viking1/States"]
 script = ExtResource( 7 )
-SPEED = null
 
 [node name="Attack" type="Node" parent="Viking1/States"]
 script = ExtResource( 8 )
@@ -64,6 +63,8 @@ script = ExtResource( 8 )
 
 [node name="ShotCooldown" type="Timer" parent="Viking1/Timers"]
 wait_time = 0.7
+
+[node name="CheckLocation" type="Timer" parent="Viking1/Timers"]
 
 [node name="Camera2D" type="Camera2D" parent="Viking1"]
 drag_margin_h_enabled = false
@@ -99,9 +100,12 @@ shape = SubResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Viking1"]
 shape = SubResource( 5 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Viking1"]
+
 [connection signal="timeout" from="Viking1/Timers/IdleTime" to="Viking1/States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Viking1/Timers/PatrolTime" to="Viking1/States/Patrol" method="_on_PatrolTime_timeout"]
 [connection signal="timeout" from="Viking1/Timers/ShotCooldown" to="Viking1/States/Attack" method="_on_ShotCooldown_timeout"]
+[connection signal="timeout" from="Viking1/Timers/CheckLocation" to="." method="_on_CheckLocation_timeout"]
 [connection signal="body_entered" from="Viking1/FindArea" to="Viking1" method="_on_FindArea_body_entered"]
 [connection signal="body_exited" from="Viking1/StopChaseArea" to="Viking1/States/Chase" method="_on_StopChaseArea_body_exited"]
 [connection signal="body_entered" from="Viking1/AttackRange" to="Viking1/States/Chase" method="_on_AttackRange_body_entered"]

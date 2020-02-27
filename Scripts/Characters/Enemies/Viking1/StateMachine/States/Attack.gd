@@ -13,15 +13,15 @@ func update(_delta):
 func shoot():
 	if can_shoot:
 		var projectile = ammo.instance()
-		var projectile_rotation = owner.get_angle_to_player()
+		var projectile_rotation = enemy.get_angle_to_player()
 		projectile.set_rotation(projectile_rotation)
-		projectile.set_global_position(owner.get_global_position())
-		owner.call_deferred("add_child", projectile)
-		var direction_vector = Vector2(PlayerVar.player.position.x - owner.position.x, PlayerVar.player.position.y - owner.position.y).normalized()
+		projectile.set_global_position(enemy.get_global_position())
+		enemy.call_deferred("add_child", projectile)
+		var direction_vector = Vector2(PlayerVar.player.position.x - owner.get_node("Viking1").position.x, PlayerVar.player.position.y - owner.get_node("Viking1").position.y).normalized()
 		projectile.direction = direction_vector
 		projectile.set_speed(500)
 		can_shoot = false
-		owner.get_node("Timers").get_node("ShotCooldown").start()
+		enemy.get_node("Timers").get_node("ShotCooldown").start()
 
 func _on_AttackRange_body_exited(body):
 	emit_signal("finished", "chase")
