@@ -40,6 +40,7 @@ func _ready():
 
 func _physics_process(_delta):
 	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
+	write_movement_path()
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("ui_focus_next"):
@@ -127,5 +128,24 @@ func camera_limit_reset():
 
 func camera_zoom(x, y):
 	camera.set_zoom(Vector2(x,y))
+
+var movement_path : Array
+
+func write_movement_path():
+	if $MovementStates.current_state.name != "Idle":
+		movement_path.append(player.position)
+		$MovementTimer.start()
+	else:
+		$MovementTimer.stop()
+
+func _on_movement_timer_timeout():
+	movement_path.append(player.position)
+	print("add")
+	$MovementTimer.start()
+
+
+
+
+
 
 

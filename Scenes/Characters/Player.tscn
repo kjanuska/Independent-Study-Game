@@ -208,6 +208,8 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="MovementTimer" type="Timer" parent="."]
+
 [node name="Charged" type="Popup" parent="."]
 editor/display_folded = true
 margin_right = 40.0
@@ -253,7 +255,6 @@ active = true
 parameters/playback = SubResource( 25 )
 
 [node name="MovementStates" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 START_STATE = NodePath("Idle")
 
