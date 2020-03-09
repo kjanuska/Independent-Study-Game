@@ -134,7 +134,8 @@ var movement_path : Array
 func write_movement_path():
 	if $MovementStates.current_state.name != "Idle":
 		movement_path.append(player.position)
-		$MovementTimer.start()
+		if $MovementTimer.is_stopped():
+			$MovementTimer.start()
 	else:
 		$MovementTimer.stop()
 
