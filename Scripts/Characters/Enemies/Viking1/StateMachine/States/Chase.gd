@@ -8,7 +8,8 @@ func enter():
 
 func update(_delta):
 	direction = Vector2(PlayerVar.player.position.x - owner.position.x, PlayerVar.player.position.y - owner.position.y)
-	.move(SPEED, direction)
+	if !(direction.length() < 50):
+		.move(SPEED, direction)
 
 func _on_StopChaseArea_body_exited(body):
 	if body.get_name() == "Player":
@@ -16,4 +17,5 @@ func _on_StopChaseArea_body_exited(body):
 
 func _on_AttackRange_body_entered(body):
 	if body.get_name() == "Player":
+		print("attack")
 		emit_signal("finished", "attack")
