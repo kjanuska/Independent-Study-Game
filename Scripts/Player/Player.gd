@@ -29,6 +29,10 @@ var count = 0
 
 var camera
 
+const scent_scene = preload("res://Scenes/Special Nodes/Scent.tscn")
+
+var scent_trail = []
+
 # equip gun as soon as the player is loaded
 func _ready():
 	player = get_node(".")
@@ -37,6 +41,7 @@ func _ready():
 	ranged_cooldown = $WeaponTimers/RangedCooldown
 	ability_cooldown = $AbilityCooldown
 	camera = $Camera
+	$ScentTimer.connect("timeout", self, "add_scent")
 
 func _physics_process(_delta):
 	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
@@ -60,6 +65,14 @@ func get_input_rotation():
 	if current_weapon != null:
 		current_weapon.get_node("Sprite").flip_v = is_flipped
 	return mouse_rotation
+
+func add_scent():
+	var scent = scent_scene.instance()
+	scent.player = player
+	scent.position = player.get_global_position()
+
+	player.add_child(scent)
+	scent_trail.push_front(scent)
 
 func equip_ability():
 	current_ability = current_ability.instance()

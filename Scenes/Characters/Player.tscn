@@ -210,6 +210,10 @@ one_shot = true
 
 [node name="MovementTimer" type="Timer" parent="."]
 
+[node name="ScentTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [node name="Charged" type="Popup" parent="."]
 editor/display_folded = true
 margin_right = 40.0
@@ -235,7 +239,7 @@ editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -0.569174, -8.9407e-08 )
+position = Vector2( -0.569174, -8.9407e-008 )
 shape = SubResource( 3 )
 
 [node name="InvincibilityPeriod" type="Timer" parent="Hurtbox"]
