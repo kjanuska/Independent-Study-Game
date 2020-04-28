@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://TileMaps/Beach Level/beach.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/Weapons/PickupWeapon.gd" type="Script" id=2]
@@ -13,9 +13,12 @@
 [ext_resource path="res://Environment/PalmTrees/Palm4.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Special Nodes/SpawnLocation.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Characters/MrWalker.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Characters/Enemies/Viking1.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Characters/MrWalker.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Characters/Enemies/Viking1.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -202,31 +205,45 @@ player = NodePath("../Player")
 [node name="Player" parent="World" instance=ExtResource( 13 )]
 position = Vector2( 10, 27.8969 )
 
+[node name="Viking1" parent="World" instance=ExtResource( 14 )]
+position = Vector2( 450, 22 )
+
+[node name="Target" parent="World" instance=ExtResource( 15 )]
+editor/display_folded = true
+position = Vector2( 1282.1, 38.19 )
+
+[node name="Hurtbox" parent="World/Target" index="4"]
+river = NodePath("../../Obstacles/River")
+falling_log = NodePath("../../Log")
+
 [node name="Obstacles" type="Node2D" parent="World"]
 position = Vector2( -268.758, -163.814 )
 
+[node name="River" parent="World/Obstacles" instance=ExtResource( 16 )]
+position = Vector2( 1470, 220 )
+
 [node name="Rocks" type="Node2D" parent="World/Obstacles"]
 
-[node name="StaticBody2D" parent="World/Obstacles/Rocks" instance=ExtResource( 14 )]
-position = Vector2( 855.008, 134.149 )
+[node name="Rock" parent="World/Obstacles/Rocks" instance=ExtResource( 17 )]
+position = Vector2( 814.235, 213.108 )
 
-[node name="StaticBody2D2" parent="World/Obstacles/Rocks" instance=ExtResource( 14 )]
-position = Vector2( 818.141, 185.591 )
+[node name="StaticBody2D2" parent="World/Obstacles/Rocks" instance=ExtResource( 17 )]
+position = Vector2( 835.059, 273.31 )
 
-[node name="StaticBody2D3" parent="World/Obstacles/Rocks" instance=ExtResource( 14 )]
-position = Vector2( 850.721, 243.036 )
+[node name="StaticBody2D3" parent="World/Obstacles/Rocks" instance=ExtResource( 17 )]
+position = Vector2( 885.48, 293.669 )
 
-[node name="StaticBody2D4" parent="World/Obstacles/Rocks" instance=ExtResource( 14 )]
-position = Vector2( 882.444, 291.049 )
+[node name="StaticBody2D4" parent="World/Obstacles/Rocks" instance=ExtResource( 17 )]
+position = Vector2( 843.882, 146.833 )
 
-[node name="StaticBody2D5" parent="World/Obstacles/Rocks" instance=ExtResource( 14 )]
-position = Vector2( 915.024, 103.283 )
+[node name="StaticBody2D5" parent="World/Obstacles/Rocks" instance=ExtResource( 17 )]
+position = Vector2( 893.298, 132.665 )
 
-[node name="MrWalker" parent="World/Obstacles/Rocks" instance=ExtResource( 15 )]
-position = Vector2( 117.055, 228.46 )
+[node name="Log" parent="World" instance=ExtResource( 18 )]
+position = Vector2( 1240, -50 )
 
-[node name="Viking1" parent="World/Obstacles/Rocks" instance=ExtResource( 16 )]
-position = Vector2( 747.228, 189.878 )
+[node name="MrWalker" parent="World" instance=ExtResource( 19 )]
+position = Vector2( -71.192, 49.401 )
 
 [node name="effects" type="Node2D" parent="."]
 
@@ -248,3 +265,5 @@ color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_exited"]
+
+[editable path="World/Target"]
