@@ -26,7 +26,7 @@
 extents = Vector2( 31.4229, 34.4232 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 106.186 )
+extents = Vector2( 10, 77.8969 )
 
 [node name="Main" type="Node"]
 
@@ -251,8 +251,15 @@ position = Vector2( -71.192, 49.401 )
 position = Vector2( 134, 54.1239 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 2.06209 )
+position = Vector2( 0, -3.90723 )
 shape = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+margin_left = -14.0
+margin_top = -82.0
+margin_right = 14.0
+margin_bottom = 74.0
+color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

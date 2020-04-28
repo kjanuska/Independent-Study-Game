@@ -85,9 +85,10 @@ shape = SubResource( 5 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
+[node name="AimSights" type="RayCast2D" parent="."]
+
 [connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]
 [connection signal="timeout" from="Timers/ShotCooldown" to="States/Attack" method="_on_ShotCooldown_timeout"]
 [connection signal="body_entered" from="ChaseArea" to="States/Patrol" method="_on_ChaseArea_body_entered"]
-[connection signal="body_entered" from="AttackRange" to="States/Chase" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="States/Attack" method="_on_AttackRange_body_exited"]
