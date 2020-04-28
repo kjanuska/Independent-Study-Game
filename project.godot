@@ -16,14 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="PASP"
-run/main_scene="res://Levels/Main.tscn"
+run/main_scene="res://Scenes/Levels/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 SignalManager="*res://Scripts/Special/Autoload/SignalManager.gd"
 PlayerVar="*res://Scripts/Special/Autoload/PlayerVar.gd"
-SceneChanger="*res://Special Nodes/SceneChanger.tscn"
+SceneChanger="*res://Scenes/Special Nodes/SceneChanger.tscn"
 AbilityVar="*res://Scripts/Abilities/AbilityVar.gd"
 
 [debug]

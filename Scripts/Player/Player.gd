@@ -83,7 +83,6 @@ func equip_ability():
 	current_ability.set_global_position(player.get_global_position())
 	timer = current_ability.time
 	ability_animation_player = current_ability.get_node("AnimationPlayer")
-	ability_animation_player.play("idle")
 
 func equip():
 	current_weapon = current_weapon.instance()

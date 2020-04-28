@@ -1,6 +1,6 @@
 extends "../Motion.gd"
 
-var ammo = preload("res://Weapons/Ranged/Bow/EnemyArrow.tscn")
+var ammo = preload("res://Scenes/Weapons/Ranged/Bow/Arrow.tscn")
 var can_shoot = true
 
 var aim_rotation
