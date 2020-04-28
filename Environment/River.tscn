@@ -4,11 +4,6 @@
 [ext_resource path="res://TileMaps/Beach Level/River.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/Sprites/Backgrounds/Island_Set.png" type="Texture" id=3]
 
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.7303, 176.565 )
 

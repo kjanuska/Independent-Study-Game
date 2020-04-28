@@ -29,7 +29,7 @@ var count = 0
 
 var camera
 
-const scent_scene = preload("res://Scenes/Special Nodes/Scent.tscn")
+const scent_scene = preload("res://Special Nodes/Scent.tscn")
 
 var scent_trail = []
 
