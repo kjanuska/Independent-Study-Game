@@ -5,7 +5,6 @@
 [ext_resource path="res://Materials/Outline/outline.material" type="Material" id=3]
 [ext_resource path="res://Assets/Sprites/Weapons/sword slice.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Weapons/Bow Shot.png" type="Texture" id=5]
-<<<<<<< HEAD:Levels/Main.tscn
 [ext_resource path="res://Special Nodes/CameraLimiter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Special Nodes/TransitionArea.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Environment/PalmTrees/Palm1.tscn" type="PackedScene" id=8]
@@ -17,22 +16,6 @@
 [ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Characters/MrWalker.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Characters/Enemies/Viking1.tscn" type="PackedScene" id=16]
-=======
-[ext_resource path="res://Scenes/Special Nodes/CameraLimiter.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Special Nodes/TransitionArea.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Environment/PalmTrees/Palm1.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Environment/PalmTrees/Palm2.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Environment/PalmTrees/Palm3.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Environment/PalmTrees/Palm4.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Special Nodes/SpawnLocation.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Characters/Enemies/Viking1.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Environment/Target.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Environment/River.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Environment/Rock.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Environment/Log.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Characters/MrWalker.tscn" type="PackedScene" id=19]
->>>>>>> parent of 3b215ba... Merge branch 'area-redesign' into raycast-pathfinding:Scenes/Levels/Main.tscn
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -106,7 +89,7 @@ position = Vector2( 1450, 50 )
 
 [node name="Transition" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1010, 48.16 )
-world_scene = "res://Scenes/Levels/Level1/Level1.tscn"
+world_scene = "res://Levels/Town.tscn"
 
 [node name="World" type="YSort" parent="."]
 
