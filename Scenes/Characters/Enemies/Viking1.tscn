@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Characters/Enemies/Viking1/Viking.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -9,17 +9,16 @@
 [ext_resource path="res://Scripts/Characters/Enemies/Viking1/StateMachine/States/Attack.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 0.0
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 12.6119
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 12.309
+[sub_resource type="CircleShape2D" id=6]
+radius = 290.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 28.9161
 
 [sub_resource type="CapsuleShape2D" id=5]
+height = 0.0
 
 [node name="Viking1" type="KinematicBody2D"]
 collision_layer = 4
@@ -32,7 +31,8 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.625, 0.625 )
+position = Vector2( -9.53674e-007, -9.53674e-007 )
+scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 2 )
 
 [node name="States" type="Node" parent="."]
@@ -64,21 +64,10 @@ wait_time = 0.7
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
-[node name="FindArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
+[node name="ChaseArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FindArea"]
-scale = Vector2( 11.1006, 10.9816 )
-shape = SubResource( 2 )
-
-[node name="StopChaseArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StopChaseArea"]
-scale = Vector2( 17.08, 17.08 )
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
+shape = SubResource( 6 )
 
 [node name="AttackRange" type="Area2D" parent="."]
 scale = Vector2( 0.68, 0.68 )
@@ -94,10 +83,11 @@ shape = SubResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
 [connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]
 [connection signal="timeout" from="Timers/ShotCooldown" to="States/Attack" method="_on_ShotCooldown_timeout"]
-[connection signal="body_entered" from="FindArea" to="." method="_on_FindArea_body_entered"]
-[connection signal="body_exited" from="StopChaseArea" to="States/Chase" method="_on_StopChaseArea_body_exited"]
+[connection signal="body_entered" from="ChaseArea" to="States/Patrol" method="_on_ChaseArea_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="States/Chase" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="States/Attack" method="_on_AttackRange_body_exited"]

@@ -4,15 +4,29 @@ export(int) var SPEED = 200
 var direction
 
 func enter():
-	pass
+	chase_target()
+
+func chase_target():
+	var look = enemy.get_node("RayCast2D")
+	look.cast_to = (enemy.target.position - enemy.position)
+	look.force_raycast_update()
+	
+	if !look.is_colliding():
+			direction = look.cast_to.normalized()
+	
+	else:
+		for scent in enemy.target.scent_trail:
+			look.cast_to = (scent.position - enemy.position)
+			look.force_raycast_update()
+
+			if !look.is_colliding():
+				direction = look.cast_to.normalized()
+				break
 
 func update(_delta):
-	direction = Vector2(PlayerVar.player.position.x - owner.position.x, PlayerVar.player.position.y - owner.position.y)
-	.move(SPEED, direction)
-
-func _on_StopChaseArea_body_exited(body):
-	if body.get_name() == "Player":
-		emit_signal("finished", "idle")
+	chase_target()
+	if direction != null:
+		.move(SPEED, direction)
 
 func _on_AttackRange_body_entered(body):
 	if body.get_name() == "Player":

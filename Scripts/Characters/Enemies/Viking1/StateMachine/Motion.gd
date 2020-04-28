@@ -2,6 +2,7 @@ extends "States.gd"
 
 onready var idle_time = owner.get_node("Timers/IdleTime")
 onready var patrol_time = owner.get_node("Timers/PatrolTime")
+onready var enemy = self.get_parent().get_parent()
 
 var move_direction = Vector2()
 

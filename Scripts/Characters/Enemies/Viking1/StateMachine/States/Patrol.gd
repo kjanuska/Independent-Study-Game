@@ -21,3 +21,7 @@ func _on_PatrolTime_timeout():
 
 func player_found():
 	emit_signal("finished", "chase")
+
+func _on_ChaseArea_body_entered(body):
+	if body.get_name() == "Player":
+		SignalManager.emit_signal("player_found")
