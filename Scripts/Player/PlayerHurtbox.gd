@@ -1,6 +1,6 @@
 extends Area2D
 
-var health = 3
+var health = 30
 var is_vulnerable = true
 
 func take_damage():

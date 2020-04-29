@@ -28,7 +28,9 @@ func chase_target():
 				break
 
 func check_aim():
-	if distance <= 100:
+	if distance == null:
+		return
+	elif distance <= 100:
 		emit_signal("finished", "attack")
 
 func update(_delta):

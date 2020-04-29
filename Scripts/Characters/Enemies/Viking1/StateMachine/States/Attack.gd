@@ -8,7 +8,8 @@ var aim_rotation
 var distance
 
 func enter():
-	pass
+	aim()
+	shoot()
 
 func update(_delta):
 	aim()

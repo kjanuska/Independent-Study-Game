@@ -7,4 +7,14 @@ func _ready():
 
 func remove_scent():
 	player.scent_trail.erase(self)
-	queue_free()
+	if $Trail.visible == true:
+		$AnimationPlayer.play("dissolve")
+	else:
+		queue_free()
+
+func enable_scent(value):
+	$Trail.visible = value
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "dissolve":
+		queue_free()
