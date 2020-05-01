@@ -9,6 +9,7 @@ func enter():
 	chase_target()
 
 func chase_target():
+	print(enemy.get_name())
 	var look = enemy.get_node("RayCast2D")
 	look.cast_to = (enemy.target.position - enemy.position)
 	look.force_raycast_update()

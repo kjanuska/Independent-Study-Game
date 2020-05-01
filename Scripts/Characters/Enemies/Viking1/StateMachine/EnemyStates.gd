@@ -3,8 +3,6 @@ extends "StateMachine.gd"
 func _ready():
 	randomize()
 	states_map = {
-		"idle": $Idle,
-		"patrol": $Patrol,
 		"chase": $Chase,
 		"attack": $Attack
 	}

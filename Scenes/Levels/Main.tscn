@@ -18,7 +18,7 @@
 [ext_resource path="res://Scenes/Environment/Rock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Environment/Log.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Characters/MrWalker.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Characters/Enemies/Viking.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Characters/Bosses/Fenrir.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -259,7 +259,6 @@ margin_bottom = 74.0
 color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
 
 [node name="Viking" parent="." instance=ExtResource( 19 )]
-position = Vector2( 424, 35.19 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
