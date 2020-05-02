@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Weapons/Ranged/Bow/Arrow.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Weapons/arrow.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+[node name="Arrow" type="Area2D" groups=[
+"arrow",
+]]
+collision_layer = 128
+collision_mask = 77
+script = ExtResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -20.3244, -0.161359 )
+scale = Vector2( 0.356785, 0.528521 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -9.36784, 0.263884 )
+scale = Vector2( 1.50977, 1.95291 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.146198, -0.730976 )
+rotation = 1.5708
+scale = Vector2( 1.03378, 0.643328 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_Arrow_area_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
