@@ -1,16 +1,20 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/Viking.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/StateMachine/EnemyStates.gd" type="Script" id=3]
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/StateMachine/States/Chase.gd" type="Script" id=4]
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/StateMachine/States/Attack.gd" type="Script" id=5]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States.gd" type="Script" id=3]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Sleep.gd" type="Script" id=4]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Chase.gd" type="Script" id=5]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Attack.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 28.9161
+radius = 12.3926
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 190.0
 
 [sub_resource type="CapsuleShape2D" id=3]
 height = 0.0
@@ -32,13 +36,16 @@ texture = ExtResource( 2 )
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 3 )
-START_STATE = NodePath("Chase")
+START_STATE = NodePath("Sleep")
 
-[node name="Chase" type="Node" parent="States"]
+[node name="Sleep" type="Node" parent="States"]
 script = ExtResource( 4 )
 
-[node name="Attack" type="Node" parent="States"]
+[node name="Chase" type="Node" parent="States"]
 script = ExtResource( 5 )
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 6 )
 
 [node name="AttackRange" type="Area2D" parent="."]
 scale = Vector2( 0.68, 0.68 )
@@ -51,6 +58,11 @@ self_modulate = Color( 0.796078, 0.262745, 0.262745, 1 )
 scale = Vector2( 7.12, 7.16 )
 shape = SubResource( 2 )
 
+[node name="DetectionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource( 4 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
@@ -61,3 +73,4 @@ modulate = Color( 0.313726, 1, 0, 1 )
 modulate = Color( 0.917647, 0.0352941, 0.0352941, 1 )
 
 [connection signal="body_exited" from="AttackRange" to="States/Attack" method="_on_AttackRange_body_exited"]
+[connection signal="area_entered" from="DetectionRange" to="States/Sleep" method="_on_DetectionRange_area_entered"]

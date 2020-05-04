@@ -1,7 +1,7 @@
 extends "../Motion.gd"
 
 export(int) var SPEED = 100
-var direction
+var random_direction
 
 func _ready():
 	SignalManager.connect("player_found", self, "player_found")
@@ -9,10 +9,10 @@ func _ready():
 func enter():
 #	play animation
 	patrol_time.start()
-	direction = get_random_direction()
+	random_direction = get_random_direction()
 
 func update(_delta):
-	.move(SPEED, direction)
+	.move(SPEED, random_direction)
 
 func _on_PatrolTime_timeout():
 	patrol_time.stop()

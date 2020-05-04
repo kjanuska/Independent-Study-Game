@@ -5,14 +5,14 @@ var can_shoot = true
 
 var aim_rotation
 
+var distance
+
 func enter():
 	aim()
 	shoot()
 
 func update(_delta):
 	aim()
-	if distance > 100:
-		emit_signal("finished", "chase")
 	shoot()
 
 func aim():
@@ -39,6 +39,9 @@ func shoot():
 		projectile.set_speed(500)
 		can_shoot = false
 		owner.get_node("Timers").get_node("ShotCooldown").start()
+
+func _on_AttackRange_body_exited(body):
+	emit_signal("finished", "chase")
 
 func _on_ShotCooldown_timeout():
 	can_shoot = true

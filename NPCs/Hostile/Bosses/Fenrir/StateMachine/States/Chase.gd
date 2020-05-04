@@ -1,22 +1,12 @@
-extends "States.gd"
+extends "../Motion.gd"
 
-onready var idle_time = owner.get_node("Timers/IdleTime")
-onready var patrol_time = owner.get_node("Timers/PatrolTime")
-onready var enemy = self.get_parent().get_parent()
-
-var distance
+export(int) var SPEED = 100
 var direction
 
-func get_random_direction():
-	var move_direction = Vector2()
-	move_direction = Vector2(randi() % 3 - 1, randi() % 3 - 1)
-	while move_direction.length() == 0:
-		move_direction = Vector2(randi() % 3 - 1, randi() % 3 - 1)
-	return move_direction
+var distance
 
-func move(speed_value, direction):
-	var motion = direction.normalized() * speed_value * AbilityVar.slowdown
-	owner.move_and_slide(motion)
+func enter():
+	chase_target()
 
 func chase_target():
 	var look = enemy.get_node("RayCast2D")
@@ -36,3 +26,15 @@ func chase_target():
 				direction = look.cast_to.normalized()
 				distance = enemy.get_global_position().distance_to(PlayerVar.player.get_global_position())
 				break
+
+func check_aim():
+	if distance == null:
+		return
+	elif distance <= 50:
+		emit_signal("finished", "attack")
+
+func update(_delta):
+	chase_target()
+	check_aim()
+	if direction != null:
+		.move(SPEED, direction)
