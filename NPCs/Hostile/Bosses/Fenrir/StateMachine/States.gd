@@ -1,14 +1,17 @@
-extends "StateMachine.gd"
+extends Node
 
-func _ready():
-	randomize()
-	states_map = {
-		"sleep": $Sleep,
-		"chase": $Chase,
-		"attack": $Attack
-	}
+signal finished(next_state_name)
 
-func _change_state(state_name):
-	if not _active:
-		return
-	._change_state(state_name)
+# Initialize the state. E.g. change the animation
+func enter():
+	return
+
+# Clean up the state. Reinitialize values like a timer
+func exit():
+	return
+
+func update(_delta):
+	return
+
+func _on_animation_finished(anim_name):
+	return

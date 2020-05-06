@@ -8,6 +8,8 @@ var temp_id
 
 var charge_ranged
 
+var scent_visible = false
+
 func _ready():
 	_scene_changed()
 	SignalManager.connect("scene_changed", self, "_scene_changed")

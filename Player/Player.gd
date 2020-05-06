@@ -33,8 +33,6 @@ const scent_scene = preload("res://Player/Effects/Scent.tscn")
 
 var scent_trail = []
 
-var level
-
 # equip gun as soon as the player is loaded
 func _ready():
 	player = get_node(".")
@@ -44,8 +42,6 @@ func _ready():
 	ability_cooldown = $AbilityCooldown
 	camera = $Camera
 	$ScentTimer.connect("timeout", self, "add_scent")
-	level = get_tree().get_current_scene()
-	
 
 func _physics_process(_delta):
 	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
@@ -73,9 +69,10 @@ func get_input_rotation():
 func add_scent():
 	var scent = scent_scene.instance()
 	scent.player = player
+	scent.visible = PlayerVar.scent_visible
 	scent.set_global_position(player.get_global_position())
 
-	level.get_node("World").get_node("effects").add_child(scent)
+	Game.effects.add_child(scent)
 	scent_trail.push_front(scent)
 
 func equip_ability():

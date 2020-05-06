@@ -1,24 +1,21 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/TileMaps/Beach Level/beach.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Weapons/PickupWeapon.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Materials/Outline/outline.material" type="Material" id=3]
 [ext_resource path="res://Assets/Sprites/Weapons/sword slice.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Weapons/Bow Shot.png" type="Texture" id=5]
-[ext_resource path="res://Levels/CameraLimiter.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Levels/TransitionArea.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Environment/PalmTrees/Palm1.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Environment/PalmTrees/Palm2.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Environment/PalmTrees/Palm3.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Environment/PalmTrees/Palm4.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Player/SpawnLocation.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=17]
-[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=18]
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/Viking.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Environment/PalmTrees/Palm1.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Environment/PalmTrees/Palm2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Environment/PalmTrees/Palm3.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Environment/PalmTrees/Palm4.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player/SpawnLocation.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=14]
+[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=15]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Fenrir.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -48,7 +45,6 @@ scale = Vector2( 129.406, 32.4289 )
 shape = SubResource( 1 )
 
 [node name="Pickup Melee" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 311.498, 48.16 )
 scale = Vector2( 0.5136, 0.462272 )
 script = ExtResource( 2 )
@@ -83,130 +79,121 @@ texture = ExtResource( 5 )
 normal_map = ExtResource( 5 )
 hframes = 16
 
-[node name="CameraLimiter" parent="." instance=ExtResource( 6 )]
-position = Vector2( 980.002, 60 )
-
-[node name="CameraLimiter2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1450, 50 )
-
-[node name="Transition" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1010, 48.16 )
-world_scene = "res://Scenes/Levels/Level1/Level1.tscn"
+[node name="effects" type="Node2D" parent="."]
+position = Vector2( 0, 2 )
 
 [node name="World" type="YSort" parent="."]
 
 [node name="Trees" type="YSort" parent="World"]
 editor/display_folded = true
 
-[node name="Palm1" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm1" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( -300, 130.778 )
 
-[node name="Palm2" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm2" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -100.192, -80 )
 
-[node name="Palm3" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm3" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( -250, 22.2923 )
 
-[node name="Palm4" parent="World/Trees" instance=ExtResource( 11 )]
+[node name="Palm4" parent="World/Trees" instance=ExtResource( 9 )]
 position = Vector2( 140, -100 )
 
-[node name="Palm5" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm5" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -200, -60 )
 
-[node name="Palm6" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm6" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( -357.237, -48 )
 
-[node name="Palm7" parent="World/Trees" instance=ExtResource( 11 )]
+[node name="Palm7" parent="World/Trees" instance=ExtResource( 9 )]
 position = Vector2( -380, 80 )
 
-[node name="Palm8" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm8" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -280, -130 )
 
-[node name="Palm9" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm9" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( -310, 10 )
 
-[node name="Palm11" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm11" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( -140, -140 )
 
-[node name="Palm12" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm12" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -60, -50 )
 
-[node name="Palm13" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm13" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( -150, -40 )
 
-[node name="Palm14" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm14" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -164, -68 )
 
-[node name="Palm10" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm10" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -374, 0 )
 
-[node name="Palm15" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm15" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( -280, -70 )
 
-[node name="Palm16" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm16" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( -270, -10 )
 
-[node name="Palm18" parent="World/Trees" instance=ExtResource( 11 )]
+[node name="Palm18" parent="World/Trees" instance=ExtResource( 9 )]
 position = Vector2( -310, 50 )
 
-[node name="Palm19" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm19" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 173.305, -78 )
 
-[node name="Palm20" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm20" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( 90, -80 )
 
-[node name="Palm21" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm21" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( 110, -120 )
 
-[node name="Palm22" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm22" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( 230, -70 )
 
-[node name="Palm23" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm23" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 180, -160 )
 
-[node name="Palm24" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm24" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( 210, -110 )
 
-[node name="Palm25" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm25" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 300, -120 )
 
-[node name="Palm26" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm26" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 240, -140 )
 
-[node name="Palm27" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm27" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( 276, -160 )
 
-[node name="Palm28" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm28" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 90, -160 )
 
-[node name="Palm30" parent="World/Trees" instance=ExtResource( 11 )]
+[node name="Palm30" parent="World/Trees" instance=ExtResource( 9 )]
 position = Vector2( 360, -160 )
 
-[node name="Palm32" parent="World/Trees" instance=ExtResource( 8 )]
+[node name="Palm32" parent="World/Trees" instance=ExtResource( 6 )]
 position = Vector2( 400, -180 )
 
-[node name="Palm31" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm31" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 260, -212 )
 
-[node name="Palm33" parent="World/Trees" instance=ExtResource( 9 )]
+[node name="Palm33" parent="World/Trees" instance=ExtResource( 7 )]
 position = Vector2( 330, -140 )
 
-[node name="Palm29" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm29" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( 420, -122.162 )
 
-[node name="Palm17" parent="World/Trees" instance=ExtResource( 10 )]
+[node name="Palm17" parent="World/Trees" instance=ExtResource( 8 )]
 position = Vector2( -350, 120.496 )
 
-[node name="SpawnLocation" parent="World" instance=ExtResource( 12 )]
-position = Vector2( 10, 22 )
+[node name="SpawnLocation" parent="World" instance=ExtResource( 10 )]
+position = Vector2( 410, -310 )
 player = NodePath("../Player")
 
-[node name="Player" parent="World" instance=ExtResource( 13 )]
-position = Vector2( 10, 27.8969 )
+[node name="Player" parent="World" instance=ExtResource( 11 )]
+position = Vector2( 30, 49.75 )
 
-[node name="effects" type="Node2D" parent="World"]
-
-[node name="Target" parent="World" instance=ExtResource( 14 )]
+[node name="Target" parent="World" instance=ExtResource( 12 )]
 editor/display_folded = true
 position = Vector2( 1282.1, 38.19 )
 
@@ -217,31 +204,16 @@ falling_log = NodePath("../../Log")
 [node name="Obstacles" type="Node2D" parent="World"]
 position = Vector2( -268.758, -163.814 )
 
-[node name="River" parent="World/Obstacles" instance=ExtResource( 15 )]
+[node name="River" parent="World/Obstacles" instance=ExtResource( 13 )]
 position = Vector2( 1470, 220 )
 
 [node name="Rocks" type="Node2D" parent="World/Obstacles"]
 
-[node name="Rock" parent="World/Obstacles/Rocks" instance=ExtResource( 16 )]
-position = Vector2( 814.235, 213.108 )
-
-[node name="StaticBody2D2" parent="World/Obstacles/Rocks" instance=ExtResource( 16 )]
-position = Vector2( 835.059, 273.31 )
-
-[node name="StaticBody2D3" parent="World/Obstacles/Rocks" instance=ExtResource( 16 )]
-position = Vector2( 885.48, 293.669 )
-
-[node name="StaticBody2D4" parent="World/Obstacles/Rocks" instance=ExtResource( 16 )]
-position = Vector2( 843.882, 146.833 )
-
-[node name="StaticBody2D5" parent="World/Obstacles/Rocks" instance=ExtResource( 16 )]
-position = Vector2( 893.298, 132.665 )
-
-[node name="Log" parent="World" instance=ExtResource( 17 )]
+[node name="Log" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 1240, -50 )
 
-[node name="MrWalker" parent="World" instance=ExtResource( 18 )]
-position = Vector2( -71.192, 48.496 )
+[node name="MrWalker" parent="World" instance=ExtResource( 15 )]
+position = Vector2( -74, 87.9784 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 134, 54.1239 )
@@ -257,8 +229,8 @@ margin_right = 14.0
 margin_bottom = 74.0
 color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
 
-[node name="Viking" parent="." instance=ExtResource( 19 )]
-position = Vector2( 394.044, 33.0519 )
+[node name="Fenrir" parent="." instance=ExtResource( 16 )]
+position = Vector2( 780, -260 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

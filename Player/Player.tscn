@@ -19,12 +19,6 @@
 [ext_resource path="res://Player/Weapons/WeaponSpawner.gd" type="Script" id=17]
 [ext_resource path="res://Player/Abilities/AbilitySpawner.gd" type="Script" id=18]
 
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.1963, 3.50365 )
 
@@ -236,7 +230,7 @@ material = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 13
-frame = 13
+frame = 14
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "hurtbox",

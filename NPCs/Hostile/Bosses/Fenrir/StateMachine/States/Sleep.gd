@@ -1,4 +1,4 @@
-extends Node
+extends "../States.gd"
 
 func enter():
 	return
@@ -6,5 +6,6 @@ func enter():
 func update(_delta):
 	return
 
-func _on_DetectionRange_area_entered(area):
-	emit_signal("finished", "chase")
+func _on_DetectionRange_body_entered(body):
+	if body.get_name() == "Player":
+		emit_signal("finished", "intimidate")

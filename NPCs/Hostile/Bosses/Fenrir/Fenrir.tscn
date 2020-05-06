@@ -1,11 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/Viking.gd" type="Script" id=1]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Fenrir.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States.gd" type="Script" id=3]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/FenrirStates.gd" type="Script" id=3]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Sleep.gd" type="Script" id=4]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Chase.gd" type="Script" id=5]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Attack.gd" type="Script" id=6]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Charge.gd" type="Script" id=7]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Circle.gd" type="Script" id=8]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Intimidate.gd" type="Script" id=9]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/KickDirt.gd" type="Script" id=10]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/RunAway.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 0.0
@@ -13,18 +18,18 @@ height = 0.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 12.3926
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 190.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 height = 0.0
 
 [node name="Fenrir" type="KinematicBody2D"]
-collision_layer = 4
-collision_mask = 495
 script = ExtResource( 1 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource( 1 )
@@ -47,6 +52,21 @@ script = ExtResource( 5 )
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource( 6 )
 
+[node name="Charge" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="Circle" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Intimidate" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="KickDirt" type="Node" parent="States"]
+script = ExtResource( 10 )
+
+[node name="RunAway" type="Node" parent="States"]
+script = ExtResource( 11 )
+
 [node name="AttackRange" type="Area2D" parent="."]
 scale = Vector2( 0.68, 0.68 )
 collision_layer = 4
@@ -59,12 +79,14 @@ scale = Vector2( 7.12, 7.16 )
 shape = SubResource( 2 )
 
 [node name="DetectionRange" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 modulate = Color( 0.313726, 1, 0, 1 )
@@ -72,5 +94,4 @@ modulate = Color( 0.313726, 1, 0, 1 )
 [node name="AimSights" type="RayCast2D" parent="."]
 modulate = Color( 0.917647, 0.0352941, 0.0352941, 1 )
 
-[connection signal="body_exited" from="AttackRange" to="States/Attack" method="_on_AttackRange_body_exited"]
-[connection signal="area_entered" from="DetectionRange" to="States/Sleep" method="_on_DetectionRange_area_entered"]
+[connection signal="body_entered" from="DetectionRange" to="States/Sleep" method="_on_DetectionRange_body_entered"]

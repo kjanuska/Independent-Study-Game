@@ -25,6 +25,7 @@ SignalManager="*res://Autoload/SignalManager.gd"
 PlayerVar="*res://Autoload/PlayerVar.gd"
 AbilityVar="*res://Player/Abilities/AbilityVar.gd"
 SceneChanger="*res://Levels/SceneChanger.tscn"
+Game="*res://Autoload/Game.gd"
 
 [debug]
 
