@@ -16,4 +16,5 @@ func _ready():
 func _change_state(state_name):
 	if not _active:
 		return
+	get_parent().get_node("Label").set_text(state_name)
 	._change_state(state_name)

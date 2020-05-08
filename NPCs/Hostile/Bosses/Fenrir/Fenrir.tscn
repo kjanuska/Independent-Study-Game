@@ -39,6 +39,10 @@ position = Vector2( -9.53674e-007, -9.53674e-007 )
 scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 2 )
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="IntimidateTimer" type="Timer" parent="Timers"]
+
 [node name="States" type="Node" parent="."]
 script = ExtResource( 3 )
 START_STATE = NodePath("Sleep")
@@ -94,4 +98,11 @@ modulate = Color( 0.313726, 1, 0, 1 )
 [node name="AimSights" type="RayCast2D" parent="."]
 modulate = Color( 0.917647, 0.0352941, 0.0352941, 1 )
 
+[node name="Label" type="Label" parent="."]
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 30.0
+margin_bottom = -16.0
+
+[connection signal="timeout" from="Timers/IntimidateTimer" to="States/Intimidate" method="_on_IntimidateTimer_timeout"]
 [connection signal="body_entered" from="DetectionRange" to="States/Sleep" method="_on_DetectionRange_body_entered"]
