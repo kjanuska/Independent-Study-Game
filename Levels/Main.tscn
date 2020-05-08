@@ -254,7 +254,6 @@ margin_top = -82.0
 margin_right = 14.0
 margin_bottom = 74.0
 color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
-
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]
