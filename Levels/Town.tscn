@@ -46,3 +46,4 @@ tile_data = PoolIntArray( 7733306, 0, 4, 7733307, 0, 5, 7798842, 0, 65539, 77988
 [node name="Paths" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 format = 1
+
