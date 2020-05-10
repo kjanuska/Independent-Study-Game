@@ -80,7 +80,8 @@ normal_map = ExtResource( 5 )
 hframes = 16
 
 [node name="effects" type="Node2D" parent="."]
-position = Vector2( 0, 2 )
+
+[node name="circle" type="Node2D" parent="."]
 
 [node name="World" type="YSort" parent="."]
 
@@ -191,7 +192,7 @@ position = Vector2( 410, -310 )
 player = NodePath("../Player")
 
 [node name="Player" parent="World" instance=ExtResource( 11 )]
-position = Vector2( 30, 49.75 )
+position = Vector2( 50, 40.9808 )
 
 [node name="Target" parent="World" instance=ExtResource( 12 )]
 editor/display_folded = true
@@ -230,7 +231,7 @@ margin_bottom = 74.0
 color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
 
 [node name="Fenrir" parent="." instance=ExtResource( 16 )]
-position = Vector2( 780, -260 )
+position = Vector2( 790, -260 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

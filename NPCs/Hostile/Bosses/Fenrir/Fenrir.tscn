@@ -42,6 +42,7 @@ texture = ExtResource( 2 )
 [node name="Timers" type="Node" parent="."]
 
 [node name="IntimidateTimer" type="Timer" parent="Timers"]
+one_shot = true
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 3 )
