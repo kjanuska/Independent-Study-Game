@@ -1,16 +1,17 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Fenrir.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/FenrirStates.gd" type="Script" id=3]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Sleep.gd" type="Script" id=4]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Chase.gd" type="Script" id=5]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Attack.gd" type="Script" id=6]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Charge.gd" type="Script" id=7]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Circle.gd" type="Script" id=8]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Intimidate.gd" type="Script" id=9]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/KickDirt.gd" type="Script" id=10]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/RunAway.gd" type="Script" id=11]
+[ext_resource path="res://Assets/charge_path.png" type="Texture" id=3]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/FenrirStates.gd" type="Script" id=4]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Sleep.gd" type="Script" id=5]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Chase.gd" type="Script" id=6]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Attack.gd" type="Script" id=7]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Charge.gd" type="Script" id=8]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Circle.gd" type="Script" id=9]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Intimidate.gd" type="Script" id=10]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/KickDirt.gd" type="Script" id=11]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/RunAway.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 0.0
@@ -23,6 +24,38 @@ radius = 190.0
 
 [sub_resource type="CapsuleShape2D" id=4]
 height = 0.0
+
+[sub_resource type="Animation" id=6]
+resource_name = "charge_path_charged"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChargePathNode/ChargePath:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.623529 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "charge_path_flash"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChargePathNode/ChargePath:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.623529 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.627451 ) ]
+}
 
 [node name="Fenrir" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -39,38 +72,51 @@ position = Vector2( -9.53674e-007, -9.53674e-007 )
 scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 2 )
 
+[node name="ChargePathNode" type="Node2D" parent="."]
+
+[node name="ChargePath" type="Sprite" parent="ChargePathNode"]
+modulate = Color( 1, 1, 1, 0.623529 )
+position = Vector2( 128, 0 )
+texture = ExtResource( 3 )
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="IntimidateTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="ChargeTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Timer" type="Timer" parent="Timers"]
+
 [node name="States" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 START_STATE = NodePath("Sleep")
 
 [node name="Sleep" type="Node" parent="States"]
-script = ExtResource( 4 )
-
-[node name="Chase" type="Node" parent="States"]
 script = ExtResource( 5 )
 
-[node name="Attack" type="Node" parent="States"]
+[node name="Chase" type="Node" parent="States"]
 script = ExtResource( 6 )
 
-[node name="Charge" type="Node" parent="States"]
+[node name="Attack" type="Node" parent="States"]
 script = ExtResource( 7 )
 
-[node name="Circle" type="Node" parent="States"]
+[node name="Charge" type="Node" parent="States"]
 script = ExtResource( 8 )
 
-[node name="Intimidate" type="Node" parent="States"]
+[node name="Circle" type="Node" parent="States"]
 script = ExtResource( 9 )
 
-[node name="KickDirt" type="Node" parent="States"]
+[node name="Intimidate" type="Node" parent="States"]
 script = ExtResource( 10 )
 
-[node name="RunAway" type="Node" parent="States"]
+[node name="KickDirt" type="Node" parent="States"]
 script = ExtResource( 11 )
+
+[node name="RunAway" type="Node" parent="States"]
+script = ExtResource( 12 )
 
 [node name="AttackRange" type="Area2D" parent="."]
 scale = Vector2( 0.68, 0.68 )
@@ -105,5 +151,10 @@ margin_top = -30.0
 margin_right = 30.0
 margin_bottom = -16.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/charge_path_charged = SubResource( 6 )
+anims/charge_path_flash = SubResource( 5 )
+
 [connection signal="timeout" from="Timers/IntimidateTimer" to="States/Intimidate" method="_on_IntimidateTimer_timeout"]
+[connection signal="timeout" from="Timers/ChargeTimer" to="States/Charge" method="_on_ChargeTimer_timeout"]
 [connection signal="body_entered" from="DetectionRange" to="States/Sleep" method="_on_DetectionRange_body_entered"]
