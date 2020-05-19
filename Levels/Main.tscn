@@ -5,8 +5,8 @@
 [ext_resource path="res://Assets/Materials/Outline/outline.material" type="Material" id=3]
 [ext_resource path="res://Assets/Sprites/Weapons/sword slice.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Weapons/Bow Shot.png" type="Texture" id=5]
-[ext_resource path="res://NPCs/Levels/CameraLimiter.tscn" type="PackedScene" id=6]
-[ext_resource path="res://NPCs/Levels/TransitionArea.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Levels/CameraLimiter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Levels/TransitionArea.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Environment/PalmTrees/Palm1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Environment/PalmTrees/Palm2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Environment/PalmTrees/Palm3.tscn" type="PackedScene" id=10]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=17]
 [ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=18]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
