@@ -10,6 +10,10 @@ var charge_ranged
 
 var scent_visible = false
 
+var damage
+
+var facing_forward
+
 func _ready():
 	_scene_changed()
 	SignalManager.connect("scene_changed", self, "_scene_changed")

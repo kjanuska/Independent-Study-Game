@@ -8,4 +8,4 @@ func update(_delta):
 
 func _on_DetectionRange_body_entered(body):
 	if body.get_name() == "Player":
-		emit_signal("finished", "intimidate")
+		emit_signal("finished", "chase")

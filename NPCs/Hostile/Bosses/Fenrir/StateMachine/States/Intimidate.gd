@@ -9,7 +9,7 @@ func update(_delta):
 
 func exit():
 	PlayerVar.scent_visible = false
-	fenrir.get_node("DetectionRange").get_node("CollisionShape2D").set_disabled(true)
+	fenrir.get_node("DetectionRange").get_node("CollisionShape2D").call_deferred("set_disabled", true)
 
 func _on_IntimidateTimer_timeout():
 	emit_signal("finished", "circle")

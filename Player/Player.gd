@@ -33,9 +33,9 @@ const scent_scene = preload("res://Player/Effects/Scent.tscn")
 
 var scent_trail = []
 
-# equip gun as soon as the player is loaded
 func _ready():
 	player = get_node(".")
+	get_node("AnimationTree").set_active(true)
 	player_animation = $AnimationTree.get("parameters/playback")
 	melee_cooldown = $WeaponTimers/MeleeCooldown
 	ranged_cooldown = $WeaponTimers/RangedCooldown
@@ -57,11 +57,18 @@ func _physics_process(_delta):
 
 func get_input_rotation():
 	mouse_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
+	if sign(mouse_rotation) == 1:
+		PlayerVar.facing_forward = true
+	else:
+		PlayerVar.facing_forward = false
 	if abs(mouse_rotation) < PI/2:
 		is_flipped = false
 	if abs(mouse_rotation) > PI/2:
 		is_flipped = true
-	get_node("Sprite").flip_h = is_flipped
+	if PlayerVar.facing_forward:
+		get_node("Sprite").flip_h = is_flipped
+	else:
+		get_node("Sprite").flip_h = !is_flipped
 	if current_weapon != null:
 		current_weapon.get_node("Sprite").flip_v = is_flipped
 	return mouse_rotation

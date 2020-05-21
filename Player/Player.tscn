@@ -1,8 +1,8 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Materials/Outline/outline.material" type="Material" id=2]
-[ext_resource path="res://Assets/Sprites/Characters/Sprite Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Characters/player-sheet.png" type="Texture" id=3]
 [ext_resource path="res://Player/PlayerHurtbox.gd" type="Script" id=4]
 [ext_resource path="res://Player/StateMachine/Movement/MovementStates.gd" type="Script" id=5]
 [ext_resource path="res://Player/StateMachine/Movement/States/Idle.gd" type="Script" id=6]
@@ -45,8 +45,8 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.01, 0.02, 0.04, 0.05, 0.07, 0.09, 0.1, 0.12, 0.13, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+"update": 0,
+"values": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -81,9 +81,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-resource_name = "idle"
+resource_name = "idle_backward"
 loop = true
-step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -94,11 +93,26 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 13, 14 ]
+"values": [ 47, 48 ]
 }
 
 [sub_resource type="Animation" id=8]
-resource_name = "walk"
+resource_name = "idle_forward"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 16, 17 ]
+}
+
+[sub_resource type="Animation" id=9]
 length = 0.6
 loop = true
 step = 0.01
@@ -109,40 +123,51 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.14, 0.28, 0.43, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 26, 27, 28, 29, 30 ]
+"times": PoolRealArray( 0, 0.08, 0.15, 0.23, 0.32, 0.41, 0.51, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "dash"
-
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "death"
+[sub_resource type="Animation" id=10]
+length = 0.6
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.19, 0.29, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 3, 4, 5, 6, 7 ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=11]
-animation = "hurt"
+animation = "dash"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
-animation = "idle"
+animation = "death"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
-animation = "walk"
+animation = "hurt"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "idle_backward"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "idle_forward"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "walk_backward"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-switch_mode = 2
-auto_advance = true
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "walk_forward"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
@@ -151,30 +176,90 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
-[sub_resource type="AnimationNodeStateMachine" id=24]
-states/dash/node = SubResource( 9 )
-states/dash/position = Vector2( 1005, 135 )
-states/death/node = SubResource( 10 )
-states/death/position = Vector2( 651.266, 347 )
-states/hurt/node = SubResource( 11 )
-states/hurt/position = Vector2( 269, 144 )
-states/idle/node = SubResource( 12 )
-states/idle/position = Vector2( 651.266, 234.191 )
-states/walk/node = SubResource( 13 )
-states/walk/position = Vector2( 651.266, 72.1909 )
-transitions = [ "idle", "walk", SubResource( 14 ), "walk", "dash", SubResource( 15 ), "walk", "hurt", SubResource( 16 ), "dash", "walk", SubResource( 17 ), "hurt", "idle", SubResource( 18 ), "idle", "death", SubResource( 19 ), "dash", "idle", SubResource( 20 ), "idle", "hurt", SubResource( 21 ), "hurt", "walk", SubResource( 22 ), "walk", "idle", SubResource( 23 ) ]
-start_node = "idle"
-end_node = "death"
-graph_offset = Vector2( -25.7339, 30.6469 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachine" id=46]
+states/dash/node = SubResource( 11 )
+states/dash/position = Vector2( 1018, 144 )
+states/death/node = SubResource( 12 )
+states/death/position = Vector2( 651.266, 347 )
+states/hurt/node = SubResource( 13 )
+states/hurt/position = Vector2( 269, 144 )
+states/idle_backward/node = SubResource( 14 )
+states/idle_backward/position = Vector2( 479.266, 273 )
+states/idle_forward/node = SubResource( 15 )
+states/idle_forward/position = Vector2( 823.266, 278 )
+states/walk_backward/node = SubResource( 16 )
+states/walk_backward/position = Vector2( 730.266, -141.489 )
+states/walk_forward/node = SubResource( 17 )
+states/walk_forward/position = Vector2( 493.266, -141.489 )
+transitions = [ "walk_backward", "dash", SubResource( 18 ), "walk_forward", "dash", SubResource( 19 ), "dash", "walk_backward", SubResource( 20 ), "dash", "walk_forward", SubResource( 21 ), "walk_forward", "hurt", SubResource( 22 ), "walk_backward", "hurt", SubResource( 23 ), "hurt", "walk_forward", SubResource( 24 ), "hurt", "walk_backward", SubResource( 25 ), "walk_forward", "walk_backward", SubResource( 26 ), "walk_backward", "walk_forward", SubResource( 27 ), "idle_forward", "walk_backward", SubResource( 28 ), "walk_backward", "idle_forward", SubResource( 29 ), "idle_backward", "walk_forward", SubResource( 30 ), "walk_forward", "idle_backward", SubResource( 31 ), "walk_forward", "idle_forward", SubResource( 32 ), "idle_forward", "walk_forward", SubResource( 33 ), "idle_backward", "walk_backward", SubResource( 34 ), "walk_backward", "idle_backward", SubResource( 35 ), "idle_backward", "death", SubResource( 36 ), "idle_forward", "death", SubResource( 37 ), "hurt", "idle_backward", SubResource( 38 ), "idle_backward", "hurt", SubResource( 39 ), "hurt", "idle_forward", SubResource( 40 ), "idle_forward", "hurt", SubResource( 41 ), "dash", "idle_forward", SubResource( 42 ), "dash", "idle_backward", SubResource( 43 ), "idle_forward", "idle_backward", SubResource( 44 ), "idle_backward", "idle_forward", SubResource( 45 ) ]
+start_node = "idle_forward"
+end_node = "death"
+graph_offset = Vector2( -25.7339, -167.236 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=47]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -228,9 +313,9 @@ text = "Shink"
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 2 )
 texture = ExtResource( 3 )
-vframes = 3
-hframes = 13
-frame = 14
+vframes = 2
+hframes = 36
+frame = 17
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "hurtbox",
@@ -250,14 +335,16 @@ one_shot = true
 anims/dash = SubResource( 4 )
 anims/death = SubResource( 5 )
 anims/hurt = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/walk = SubResource( 8 )
+anims/idle_backward = SubResource( 7 )
+anims/idle_forward = SubResource( 8 )
+anims/walk_backward = SubResource( 9 )
+anims/walk_forward = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 46 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 25 )
+parameters/playback = SubResource( 47 )
 
 [node name="MovementStates" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -313,6 +400,7 @@ margin_right = 20.0
 margin_bottom = -26.0
 
 [node name="RadialMenu" type="Control" parent="."]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0

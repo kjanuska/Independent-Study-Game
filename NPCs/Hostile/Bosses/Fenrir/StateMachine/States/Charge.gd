@@ -1,7 +1,6 @@
 extends "../Motion.gd"
 
 onready var charge_path = fenrir.get_node("ChargePathNode")
-onready var animation_player = fenrir.get_node("AnimationPlayer")
 
 export(int) var SPEED = 500
 var charge_direction
@@ -13,6 +12,9 @@ var charge_distance = 70
 var slowdown_distance = charge_distance / 2
 
 var charged = false
+
+func _ready():
+	SignalManager.connect("take_damage", self , "damage")
 
 func enter():
 	charge_path.visible = true
@@ -26,7 +28,6 @@ func update(_delta):
 	if charged:
 		charge_distance -= 1
 		if charge_distance > 0:
-			print(charge_distance)
 			if charge_distance > slowdown_distance:
 				t += _delta * 2.4
 			else:
@@ -36,10 +37,12 @@ func update(_delta):
 			else:
 				.move(lerp(0, SPEED, t), charge_direction)
 		else:
+			fenrir.get_node("FenrirBody").disabled = false
 			emit_signal("finished", "chase")
 
 func _on_ChargeTimer_timeout():
 	charged = true
+	fenrir.get_node("FenrirBody").disabled = true
 	charge_path.visible = false
 	angle = (PlayerVar.player.position - fenrir.position).angle()
 	animation_player.play("charge_path_charged")
@@ -48,6 +51,7 @@ func _on_ChargeTimer_timeout():
 func exit():
 	charged = false
 
-
+func take_damage():
+	emit_signal("finished", "stagger")
 
 

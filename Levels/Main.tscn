@@ -11,11 +11,11 @@
 [ext_resource path="res://Environment/PalmTrees/Palm4.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/SpawnLocation.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=14]
-[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=15]
-[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Fenrir.tscn" type="PackedScene" id=16]
+[ext_resource path="res://NPCs/Hostile/Enemies/VikingSword/VikingSword.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=15]
+[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -82,6 +82,8 @@ hframes = 16
 [node name="effects" type="Node2D" parent="."]
 
 [node name="circle" type="Node2D" parent="."]
+
+[node name="barriers" type="Node2D" parent="."]
 
 [node name="World" type="YSort" parent="."]
 
@@ -188,13 +190,16 @@ position = Vector2( 420, -122.162 )
 position = Vector2( -350, 120.496 )
 
 [node name="SpawnLocation" parent="World" instance=ExtResource( 10 )]
-position = Vector2( 410, -310 )
+position = Vector2( 70, 27.4808 )
 player = NodePath("../Player")
 
 [node name="Player" parent="World" instance=ExtResource( 11 )]
 position = Vector2( 50, 40.9808 )
 
-[node name="Target" parent="World" instance=ExtResource( 12 )]
+[node name="VikingSword" parent="World" instance=ExtResource( 12 )]
+position = Vector2( 396, 30.1314 )
+
+[node name="Target" parent="World" instance=ExtResource( 13 )]
 editor/display_folded = true
 position = Vector2( 1282.1, 38.19 )
 
@@ -205,16 +210,16 @@ falling_log = NodePath("../../Log")
 [node name="Obstacles" type="Node2D" parent="World"]
 position = Vector2( -268.758, -163.814 )
 
-[node name="River" parent="World/Obstacles" instance=ExtResource( 13 )]
+[node name="River" parent="World/Obstacles" instance=ExtResource( 14 )]
 position = Vector2( 1470, 220 )
 
 [node name="Rocks" type="Node2D" parent="World/Obstacles"]
 
-[node name="Log" parent="World" instance=ExtResource( 14 )]
+[node name="Log" parent="World" instance=ExtResource( 15 )]
 position = Vector2( 1240, -50 )
 
-[node name="MrWalker" parent="World" instance=ExtResource( 15 )]
-position = Vector2( -74, 87.9784 )
+[node name="MrWalker" parent="World" instance=ExtResource( 16 )]
+position = Vector2( -210, 120 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 134, 54.1239 )
@@ -229,9 +234,6 @@ margin_top = -82.0
 margin_right = 14.0
 margin_bottom = 74.0
 color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
-
-[node name="Fenrir" parent="." instance=ExtResource( 16 )]
-position = Vector2( 790, -260 )
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

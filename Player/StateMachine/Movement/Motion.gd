@@ -15,3 +15,12 @@ func get_input_direction():
 func move(speed_value, direction):
 	var motion = direction.normalized() * speed_value
 	owner.move_and_slide(motion)
+
+func facing_direction(anim):
+	var facing_direction
+	if PlayerVar.facing_forward:
+		facing_direction = str(anim, "_forward")
+	else:
+		facing_direction = str(anim, "_backward")
+	player_animation.travel(facing_direction)
+	

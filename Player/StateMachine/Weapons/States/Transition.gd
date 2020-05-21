@@ -22,6 +22,7 @@ func _assign_id(id):
 			0:
 				melee = weapon_spawner.sword_load
 				wait_time = 0.5
+				PlayerVar.damage = 60
 		owner.current_weapon = melee
 		owner.get_node("WeaponTimers").get_node("MeleeCooldown").wait_time = wait_time
 		owner.timer = owner.get_node("WeaponTimers").get_node("MeleeCooldown")
@@ -33,6 +34,7 @@ func _assign_id(id):
 				owner.ammo = projectile_spawner.arrow_load
 				owner.ammo_speed = 700
 				PlayerVar.charge_ranged = true
+				PlayerVar.damage = 30
 				wait_time = 1
 			11:
 				ranged = weapon_spawner.gun_load

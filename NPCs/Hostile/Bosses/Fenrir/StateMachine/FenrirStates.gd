@@ -9,8 +9,10 @@ func _ready():
 		"charge": $Charge,
 		"circle": $Circle,
 		"intimidate": $Intimidate,
-		"kickdirt": $KickDirt,
-		"runaway": $RunAway
+		"kick_dirt": $KickDirt,
+		"run_away": $RunAway,
+		"stagger": $Stagger,
+		"recover": $Recover
 	}
 
 func _change_state(state_name):

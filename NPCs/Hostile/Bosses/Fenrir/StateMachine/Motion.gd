@@ -3,10 +3,10 @@ extends "States.gd"
 var direction
 var distance
 onready var fenrir = get_parent().get_parent()
+onready var animation_player = fenrir.get_node("AnimationPlayer")
 
 func move(speed_value, direction):
-	var motion = direction.normalized() * speed_value * AbilityVar.slowdown
-	owner.move_and_slide(motion)
+	owner.move_and_slide(direction.normalized() * speed_value * AbilityVar.slowdown)
 
 func get_direction(target):
 	return (target.position - fenrir.position).normalized()

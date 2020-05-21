@@ -3,9 +3,6 @@ extends "../Motion.gd"
 export(int) var SPEED = 100
 var random_direction
 
-func _ready():
-	SignalManager.connect("player_found", self, "player_found")
-
 func enter():
 	.play("run")
 	patrol_time.start()
@@ -19,9 +16,13 @@ func _on_PatrolTime_timeout():
 	if get_parent().current_state.name == "Patrol":
 		emit_signal("finished", "idle")
 
-func player_found():
-	emit_signal("finished", "chase")
-
 func _on_ChaseArea_body_entered(body):
 	if body.get_name() == "Player":
-		SignalManager.emit_signal("player_found")
+		player_near = true
+
+func _on_ChaseArea_body_exited(body):
+	if body.get_name() == "Player":
+		player_near = false
+
+
+

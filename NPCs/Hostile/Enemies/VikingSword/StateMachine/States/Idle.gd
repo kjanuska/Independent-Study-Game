@@ -4,7 +4,7 @@ func _ready():
 	SignalManager.connect("player_found", self , "player_found")
 
 func enter():
-	
+	.play("idle")
 	idle_time.start()
 
 func _on_IdleTime_timeout():
@@ -13,4 +13,4 @@ func _on_IdleTime_timeout():
 		emit_signal("finished", "patrol")
 
 func player_found():
-	emit_signal("finished", "chase")
+	player_near = true

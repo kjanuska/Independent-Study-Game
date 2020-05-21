@@ -1,6 +1,10 @@
 extends "../Motion.gd"
 
-export(int) var SPEED = 250
+export(int) var SPEED = 200
+
+func _ready():
+	SignalManager.connect("take_damage", self , "damage")
+	fenrir.get_node("DefenseRange").get_node("CollisionShape2D").disabled = true
 
 func enter():
 	.chase_target()
@@ -16,3 +20,6 @@ func update(_delta):
 	check_aim()
 	if direction != null:
 		.move(SPEED, direction)
+
+func damage():
+	emit_signal("finished", "stagger")
