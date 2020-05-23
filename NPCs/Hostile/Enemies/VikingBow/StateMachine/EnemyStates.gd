@@ -6,7 +6,8 @@ func _ready():
 		"idle": $Idle,
 		"patrol": $Patrol,
 		"chase": $Chase,
-		"attack": $Attack
+		"attack": $Attack,
+		"dead": $Dead
 	}
 
 func _change_state(state_name):

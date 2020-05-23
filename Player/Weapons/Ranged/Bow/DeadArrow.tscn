@@ -3,6 +3,7 @@
 [ext_resource path="res://Assets/Sprites/Weapons/arrow.png" type="Texture" id=1]
 
 [node name="Sprite" type="Sprite"]
+show_behind_parent = true
 position = Vector2( -9.36784, 0.263884 )
 scale = Vector2( 1.50977, 1.95291 )
 texture = ExtResource( 1 )

@@ -12,6 +12,7 @@ signal scene_loaded()
 signal player_found()
 signal player_lost()
 signal attack_player()
+signal dead()
 
 #boss
 signal take_damage()

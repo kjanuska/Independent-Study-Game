@@ -24,7 +24,6 @@ func _on_Arrow_area_entered(area):
 	if area.is_in_group("hurtbox"):
 		var dead_arrow = dead_arrow_load.instance()
 		area.get_parent().call_deferred("add_child", dead_arrow)
-		dead_arrow.set_global_position(position - PlayerVar.player.position)
 		dead_arrow.set_rotation(get_rotation())
 		queue_free()
-		area.take_damage()
+		area.take_damage(20)

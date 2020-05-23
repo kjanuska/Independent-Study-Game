@@ -13,8 +13,10 @@ func interact():
 	tie.reset()
 	tie.set_color(Color(0, 0, 0))
 	tie.set_size(11)
-	tie.buff_text("Hey ", 0.1)
-	tie.buff_text("brrrooo\n", 0.9)
+	tie.buff_text("Hey, I'm in a pickle here.\n", 0.1)
+	tie.clear_text()
 	tie.buff_silence(1)
-	tie.buff_text("I'm Mr. Walker", 0.05)
+
+	tie.buff_text("There are some slimes over there that I can't", 0.1)
+	tie.buff_text("get rid of because I don't know how to use a sword!", 0.1)
 	tie.set_state(tie.STATE_OUTPUT)

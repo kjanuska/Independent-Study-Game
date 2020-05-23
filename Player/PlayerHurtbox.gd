@@ -1,13 +1,13 @@
 extends Area2D
 
-var health = 30
+var health = 100
 var is_vulnerable = true
 
-func take_damage():
+func take_damage(damage):
 	if is_vulnerable:
 		print(health)
-		health -= 1
-		if health == 0:
+		health -= damage
+		if health <= 0:
 			print("you died")
 			get_parent().player_animation.travel("death")
 			owner.get_node("MovementStates").set_physics_process(false)
@@ -20,4 +20,3 @@ func take_damage():
 
 func _on_InvincibilityPeriod_timeout():
 	is_vulnerable = true
-	print("done")

@@ -2,6 +2,9 @@ extends "../Motion.gd"
 
 export(int) var SPEED = 200
 
+func _ready():
+	SignalManager.connect("dead", self, "dead")
+
 func enter():
 	.chase_target()
 
@@ -16,3 +19,6 @@ func update(_delta):
 	check_aim()
 	if direction != null:
 		.move(SPEED, direction)
+
+func dead():
+	emit_signal("finished", "dead")

@@ -30,7 +30,7 @@ func _on_PopupTimer_timeout():
 "
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 7.45749, 10.7607 )
+extents = Vector2( 10.5692, 10.7607 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "dash"
@@ -257,7 +257,7 @@ states/walk_forward/position = Vector2( 493.266, -141.489 )
 transitions = [ "walk_backward", "dash", SubResource( 18 ), "walk_forward", "dash", SubResource( 19 ), "dash", "walk_backward", SubResource( 20 ), "dash", "walk_forward", SubResource( 21 ), "walk_forward", "hurt", SubResource( 22 ), "walk_backward", "hurt", SubResource( 23 ), "hurt", "walk_forward", SubResource( 24 ), "hurt", "walk_backward", SubResource( 25 ), "walk_forward", "walk_backward", SubResource( 26 ), "walk_backward", "walk_forward", SubResource( 27 ), "idle_forward", "walk_backward", SubResource( 28 ), "walk_backward", "idle_forward", SubResource( 29 ), "idle_backward", "walk_forward", SubResource( 30 ), "walk_forward", "idle_backward", SubResource( 31 ), "walk_forward", "idle_forward", SubResource( 32 ), "idle_forward", "walk_forward", SubResource( 33 ), "idle_backward", "walk_backward", SubResource( 34 ), "walk_backward", "idle_backward", SubResource( 35 ), "idle_backward", "death", SubResource( 36 ), "idle_forward", "death", SubResource( 37 ), "hurt", "idle_backward", SubResource( 38 ), "idle_backward", "hurt", SubResource( 39 ), "hurt", "idle_forward", SubResource( 40 ), "idle_forward", "hurt", SubResource( 41 ), "dash", "idle_forward", SubResource( 42 ), "dash", "idle_backward", SubResource( 43 ), "idle_forward", "idle_backward", SubResource( 44 ), "idle_backward", "idle_forward", SubResource( 45 ) ]
 start_node = "idle_forward"
 end_node = "death"
-graph_offset = Vector2( -25.7339, -167.236 )
+graph_offset = Vector2( -25.7339, -222.304 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=47]
 

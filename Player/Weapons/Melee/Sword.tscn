@@ -105,6 +105,7 @@ material = SubResource( 2 )
 position = Vector2( 17.65, 0 )
 texture = SubResource( 3 )
 hframes = 6
+frame = 5
 
 [node name="Area2D" type="Area2D" parent="Sprite"]
 position = Vector2( 101.697, -19.8672 )

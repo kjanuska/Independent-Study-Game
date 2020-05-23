@@ -35,7 +35,6 @@ var scent_trail = []
 
 func _ready():
 	player = get_node(".")
-	get_node("AnimationTree").set_active(true)
 	player_animation = $AnimationTree.get("parameters/playback")
 	melee_cooldown = $WeaponTimers/MeleeCooldown
 	ranged_cooldown = $WeaponTimers/RangedCooldown
@@ -114,11 +113,13 @@ func shoot_weapon():
 func shoot_charged():
 	weapon_animation_player.play("attack")
 	if count == 80:
-		ammo_speed = 1500
+		ammo_speed = 800
+		PlayerVar.damage = 40
 		shoot_weapon()
 		count = 0
 	elif count < 80:
-		ammo_speed = 700
+		ammo_speed = 400
+		PlayerVar.damage = 30
 		shoot_weapon()
 		count = 0
 

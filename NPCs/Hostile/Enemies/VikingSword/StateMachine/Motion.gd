@@ -60,6 +60,7 @@ func _physics_process(_delta):
 	
 		if !aim.is_colliding():
 			emit_signal("finished", "chase")
+			set_physics_process(false)
 		else:
 			return
 	else:

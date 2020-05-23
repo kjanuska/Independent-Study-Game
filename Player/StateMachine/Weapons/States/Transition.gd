@@ -34,12 +34,11 @@ func _assign_id(id):
 				owner.ammo = projectile_spawner.arrow_load
 				owner.ammo_speed = 700
 				PlayerVar.charge_ranged = true
-				PlayerVar.damage = 30
+				PlayerVar.damage = 50
 				wait_time = 1
 			11:
 				ranged = weapon_spawner.gun_load
 				owner.ammo = projectile_spawner.bullet_load
-				owner.ammo_speed = 1500
 				PlayerVar.charge_ranged = false
 				wait_time = 0.2
 		owner.current_weapon = ranged
