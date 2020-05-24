@@ -14,3 +14,6 @@ func _on_IdleTime_timeout():
 
 func player_found():
 	player_near = true
+
+func dead():
+	emit_signal("finished", "dead")

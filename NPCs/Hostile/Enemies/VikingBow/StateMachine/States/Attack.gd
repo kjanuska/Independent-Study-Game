@@ -42,3 +42,6 @@ func shoot():
 
 func _on_ShotCooldown_timeout():
 	can_shoot = true
+
+func dead():
+	emit_signal("finished", "dead")

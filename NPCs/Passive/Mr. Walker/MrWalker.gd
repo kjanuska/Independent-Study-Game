@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var overlapping = false
 
+var slowdown
+
 func _ready():
 	$Text/TextInterfaceEngine.connect("buff_end", self, "stopped_talking")
 	$AnimationPlayer.play("idle")
@@ -13,6 +15,10 @@ func _on_Area2D_body_entered(body):
 
 func _on_Area2D_body_exited(body):
 	if body.get_name() == "Player":
+		get_node("Text").tie.clear_buffer()
+		get_node("Text").tie.clear_text()
+		get_node("Text").tie.buff_clear()
+		$AnimationPlayer.play("idle")
 		PlayerVar.player.camera_zoom(1, 1)
 		overlapping =  false
 

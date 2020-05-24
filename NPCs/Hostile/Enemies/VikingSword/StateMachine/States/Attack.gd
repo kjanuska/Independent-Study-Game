@@ -30,3 +30,6 @@ func _on_AttackTime_timeout():
 	else:
 		.play("attack")
 		attack_time.start()
+
+func dead():
+	emit_signal("finished", "dead")

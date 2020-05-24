@@ -4,6 +4,9 @@ var time = 3.0
 
 onready var ice_cube_load = preload("res://Player/Abilities/Freeze/IceCubeAnimation.tscn")
 
+func _ready():
+	$AnimationPlayer.play("idle")
+
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "activate":
 		$AnimationPlayer.play("idle")
@@ -11,16 +14,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		PlayerVar.player.ability_cooldown.start()
 
 func _on_FreezeArea_body_entered(body):
-	AbilityVar.slowdown = 0
 	var ice_cube = ice_cube_load.instance()
 	body.add_child(ice_cube)
+	ice_cube.target_body = body
+	ice_cube.target_body.slowdown = 0
 
-func _on_FreezeArea_body_exited(body):
-	$Timers/FreezeTime.start()
-
-func _on_FreezeTime_timeout():
-	AbilityVar.slowdown = 0.7
-	$Timers/SlowdownTimer.start()
-
-func _on_SlowdownTimer_timeout():
-	AbilityVar.slowdown = 1

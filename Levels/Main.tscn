@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/TileMaps/Beach Level/beach.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Weapons/PickupWeapon.gd" type="Script" id=2]
@@ -11,12 +11,11 @@
 [ext_resource path="res://Environment/PalmTrees/Palm2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/SpawnLocation.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingSword/VikingSword.tscn" type="PackedScene" id=12]
-[ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/VikingBow.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=16]
-[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Environment/Target.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Environment/River.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Environment/Log.tscn" type="PackedScene" id=14]
+[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Levels/TransitionArea.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -55,7 +54,7 @@ scale = Vector2( 129.406, 32.4289 )
 shape = SubResource( 1 )
 
 [node name="Pickup Melee" type="Area2D" parent="."]
-position = Vector2( 90, 60 )
+position = Vector2( 90, 20 )
 scale = Vector2( 0.5136, 0.462272 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -75,7 +74,7 @@ normal_map = ExtResource( 4 )
 hframes = 6
 
 [node name="Pickup Bow" type="Area2D" parent="."]
-position = Vector2( 90, 98.5957 )
+position = Vector2( 90, 90 )
 scale = Vector2( 0.520005, 0.480001 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -3155,12 +3154,6 @@ player = NodePath("../Player")
 [node name="Player" parent="World" instance=ExtResource( 11 )]
 position = Vector2( 50, 40.9808 )
 
-[node name="VikingSword" parent="World" instance=ExtResource( 12 )]
-position = Vector2( 334, 40 )
-
-[node name="VikingBow" parent="World" instance=ExtResource( 13 )]
-position = Vector2( 650, 73.1811 )
-
 [node name="StaticBody2D" type="StaticBody2D" parent="World"]
 position = Vector2( 134, 54.1239 )
 
@@ -3175,7 +3168,7 @@ margin_right = 14.0
 margin_bottom = 74.0
 color = Color( 0.0666667, 0.0196078, 0.0196078, 1 )
 
-[node name="Target" parent="World" instance=ExtResource( 14 )]
+[node name="Target" parent="World" instance=ExtResource( 12 )]
 editor/display_folded = true
 position = Vector2( 959, 53.1811 )
 
@@ -3189,16 +3182,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="River" parent="World/Obstacles" instance=ExtResource( 15 )]
+[node name="River" parent="World/Obstacles" instance=ExtResource( 13 )]
 position = Vector2( 1158.76, 206.995 )
 
 [node name="Rocks" type="Node2D" parent="World/Obstacles"]
 
-[node name="Log" parent="World" instance=ExtResource( 16 )]
+[node name="Log" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 930, -6.8189 )
 
-[node name="MrWalker" parent="World" instance=ExtResource( 17 )]
-position = Vector2( -76, 24.5633 )
+[node name="MrWalker" parent="World" instance=ExtResource( 15 )]
+position = Vector2( -80, 52.4571 )
 
 [node name="Node" type="Node" parent="World"]
 
@@ -3223,6 +3216,10 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/TopEdge"]
 shape = SubResource( 5 )
+
+[node name="Transition" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1050, 160.914 )
+world_scene = "res://Levels/Arena.tscn"
 
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]

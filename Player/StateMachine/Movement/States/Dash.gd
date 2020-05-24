@@ -3,7 +3,7 @@ extends "../Motion.gd"
 onready var dash_cooldown = owner.get_node("DashCooldown")
 
 func enter():
-	owner.get_node("Hurtbox").is_vulnerable = false
+	PlayerVar.is_vulnerable = false
 	speed = 1000.0
 	move_direction = get_input_direction()
 	player_animation.travel("dash")
@@ -14,7 +14,7 @@ func update(_delta):
 
 func _on_DashTimer_timeout():
 	speed = 0.0
-	owner.get_node("Hurtbox").is_vulnerable = true
+	PlayerVar.is_vulnerable = true
 	emit_signal("finished", "previous")
 	dash_cooldown.start()
 

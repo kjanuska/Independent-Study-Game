@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shield.png-e10399fefc1dda1cb462c94fbd5d83f6.stex"
+path="res://.import/shield.png-a4389471f9e119422b75665757dc579c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Weapons/shield.png"
-dest_files=[ "res://.import/shield.png-e10399fefc1dda1cb462c94fbd5d83f6.stex" ]
+source_file="res://Assets/Sprites/Ability/Shield/shield.png"
+dest_files=[ "res://.import/shield.png-a4389471f9e119422b75665757dc579c.stex" ]
 
 [params]
 

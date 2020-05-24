@@ -15,7 +15,7 @@ func get_random_direction():
 	return move_direction
 
 func move(speed_value, direction):
-	var motion = direction.normalized() * speed_value * AbilityVar.slowdown
+	var motion = direction.normalized() * speed_value * enemy.slowdown
 	owner.move_and_slide(motion)
 
 func chase_target():

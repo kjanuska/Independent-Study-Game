@@ -2,6 +2,9 @@ extends Node2D
 
 var time = 2.0
 
+func _ready():
+	$AnimationPlayer.play("idle")
+
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "activate":
 		$AnimationPlayer.play("idle")

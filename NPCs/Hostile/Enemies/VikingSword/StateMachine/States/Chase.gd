@@ -2,9 +2,6 @@ extends "../Motion.gd"
 
 export(int) var SPEED = 200
 
-func _ready():
-	SignalManager.connect("dead", self, "dead")
-
 func enter():
 	.play("run")
 	.chase_target()

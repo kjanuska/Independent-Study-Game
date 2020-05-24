@@ -91,10 +91,10 @@ shape = SubResource( 4 )
 script = ExtResource( 3 )
 
 [node name="TextInterfaceEngine" type="ReferenceRect" parent="Text"]
-margin_left = -29.0
-margin_top = -55.0049
-margin_right = 98.0
-margin_bottom = -8.00494
+margin_left = -80.0
+margin_top = -60.0
+margin_right = 88.0
+margin_bottom = -8.0
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )

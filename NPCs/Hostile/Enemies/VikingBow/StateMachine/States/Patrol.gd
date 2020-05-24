@@ -24,3 +24,6 @@ func player_found():
 func _on_ChaseArea_body_entered(body):
 	if body.get_name() == "Player":
 		SignalManager.emit_signal("player_found")
+
+func dead():
+	emit_signal("finished", "dead")

@@ -14,6 +14,8 @@ var damage
 
 var facing_forward
 
+var is_vulnerable = true
+
 func _ready():
 	_scene_changed()
 	SignalManager.connect("scene_changed", self, "_scene_changed")

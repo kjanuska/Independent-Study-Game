@@ -22,12 +22,12 @@ func move(speed_value, direction):
 	var is_flipped
 	if abs(direction.angle()) < PI/2:
 		is_flipped = false
-		enemy.get_node("Sword/CollisionShape2D").position.x = 12
+		enemy.get_node("Sword").get_node("CollisionShape2D").position.x = 12
 	if abs(direction.angle()) > PI/2:
 		is_flipped = true
-		enemy.get_node("Sword/CollisionShape2D").position.x = -12
+		enemy.get_node("Sword").get_node("CollisionShape2D").position.x = -12
 	enemy.get_node("Sprite").flip_h = is_flipped
-	var motion = direction.normalized() * speed_value * AbilityVar.slowdown
+	var motion = direction.normalized() * speed_value * enemy.slowdown
 	owner.move_and_slide(motion)
 
 func chase_target():

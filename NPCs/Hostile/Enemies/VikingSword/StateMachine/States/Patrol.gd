@@ -24,5 +24,6 @@ func _on_ChaseArea_body_exited(body):
 	if body.get_name() == "Player":
 		player_near = false
 
-
+func dead():
+	emit_signal("finished", "dead")
 

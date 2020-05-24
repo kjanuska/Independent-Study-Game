@@ -13,3 +13,6 @@ func _on_IdleTime_timeout():
 
 func player_found():
 	emit_signal("finished", "chase")
+
+func dead():
+	emit_signal("finished", "dead")
