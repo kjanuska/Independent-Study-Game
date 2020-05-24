@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass_tileset_16x16.png-c6a94ddcff5f3cae740b9a1eb10bb68f.stex"
+path="res://.import/walltiles.png-b7aac6da4e3105be98a4441c80a66d34.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environment/grass_tileset_16x16.png"
-dest_files=[ "res://.import/grass_tileset_16x16.png-c6a94ddcff5f3cae740b9a1eb10bb68f.stex" ]
+source_file="res://Levels/walltiles.png"
+dest_files=[ "res://.import/walltiles.png-b7aac6da4e3105be98a4441c80a66d34.stex" ]
 
 [params]
 
