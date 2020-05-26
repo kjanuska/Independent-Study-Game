@@ -1,8 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Fenrir.gd" type="Script" id=1]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Hurtbox.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Characters/Enemies/king_boss.png" type="Texture" id=3]
 [ext_resource path="res://Assets/charge_path.png" type="Texture" id=4]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/FenrirStates.gd" type="Script" id=5]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Sleep.gd" type="Script" id=6]
@@ -15,6 +15,7 @@
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/RunAway.gd" type="Script" id=13]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Stagger.gd" type="Script" id=14]
 [ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Recover.gd" type="Script" id=15]
+[ext_resource path="res://icon.png" type="Texture" id=16]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 0.0
@@ -149,8 +150,9 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -9.53674e-007, -9.53674e-007 )
-scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 3 )
+vframes = 7
+hframes = 40
 
 [node name="ChargePathNode" type="Node2D" parent="."]
 
@@ -261,7 +263,7 @@ visible = false
 
 [node name="Attack" type="Sprite" parent="Claw"]
 scale = Vector2( 0.296875, 0.383523 )
-texture = ExtResource( 3 )
+texture = ExtResource( 16 )
 
 [node name="AttackBox" type="Area2D" parent="Claw/Attack"]
 collision_layer = 1024

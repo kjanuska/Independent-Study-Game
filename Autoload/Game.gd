@@ -9,7 +9,7 @@ func _ready():
 
 func update():
 	print("update")
-	level = get_tree().get_current_scene
+	level = get_tree().get_current_scene()
 	world = level.get_node("World")
 	effects = level.get_node("effects")
 	

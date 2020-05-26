@@ -4,6 +4,8 @@ var attack_misses = randi() % 3 + 2
 
 var damaged = false
 
+var damage = 40
+
 func _ready():
 	SignalManager.connect("take_damage", self , "damage")
 
@@ -43,5 +45,5 @@ func damage():
 func _on_AttackBox_area_entered(area):
 	if area.is_in_group("hurtbox"):
 		damaged = true
-		area.take_damage()
+		area.take_damage(damage)
 

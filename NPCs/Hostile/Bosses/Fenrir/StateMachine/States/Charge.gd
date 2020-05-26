@@ -51,7 +51,7 @@ func _on_ChargeTimer_timeout():
 func exit():
 	charged = false
 
-func take_damage():
+func damage():
 	emit_signal("finished", "stagger")
 
 
