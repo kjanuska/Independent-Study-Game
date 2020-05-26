@@ -1,0 +1,112 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://NPCs/Passive/Mr. Walker/MrWalker.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Characters/MrWalker.png" type="Texture" id=2]
+[ext_resource path="res://NPCs/Passive/Mr. Walker/WalkerText.gd" type="Script" id=3]
+[ext_resource path="res://addons/GodotTIE/text_interface_engine.gd" type="Script" id=4]
+[ext_resource path="res://addons/GodotTIE/GodotTIE_icon.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Fonts/Roboto.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Assets/Sprites/Characters/!.png" type="Texture" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 6.03484
+
+[sub_resource type="Animation" id=2]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "talk"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 22.6923, 23.0904 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "ready"
+length = 1.65
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("ExclamationMark:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.8, 1.53 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -25 ), Vector2( 0, -29 ), Vector2( 0, -25 ) ]
+}
+
+[node name="MrWalker" type="KinematicBody2D"]
+collision_layer = 32
+collision_mask = 15
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.35598 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 5
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 2 )
+anims/talk = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="Text" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="TextInterfaceEngine" type="ReferenceRect" parent="Text"]
+margin_left = -80.0
+margin_top = -60.0
+margin_right = 88.0
+margin_bottom = -8.0
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+FONT = ExtResource( 6 )
+
+[node name="ExclamationMark" type="Sprite" parent="."]
+position = Vector2( 0, -24.5041 )
+texture = ExtResource( 7 )
+
+[node name="ExclamationAnimation" type="AnimationPlayer" parent="."]
+anims/ready = SubResource( 5 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

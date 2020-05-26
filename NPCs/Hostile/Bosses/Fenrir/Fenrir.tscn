@@ -1,0 +1,283 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Fenrir.gd" type="Script" id=1]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/Hurtbox.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/charge_path.png" type="Texture" id=4]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/FenrirStates.gd" type="Script" id=5]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Sleep.gd" type="Script" id=6]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Chase.gd" type="Script" id=7]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Attack.gd" type="Script" id=8]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Charge.gd" type="Script" id=9]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Circle.gd" type="Script" id=10]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Intimidate.gd" type="Script" id=11]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/KickDirt.gd" type="Script" id=12]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/RunAway.gd" type="Script" id=13]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Stagger.gd" type="Script" id=14]
+[ext_resource path="res://NPCs/Hostile/Bosses/Fenrir/StateMachine/States/Recover.gd" type="Script" id=15]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 0.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 12.3926
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 190.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 89.0
+
+[sub_resource type="CapsuleShape2D" id=5]
+height = 0.0
+
+[sub_resource type="Animation" id=6]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00774103, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.027451, 0.027451, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Claw:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Claw/Attack/AttackBox/AttackBoxCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Claw/Attack:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1.68179, 2.54912, 2.46229 ),
+"update": 0,
+"values": [ Vector2( 19.5, 0 ), Vector2( 50, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChargePathNode/ChargePath:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.623529 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChargePathNode/ChargePath:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.623529 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.627451 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "kick_dirt"
+
+[sub_resource type="Animation" id=10]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 30.0
+
+[node name="Fenrir" type="KinematicBody2D"]
+position = Vector2( 1, 0 )
+script = ExtResource( 1 )
+
+[node name="Hurtbox" type="Area2D" parent="." groups=[
+"hurtbox",
+]]
+collision_layer = 4
+collision_mask = 384
+script = ExtResource( 2 )
+
+[node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -9.53674e-007, -9.53674e-007 )
+scale = Vector2( 0.3125, 0.3125 )
+texture = ExtResource( 3 )
+
+[node name="ChargePathNode" type="Node2D" parent="."]
+
+[node name="ChargePath" type="Sprite" parent="ChargePathNode"]
+modulate = Color( 1, 1, 1, 0.623529 )
+position = Vector2( 128, 0 )
+texture = ExtResource( 4 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="IntimidateTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="ChargeTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="StaggerTimer" type="Timer" parent="Timers"]
+wait_time = 1.5
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="States" type="Node" parent="."]
+script = ExtResource( 5 )
+START_STATE = NodePath("Sleep")
+
+[node name="Sleep" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="Chase" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Charge" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Circle" type="Node" parent="States"]
+script = ExtResource( 10 )
+
+[node name="Intimidate" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="KickDirt" type="Node" parent="States"]
+script = ExtResource( 12 )
+
+[node name="RunAway" type="Node" parent="States"]
+script = ExtResource( 13 )
+
+[node name="Stagger" type="Node" parent="States"]
+script = ExtResource( 14 )
+
+[node name="Recover" type="Node" parent="States"]
+script = ExtResource( 15 )
+
+[node name="AttackRange" type="Area2D" parent="."]
+scale = Vector2( 0.68, 0.68 )
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+modulate = Color( 0.886275, 0.235294, 0.235294, 1 )
+self_modulate = Color( 0.796078, 0.262745, 0.262745, 1 )
+scale = Vector2( 7.12, 7.16 )
+shape = SubResource( 2 )
+
+[node name="DetectionRange" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+position = Vector2( 5.96046e-007, 0 )
+shape = SubResource( 3 )
+
+[node name="DefenseRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseRange"]
+shape = SubResource( 4 )
+disabled = true
+
+[node name="FenrirBody" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+modulate = Color( 0.313726, 1, 0, 1 )
+
+[node name="AimSights" type="RayCast2D" parent="."]
+modulate = Color( 0.917647, 0.0352941, 0.0352941, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -21.0
+margin_top = -30.0
+margin_right = 39.0
+margin_bottom = -16.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 6 )
+anims/charge_path_charged = SubResource( 7 )
+anims/charge_path_flash = SubResource( 8 )
+anims/kick_dirt = SubResource( 9 )
+anims/stagger = SubResource( 10 )
+
+[node name="Claw" type="Node2D" parent="."]
+visible = false
+
+[node name="Attack" type="Sprite" parent="Claw"]
+scale = Vector2( 0.296875, 0.383523 )
+texture = ExtResource( 3 )
+
+[node name="AttackBox" type="Area2D" parent="Claw/Attack"]
+collision_layer = 1024
+collision_mask = 10
+
+[node name="AttackBoxCollision" type="CollisionShape2D" parent="Claw/Attack/AttackBox"]
+position = Vector2( 1.90735e-006, 0 )
+shape = SubResource( 11 )
+disabled = true
+
+[connection signal="timeout" from="Timers/IntimidateTimer" to="States/Intimidate" method="_on_IntimidateTimer_timeout"]
+[connection signal="timeout" from="Timers/ChargeTimer" to="States/Charge" method="_on_ChargeTimer_timeout"]
+[connection signal="timeout" from="Timers/StaggerTimer" to="States/Stagger" method="_on_StaggerTimer_timeout"]
+[connection signal="timeout" from="Timers/AttackTimer" to="States/Attack" method="_on_AttackTimer_timeout"]
+[connection signal="body_entered" from="DetectionRange" to="States/Sleep" method="_on_DetectionRange_body_entered"]
+[connection signal="body_entered" from="DefenseRange" to="States/Recover" method="_on_DefenseRange_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="States/Attack" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="States/KickDirt" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="Claw/Attack/AttackBox" to="States/Attack" method="_on_AttackBox_area_entered"]
