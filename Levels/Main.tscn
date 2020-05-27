@@ -21,10 +21,10 @@
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.4229, 34.4232 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 356 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 918.502, 10 )
 
 [node name="Main" type="Node"]
@@ -6811,7 +6811,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Left Edge"]
 position = Vector2( -36, 62.4572 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="TopEdge" type="StaticBody2D" parent="Edges"]
 editor/display_folded = true
@@ -6821,19 +6821,18 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/TopEdge"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="RightEdge" type="StaticBody2D" parent="Edges"]
 position = Vector2( 1090, -35.5428 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/RightEdge"]
 scale = Vector2( -0.01, 21.84 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Transition" parent="." instance=ExtResource( 15 )]
 position = Vector2( 1050, 160.914 )
 world_scene = "res://Levels/Town.tscn"
-
 [connection signal="body_entered" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Pickup Melee" to="Pickup Melee" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Pickup Bow" to="Pickup Bow" method="_on_Area2D_body_entered"]
