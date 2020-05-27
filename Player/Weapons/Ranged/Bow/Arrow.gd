@@ -2,12 +2,11 @@ extends Area2D
 
 var speed
 
-var dead_arrow_load = preload("res://Player/Weapons/Ranged/Bow/DeadArrow.tscn")
-
 var direction = Vector2()
 
 func _ready():
 	set_as_toplevel(true)
+	$AnimationPlayer.play("fire")
 
 func _physics_process(delta):
 	position.x += direction.x * speed * delta * AbilityVar.slowdown
@@ -20,10 +19,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 	if speed != 0:
 		queue_free()
 
-func _on_Arrow_area_entered(area):
+func _on_Fireball_area_entered(area):
 	if area.is_in_group("hurtbox"):
-		var dead_arrow = dead_arrow_load.instance()
-		area.get_parent().call_deferred("add_child", dead_arrow)
-		dead_arrow.set_rotation(get_rotation())
+		area.take_damage(25)
 		queue_free()
-		area.take_damage(20)
+
+func _on_Fireball_body_entered(body):
+	if body.get_class() == "TileMap" && body.get_name() == "Walls":
+		queue_free()

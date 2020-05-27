@@ -3,9 +3,12 @@ extends "States.gd"
 onready var idle_time = owner.get_node("Timers/IdleTime")
 onready var patrol_time = owner.get_node("Timers/PatrolTime")
 onready var enemy = self.get_parent().get_parent()
+onready var animation_player = enemy.get_node("AnimationTree").get("parameters/playback")
 
 var distance
 var direction
+
+var player_near = false
 
 func get_random_direction():
 	var move_direction = Vector2()
@@ -36,3 +39,20 @@ func chase_target():
 				direction = look.cast_to.normalized()
 				distance = enemy.get_global_position().distance_to(PlayerVar.player.get_global_position())
 				break
+
+func play(animation):
+	animation_player.travel(animation)
+
+func _physics_process(_delta):
+	if player_near:
+		var aim = enemy.get_node("RayCast2D")
+		aim.cast_to = (enemy.target.position - enemy.position)
+		aim.force_raycast_update()
+	
+		if !aim.is_colliding():
+			emit_signal("finished", "chase")
+			set_physics_process(false)
+		else:
+			return
+	else:
+		return

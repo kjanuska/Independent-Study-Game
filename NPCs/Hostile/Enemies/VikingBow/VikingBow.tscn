@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/Viking.gd" type="Script" id=1]
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/Hurtbox.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Characters/Enemies/viking_archer.png" type="Texture" id=3]
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/StateMachine/EnemyStates.gd" type="Script" id=4]
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/StateMachine/States/Idle.gd" type="Script" id=5]
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingBow/StateMachine/States/Patrol.gd" type="Script" id=6]
@@ -17,21 +17,38 @@ height = 0.0
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 290.0
+radius = 120.416
 
-[sub_resource type="Animation" id=4]
-resource_name = "die"
+[sub_resource type="Animation" id=7]
+resource_name = "attack"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16, 12, 11 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "die"
+length = 1.5
+step = 0.09
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.18, 0.27, 0.36, 0.45, 0.54, 0.63, 0.72, 0.81, 0.9, 0.99, 1.08, 1.17, 1.26, 1.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -48,6 +65,88 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+
+[sub_resource type="Animation" id=8]
+resource_name = "idle"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "run"
+length = 0.65
+loop = true
+step = 0.11
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.11, 0.22, 0.33, 0.44, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "die"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachine" id=24]
+states/attack/node = SubResource( 12 )
+states/attack/position = Vector2( 406, 96 )
+states/die/node = SubResource( 13 )
+states/die/position = Vector2( 665, 298 )
+states/idle/node = SubResource( 14 )
+states/idle/position = Vector2( 659, 174 )
+states/run/node = SubResource( 15 )
+states/run/position = Vector2( 1004, 96 )
+transitions = [ "attack", "idle", SubResource( 16 ), "idle", "attack", SubResource( 17 ), "run", "idle", SubResource( 18 ), "idle", "run", SubResource( 19 ), "idle", "die", SubResource( 20 ), "run", "attack", SubResource( 21 ), "attack", "run", SubResource( 22 ), "run", "die", SubResource( 23 ) ]
+start_node = "idle"
+end_node = "die"
+graph_offset = Vector2( 0, 21.2306 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
 [node name="VikingBow" type="KinematicBody2D"]
 collision_layer = 4
@@ -68,9 +167,11 @@ script = ExtResource( 2 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -9.53674e-007, -9.53674e-007 )
-scale = Vector2( 0.3125, 0.3125 )
+position = Vector2( 3, -5 )
 texture = ExtResource( 3 )
+vframes = 6
+hframes = 6
+frame = 2
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -100,6 +201,10 @@ script = ExtResource( 9 )
 [node name="ShotCooldown" type="Timer" parent="Timers"]
 wait_time = 0.7
 
+[node name="Draw" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
 [node name="ChaseArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
@@ -112,8 +217,17 @@ modulate = Color( 0.313726, 1, 0, 1 )
 modulate = Color( 0.917647, 0.0352941, 0.0352941, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 7 )
 anims/die = SubResource( 4 )
 anims/hurt = SubResource( 5 )
+anims/idle = SubResource( 8 )
+anims/run = SubResource( 9 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 24 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 11 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -20.0
@@ -125,4 +239,5 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 [connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]
 [connection signal="timeout" from="Timers/ShotCooldown" to="States/Attack" method="_on_ShotCooldown_timeout"]
+[connection signal="timeout" from="Timers/Draw" to="States/Attack" method="_on_Draw_timeout"]
 [connection signal="body_entered" from="ChaseArea" to="States/Patrol" method="_on_ChaseArea_body_entered"]

@@ -3,6 +3,7 @@ extends "../Motion.gd"
 export(int) var SPEED = 200
 
 func enter():
+	.play("run")
 	.chase_target()
 
 func check_aim():

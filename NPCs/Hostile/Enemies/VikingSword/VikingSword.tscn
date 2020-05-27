@@ -18,7 +18,7 @@ height = 0.0
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 220.605
+radius = 151.468
 
 [sub_resource type="Animation" id=4]
 resource_name = "attack"
@@ -256,13 +256,6 @@ position = Vector2( 12.3931, 4.21373 )
 scale = Vector2( 0.350318, 0.250623 )
 shape = SubResource( 23 )
 disabled = true
-
-[node name="Label" type="Label" parent="."]
-margin_left = -34.0543
-margin_top = -29.4367
-margin_right = 5.94574
-margin_bottom = -15.4367
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [connection signal="timeout" from="Timers/IdleTime" to="States/Idle" method="_on_IdleTime_timeout"]
 [connection signal="timeout" from="Timers/PatrolTime" to="States/Patrol" method="_on_PatrolTime_timeout"]

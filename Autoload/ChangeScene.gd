@@ -3,7 +3,7 @@ extends CanvasLayer
 func change_scene(path):
 	$AnimationPlayer.play("fade")
 	yield($AnimationPlayer, "animation_finished")
-a	assert(get_tree().change_scene(path) == OK)
+	assert(get_tree().change_scene(path) == OK)
 	yield(SignalManager, "scene_loaded")
 	SignalManager.emit_signal("weapon_changed")
 	$AnimationPlayer.play_backwards("fade")

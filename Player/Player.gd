@@ -43,7 +43,6 @@ func _ready():
 	$ScentTimer.connect("timeout", self, "add_scent")
 
 func _physics_process(_delta):
-	$Label.set_text(String(Vector2(floor(player.get_global_position().x), floor(player.get_global_position().y))))
 	write_movement_path()
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
@@ -113,12 +112,12 @@ func shoot_weapon():
 func shoot_charged():
 	weapon_animation_player.play("attack")
 	if count == 80:
-		ammo_speed = 800
+		ammo_speed = 900
 		PlayerVar.damage = 40
 		shoot_weapon()
 		count = 0
 	elif count < 80:
-		ammo_speed = 400
+		ammo_speed = 600
 		PlayerVar.damage = 30
 		shoot_weapon()
 		count = 0

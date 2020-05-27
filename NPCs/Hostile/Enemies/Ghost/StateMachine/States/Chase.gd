@@ -9,7 +9,7 @@ func enter():
 func check_aim():
 	if distance == null:
 		return
-	elif distance <= 40:
+	elif distance <= 30:
 		emit_signal("finished", "attack")
 
 func update(_delta):
