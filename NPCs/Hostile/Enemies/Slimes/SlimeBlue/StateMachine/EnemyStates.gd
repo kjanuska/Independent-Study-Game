@@ -1,4 +1,4 @@
-extends "StateMachine.gd"
+	extends "StateMachine.gd"
 
 func _ready():
 	randomize()

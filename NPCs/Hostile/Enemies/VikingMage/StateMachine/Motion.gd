@@ -3,6 +3,7 @@ extends "States.gd"
 onready var idle_time = owner.get_node("Timers/IdleTime")
 onready var patrol_time = owner.get_node("Timers/PatrolTime")
 onready var enemy = self.get_parent().get_parent()
+onready var animation_player = enemy.get_node("AnimationTree").get("parameters/playback")
 
 var distance
 var direction
@@ -36,3 +37,6 @@ func chase_target():
 				direction = look.cast_to.normalized()
 				distance = enemy.get_global_position().distance_to(PlayerVar.player.get_global_position())
 				break
+
+func play(animation):
+	animation_player.travel(animation)

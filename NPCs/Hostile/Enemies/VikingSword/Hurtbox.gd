@@ -9,4 +9,4 @@ func take_damage(damage):
 	if health <= 0:
 		get_parent().get_node("States").current_state.dead()
 		return
-	animation_player.play("hurt", str(randi() % 3 + 1))
+	animation_player.play("hurt")

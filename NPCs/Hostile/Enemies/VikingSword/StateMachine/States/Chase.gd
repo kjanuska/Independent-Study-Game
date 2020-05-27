@@ -1,6 +1,6 @@
 extends "../Motion.gd"
 
-export(int) var SPEED = 200
+export(int) var SPEED = 180
 
 func enter():
 	.play("run")

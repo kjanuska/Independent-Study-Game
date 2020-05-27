@@ -1,7 +1,7 @@
 extends Area2D
 
-var health = 100
-onready var animation_player = get_parent().get_node("AnimationPlayer")
+var health = 70
+onready var animation_player = get_parent().get_node("AnimationTree").get("parameters/playback")
 
 func take_damage(damage):
 	if health > 0:
@@ -9,4 +9,4 @@ func take_damage(damage):
 	if health <= 0:
 		get_parent().get_node("States").current_state.dead()
 		return
-	animation_player.play("hurt")
+	animation_player.travel("hurt")

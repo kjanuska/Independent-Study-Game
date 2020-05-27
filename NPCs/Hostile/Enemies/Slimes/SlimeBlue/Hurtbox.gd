@@ -1,6 +1,6 @@
 extends Area2D
 
-var health = 100
+var health = 50
 onready var animation_player = get_parent().get_node("AnimationPlayer")
 
 func take_damage(damage):

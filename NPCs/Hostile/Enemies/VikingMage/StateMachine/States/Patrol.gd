@@ -1,12 +1,13 @@
 extends "../Motion.gd"
 
-export(int) var SPEED = 100
+export(int) var SPEED = 70
 var random_direction
 
 func _ready():
 	SignalManager.connect("player_found", self, "player_found")
 
 func enter():
+	.play("run")
 	patrol_time.start()
 	random_direction = get_random_direction()
 

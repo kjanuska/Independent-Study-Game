@@ -16,7 +16,7 @@ func _on_FallTimer_timeout():
 	$FallTimer.stop()
 
 func _on_Spikes_area_entered(area):
-	if area.is_in_group("player_hurtbox"):
+	if area.is_in_group("hurtbox"):
 		overlapping = true
 		entity = area
 

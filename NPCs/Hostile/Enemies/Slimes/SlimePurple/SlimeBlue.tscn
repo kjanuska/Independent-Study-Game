@@ -3,13 +3,12 @@
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingSword/VikingSword.gd" type="Script" id=1]
 [ext_resource path="res://NPCs/Hostile/Enemies/VikingSword/Hurtbox.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/Characters/Enemies/recolored_slimes.png" type="Texture" id=3]
-[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/StateMachine/EnemyStates.gd" type="Script" id=4]
-[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/StateMachine/States/Idle.gd" type="Script" id=5]
-[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/StateMachine/States/Patrol.gd" type="Script" id=6]
-[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/StateMachine/States/Chase.gd" type="Script" id=7]
-[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/StateMachine/States/Attack.gd" type="Script" id=8]
-[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/StateMachine/States/Dead.gd" type="Script" id=9]
-
+[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/StateMachine/EnemyStates.gd" type="Script" id=4]
+[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/StateMachine/States/Idle.gd" type="Script" id=5]
+[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/StateMachine/States/Patrol.gd" type="Script" id=6]
+[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/StateMachine/States/Chase.gd" type="Script" id=7]
+[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/StateMachine/States/Attack.gd" type="Script" id=8]
+[ext_resource path="res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/StateMachine/States/Dead.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 0.0
@@ -31,10 +30,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.08, 0.19, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 1,
-"values": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+"values": [  ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sword/CollisionShape2D:disabled")
@@ -189,9 +188,11 @@ position = Vector2( 0.22903, -10.3481 )
 texture = ExtResource( 3 )
 vframes = 20
 hframes = 10
+frame = 12
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 4 )
+START_STATE = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 5 )

@@ -22,7 +22,7 @@ func _assign_id(id):
 			0:
 				melee = weapon_spawner.sword_load
 				wait_time = 0.5
-				PlayerVar.damage = 60
+				PlayerVar.damage = 40
 		owner.current_weapon = melee
 		owner.get_node("WeaponTimers").get_node("MeleeCooldown").wait_time = wait_time
 		owner.timer = owner.get_node("WeaponTimers").get_node("MeleeCooldown")

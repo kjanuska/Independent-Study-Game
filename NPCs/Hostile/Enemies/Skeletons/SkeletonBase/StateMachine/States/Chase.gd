@@ -1,6 +1,6 @@
 extends "../Motion.gd"
 
-export(int) var SPEED = 200
+export(int) var SPEED = 170
 
 func enter():
 	.play("run")
@@ -9,7 +9,7 @@ func enter():
 func check_aim():
 	if distance == null:
 		return
-	elif distance <= 30:
+	elif distance <= 20:
 		emit_signal("finished", "attack")
 
 func update(_delta):

@@ -1,8 +1,8 @@
 extends Node2D
 
 onready var ghost_load = preload("res://NPCs/Hostile/Enemies/Ghost/Ghost.tscn")
-onready var skeleton_load = preload("res://NPCs/Hostile/Enemies/Skeleton/Skeleton.tscn")
-onready var slime_load = preload("res://NPCs/Hostile/Enemies/Slime/Slime.tscn")
+onready var skeleton_load = preload("res://NPCs/Hostile/Enemies/Skeletons/SkeletonBase/Skeleton.tscn")
+onready var slime_load = preload("res://NPCs/Hostile/Enemies/Slimes/SlimeBlue/SlimeBlue.tscn")
 onready var viking_bow_load = preload("res://NPCs/Hostile/Enemies/VikingBow/VikingBow.tscn")
 onready var viking_mage_load = preload("res://NPCs/Hostile/Enemies/VikingMage/VikingMage.tscn")
 onready var viking_sword_load = preload("res://NPCs/Hostile/Enemies/VikingSword/VikingSword.tscn")

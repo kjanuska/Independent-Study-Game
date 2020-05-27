@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Materials/Outline/outline.material" type="Material" id=2]
@@ -152,9 +152,6 @@ animation = "dash"
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "death"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
-animation = "hurt"
-
 [sub_resource type="AnimationNodeAnimation" id=14]
 animation = "idle_backward"
 
@@ -176,18 +173,6 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
 auto_advance = true
 
@@ -215,18 +200,6 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
 switch_mode = 2
 auto_advance = true
@@ -244,8 +217,6 @@ states/dash/node = SubResource( 11 )
 states/dash/position = Vector2( 1018, 144 )
 states/death/node = SubResource( 12 )
 states/death/position = Vector2( 651.266, 347 )
-states/hurt/node = SubResource( 13 )
-states/hurt/position = Vector2( 269, 144 )
 states/idle_backward/node = SubResource( 14 )
 states/idle_backward/position = Vector2( 479.266, 273 )
 states/idle_forward/node = SubResource( 15 )
@@ -254,7 +225,7 @@ states/walk_backward/node = SubResource( 16 )
 states/walk_backward/position = Vector2( 730.266, -141.489 )
 states/walk_forward/node = SubResource( 17 )
 states/walk_forward/position = Vector2( 493.266, -141.489 )
-transitions = [ "walk_backward", "dash", SubResource( 18 ), "walk_forward", "dash", SubResource( 19 ), "dash", "walk_backward", SubResource( 20 ), "dash", "walk_forward", SubResource( 21 ), "walk_forward", "hurt", SubResource( 22 ), "walk_backward", "hurt", SubResource( 23 ), "hurt", "walk_forward", SubResource( 24 ), "hurt", "walk_backward", SubResource( 25 ), "walk_forward", "walk_backward", SubResource( 26 ), "walk_backward", "walk_forward", SubResource( 27 ), "idle_forward", "walk_backward", SubResource( 28 ), "walk_backward", "idle_forward", SubResource( 29 ), "idle_backward", "walk_forward", SubResource( 30 ), "walk_forward", "idle_backward", SubResource( 31 ), "walk_forward", "idle_forward", SubResource( 32 ), "idle_forward", "walk_forward", SubResource( 33 ), "idle_backward", "walk_backward", SubResource( 34 ), "walk_backward", "idle_backward", SubResource( 35 ), "idle_backward", "death", SubResource( 36 ), "idle_forward", "death", SubResource( 37 ), "hurt", "idle_backward", SubResource( 38 ), "idle_backward", "hurt", SubResource( 39 ), "hurt", "idle_forward", SubResource( 40 ), "idle_forward", "hurt", SubResource( 41 ), "dash", "idle_forward", SubResource( 42 ), "dash", "idle_backward", SubResource( 43 ), "idle_forward", "idle_backward", SubResource( 44 ), "idle_backward", "idle_forward", SubResource( 45 ) ]
+transitions = [ "walk_backward", "dash", SubResource( 18 ), "walk_forward", "dash", SubResource( 19 ), "dash", "walk_backward", SubResource( 20 ), "dash", "walk_forward", SubResource( 21 ), "walk_forward", "walk_backward", SubResource( 26 ), "walk_backward", "walk_forward", SubResource( 27 ), "idle_forward", "walk_backward", SubResource( 28 ), "walk_backward", "idle_forward", SubResource( 29 ), "idle_backward", "walk_forward", SubResource( 30 ), "walk_forward", "idle_backward", SubResource( 31 ), "walk_forward", "idle_forward", SubResource( 32 ), "idle_forward", "walk_forward", SubResource( 33 ), "idle_backward", "walk_backward", SubResource( 34 ), "walk_backward", "idle_backward", SubResource( 35 ), "idle_backward", "death", SubResource( 36 ), "idle_forward", "death", SubResource( 37 ), "dash", "idle_forward", SubResource( 42 ), "dash", "idle_backward", SubResource( 43 ), "idle_forward", "idle_backward", SubResource( 44 ), "idle_backward", "idle_forward", SubResource( 45 ) ]
 start_node = "idle_forward"
 end_node = "death"
 graph_offset = Vector2( -25.7339, -222.304 )

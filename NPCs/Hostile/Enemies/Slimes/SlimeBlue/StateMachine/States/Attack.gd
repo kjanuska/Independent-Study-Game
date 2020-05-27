@@ -25,7 +25,7 @@ func aim():
 func _on_AttackTime_timeout():
 	attack_time.stop()
 	aim()
-	if distance > 30:
+	if distance > 10:
 		emit_signal("finished", "chase")
 	else:
 		.play("attack")

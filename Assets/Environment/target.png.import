@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/skeleton_base.png-a49c7f8c19441004864fd48ab306bac3.stex"
+path="res://.import/target.png-da38214772b966117df0935aceb7a9ed.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Enemies/skeleton_base.png"
-dest_files=[ "res://.import/skeleton_base.png-a49c7f8c19441004864fd48ab306bac3.stex" ]
+source_file="res://Assets/Environment/target.png"
+dest_files=[ "res://.import/target.png-da38214772b966117df0935aceb7a9ed.stex" ]
 
 [params]
 

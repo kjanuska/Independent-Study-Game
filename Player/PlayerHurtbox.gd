@@ -4,8 +4,8 @@ var health = 100
 
 func take_damage(damage):
 	if PlayerVar.is_vulnerable:
-		print(health)
 		health -= damage
+		print(health)
 		if health <= 0:
 			print("you died")
 			get_parent().player_animation.travel("death")
@@ -14,7 +14,7 @@ func take_damage(damage):
 			PlayerVar.is_vulnerable = false
 			return
 		PlayerVar.is_vulnerable = false
-		get_parent().player_animation.travel("hurt")
+		get_parent().get_node("AnimationPlayer").play("hurt")
 		$InvincibilityPeriod.start()
 
 func _on_InvincibilityPeriod_timeout():

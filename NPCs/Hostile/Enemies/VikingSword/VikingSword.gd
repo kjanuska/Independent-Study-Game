@@ -12,4 +12,4 @@ func _physics_process(delta):
 
 func _on_Sword_area_entered(area):
 	if area.is_in_group("hurtbox"):
-		area.take_damage(50)
+		area.take_damage(15)

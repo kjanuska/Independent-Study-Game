@@ -1,6 +1,6 @@
 extends "../Motion.gd"
 
-export(int) var SPEED = 100
+export(int) var SPEED = 70
 var random_direction
 
 func enter():
